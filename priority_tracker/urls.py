@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from actions.views import say_hello
+from actions.views import get_action_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello', say_hello, name='hello'),
+    path('', get_action_list, name='get_action_list'),
 ]
