@@ -26,4 +26,6 @@ urlpatterns = [
     path('add-category/', add_category, name='add_category'),
     path('add-priority/', add_priority, name='add_priority'),
     path('add-new-action/', add_action, name='add_new_action'),
+    path('add-new-category/', add_category, name='add_new_category'),
+    path('add-new-priority/', add_priority, name='add_new_priority'),
 ]

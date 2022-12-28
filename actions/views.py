@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
+from .forms import ActionForm, CategoryForm, PriorityForm
 from .models import Action, Category, Priority
+
 
 
 # Create your views here.
@@ -30,19 +32,38 @@ def get_categories_list(request):
 
 
 def add_action(request):
+    actionform = ActionForm()
     if request.method == "POST":
-        title = request.POST.get("action_title")
-        priority = request.POST.get("priority_title")
-        category = request.POST.get("category_title")
-        Action.objects.create(title=title, priority=priority, category=category)
+        actionform = ActionForm(request.POST)
+        if actionform.is_valid():
+            actionform.save()
+            return redirect('/')
 
-        return redirect('get_action_list')
-    return render(request, 'actions/add_action.html')
 
+    context = {'actionform': actionform}
+    return render(request, 'actions/add_action.html', context)
 
 def add_category(request):
-    return render(request, 'actions/add_category.html')
+    categoryform = CategoryForm()
+    if request.method == "POST":
+        categoryform = CategoryForm(request.POST)
+        if categoryform.is_valid():
+            categoryform.save()
+            return redirect('/categories/')
+
+
+    context = {'categoryform': categoryform}
+    return render(request, 'actions/add_category.html', context)
 
 
 def add_priority(request):
-    return render(request, 'actions/add_priority.html')
+    priorityform = PriorityForm()
+    if request.method == "POST":
+        priorityform = PriorityForm(request.POST)
+        if priorityform.is_valid():
+            priorityform.save()
+            return redirect('/priorities/')
+
+
+    context = {'priorityform': priorityform}
+    return render(request, 'actions/add_priority.html', context)

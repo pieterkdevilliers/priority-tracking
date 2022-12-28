@@ -8,28 +8,12 @@
 </head>
 <body>
     <h1>Add a Category</h1>
-    <form method="POST" action="add-category">
+    <form method="POST" action="/add-new-category/">
         {% csrf_token %}
-        <div>
-            <p>
-                <label for="id_name">Category Title:</label>
-                <input type="text" id="id_name" name="category_title" />
-            </p>
-        </div>
-        <div>
-            <p>
-                <label for="id_description">Category Description:</label>
-                <input type="text" id="id_description" name="category_description" />
-            </p>
-        </div>
-        <div>
-            <p></p>
-        </div>
-        <div>
-            <p>
-                <button type="submit">Add Category</button>
-            </p>
-        </div>
+
+        {{categoryform}}
+        
+        <input type="submit" name="Add Category">
     </form>
 </body>
 </html>
