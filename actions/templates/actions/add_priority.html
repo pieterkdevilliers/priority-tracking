@@ -8,28 +8,12 @@
 </head>
 <body>
     <h1>Add Priority</h1>
-    <form method="POST" action="add-priority">
+    <form method="POST" action="/add-new-priority/">
         {% csrf_token %}
-        <div>
-            <p>
-                <label for="id_name">Priority Title:</label>
-                <input type="text" id="id_name" name="priority_title" />
-            </p>
-        </div>
-        <div>
-            <p>
-                <label for="id_description">Priority Description:</label>
-                <input type="text" id="id_description" name="priority_description" />
-            </p>
-        </div>
-        <div>
-            <p></p>
-        </div>
-        <div>
-            <p>
-                <button type="submit">Add Priority</button>
-            </p>
-        </div>
+
+        {{priorityform}}
+        
+        <input type="submit" name="Add Priority">
     </form>
 </body>
 </html>

@@ -8,34 +8,14 @@
 </head>
 <body>
     <h1>Add an Action</h1>
+
     <form method="POST" action="/add-new-action/">
         {% csrf_token %}
-        <div>
-            <p>
-                <label for="id_name">Action Title:</label>
-                <input type="text" id="id_name" name="action_title" />
-            </p>
-        </div>
-        <div>
-            <p>
-                <label for="id_priority">Priority:</label>
-                <input type="text" id="id_priority" name="priority_title" />
-            </p>
-        </div>
-        <div>
-            <p>
-                <label for="id_category">Category:</label>
-                <input type="text" id="id_category" name="category_title" />
-            </p>
-        </div>
-        <div>
-            <p></p>
-        </div>
-        <div>
-            <p>
-                <button type="submit">Add Action</button>
-            </p>
-        </div>
+
+        {{actionform}}
+        
+        <input type="submit" name="Add Action">
     </form>
+
 </body>
 </html>
