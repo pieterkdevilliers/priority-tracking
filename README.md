@@ -4,7 +4,11 @@
 
 [Link to deployed site](https://pram-bookstore.herokuapp.com/)
 
-[![Build Status](https://travis-ci.org/pramcistudent/bookstore-milestone-four.svg?branch=master)](https://travis-ci.org/pramcistudent/bookstore-milestone-four)
+**Project Overview - What are we aiming for?**
+
+A priority tracking app, allowing the user to specify their top 3 priorities, and then track their time on tasks. This will allow the user to see how much of their time is spent on priority and how much is spent off priority.
+
+[![Wireframe Overview](/assets/images/WireFrameScreenshot.png)](/assets/videos/Priority%20Tracker%20Overview.mp4)
 
 **Love Reading Books?**
 
