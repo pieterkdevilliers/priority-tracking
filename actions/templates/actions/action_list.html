@@ -8,5 +8,16 @@
 </head>
 <body>
     <h1>Things I need to do:</h1>
+    <table>
+        {% for action in actions %}
+            <tr>
+                <td>{{ action.title }}</td>
+                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.priority }}</td>
+                <td>{{ action.category }}</td>
+                <td>{{ action.doneStatus }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>

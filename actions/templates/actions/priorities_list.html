@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priorities List</title>
+</head>
+<body>
+    <h1>My Priorities:</h1>
+    <table>
+        {% for priority in priorities %}
+            <tr>
+                <td>{{ priority.title }}</td>
+                <td>{{ priority.description }}</td>
+                <td>{{ priority.activeStatus }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
