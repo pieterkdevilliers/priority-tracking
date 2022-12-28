@@ -26,6 +26,10 @@ DEBUG = 'DEBUG'
 
 ALLOWED_HOSTS = []
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-pieterkdevi-prioritytra-lbfu7psylfm.ws-eu80.gitpod.io'
+    ]
+
 
 # Application definition
 
