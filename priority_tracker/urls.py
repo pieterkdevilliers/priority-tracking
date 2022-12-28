@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from actions.views import get_action_list, get_priorities_list, get_categories_list
+from actions.views import get_action_list, get_priorities_list, get_categories_list, add_action, add_category, add_priority
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', get_action_list, name='get_action_list'),
     path('priorities/', get_priorities_list, name='get_priorities_list'),
     path('categories/', get_categories_list, name='get_categories_list'),
+    path('add-action/', add_action, name='add_action'),
+    path('add-category/', add_category, name='add_category'),
+    path('add-priority/', add_priority, name='add_priority'),
+    path('add-new-action/', add_action, name='add_new_action'),
 ]

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Priority</title>
+</head>
+<body>
+    <h1>Add Priority</h1>
+    <form method="POST" action="add-priority">
+        {% csrf_token %}
+        <div>
+            <p>
+                <label for="id_name">Priority Title:</label>
+                <input type="text" id="id_name" name="priority_title" />
+            </p>
+        </div>
+        <div>
+            <p>
+                <label for="id_description">Priority Description:</label>
+                <input type="text" id="id_description" name="priority_description" />
+            </p>
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <div>
+            <p>
+                <button type="submit">Add Priority</button>
+            </p>
+        </div>
+    </form>
+</body>
+</html>

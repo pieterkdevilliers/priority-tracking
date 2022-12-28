@@ -17,7 +17,10 @@
                 <td>{{ action.category }}</td>
                 <td>{{ action.doneStatus }}</td>
             </tr>
+        {% empty %}
+        <tr><td>You have nothing to do.</td></tr>
         {% endfor %}
     </table>
+    <a href="/add-action/">Add New Action</a>
 </body>
 </html>

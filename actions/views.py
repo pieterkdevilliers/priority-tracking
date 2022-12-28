@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Action, Category, Priority
 
 
@@ -27,3 +27,22 @@ def get_categories_list(request):
         "categories": categories
     }
     return render(request, 'actions/categories_list.html', context)
+
+
+def add_action(request):
+    if request.method == "POST":
+        title = request.POST.get("action_title")
+        priority = request.POST.get("priority_title")
+        category = request.POST.get("category_title")
+        Action.objects.create(title=title, priority=priority, category=category)
+
+        return redirect('get_action_list')
+    return render(request, 'actions/add_action.html')
+
+
+def add_category(request):
+    return render(request, 'actions/add_category.html')
+
+
+def add_priority(request):
+    return render(request, 'actions/add_priority.html')

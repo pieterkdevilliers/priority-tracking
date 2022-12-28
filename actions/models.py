@@ -25,9 +25,10 @@ class Action(models.Model):
     trackedTime = models.DurationField(null=True, blank=True)
     doneStatus = models.BooleanField(null=False, blank=False, default=False)
     date = models.DateField(auto_now_add=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=False, blank=False)
-    priority = models.ForeignKey(Priority, on_delete=models.CASCADE, null=False, blank=False)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, null=False, blank=False)
+    priority = models.ForeignKey(
+        Priority, on_delete=models.CASCADE, null=False, blank=False)
 
     def __str__(self):
         return self.title
-
