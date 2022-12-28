@@ -8,7 +8,7 @@
 
 A priority tracking app, allowing the user to specify their top 3 priorities, and then track their time on tasks. This will allow the user to see how much of their time is spent on priority and how much is spent off priority.
 
-[![Wireframe Overview](/assets/images/WireFrameScreenshot.png)](/assets/videos/Priority%20Tracker%20Overview.mp4)
+[![Wireframe Overview](/assets/images/WireFrameScreenshot.png)](https://www.loom.com/share/14b672c3510a4650bfed82f3297aa880)
 
 **Love Reading Books?**
 
