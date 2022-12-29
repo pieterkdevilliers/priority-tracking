@@ -13,6 +13,8 @@
             <tr>
                 <td>{{ category.title }}</td>
                 <td>{{ category.description }}</td>
+                <td><a href="{% url 'update_category' category.id %}">Update</a></td>
+                <td><a href="{% url 'delete_category' category.id %}">Delete</a></td>
             </tr>
         {% endfor %}
     </table>
