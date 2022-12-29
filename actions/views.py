@@ -1,12 +1,16 @@
 """
 Views for the Actions App.
 """
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .forms import ActionForm, CategoryForm, PriorityForm
+from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
 from .models import Action, Category, Priority
 # Create your views here.
 
 
+@login_required(login_url='login')
 def get_action_list(request):
     """
     Retrieves the action_list template.
@@ -18,6 +22,7 @@ def get_action_list(request):
     return render(request, 'actions/action_list.html', context)
 
 
+@login_required(login_url='login')
 def get_priorities_list(request):
     """
     Retrieves the priorities_list template.
@@ -29,6 +34,7 @@ def get_priorities_list(request):
     return render(request, 'actions/priorities_list.html', context)
 
 
+@login_required(login_url='login')
 def get_categories_list(request):
     """
     Retrieves the categories_list template.
@@ -40,6 +46,7 @@ def get_categories_list(request):
     return render(request, 'actions/categories_list.html', context)
 
 
+@login_required(login_url='login')
 def add_action(request):
     """
     Submits the ActionForm and Creates an Action
@@ -55,6 +62,7 @@ def add_action(request):
     return render(request, 'actions/add_action.html', context)
 
 
+@login_required(login_url='login')
 def update_action(request, pk):
     """
     Submits the ActionForm and Updates an Action
@@ -72,6 +80,7 @@ def update_action(request, pk):
     return render(request, 'actions/update_action.html', context)
 
 
+@login_required(login_url='login')
 def delete_action(request, pk):
     """
     Deletes the selected Action
@@ -85,6 +94,7 @@ def delete_action(request, pk):
     return render(request, 'actions/delete_action.html', context)
 
 
+@login_required(login_url='login')
 def add_category(request):
     """
     Submits the CategoryForm and Creates a Category
@@ -100,6 +110,7 @@ def add_category(request):
     return render(request, 'actions/add_category.html', context)
 
 
+@login_required(login_url='login')
 def update_category(request, pk):
     """
     Submits the CategoryForm and Updates a Category
@@ -117,6 +128,7 @@ def update_category(request, pk):
     return render(request, 'actions/update_category.html', context)
 
 
+@login_required(login_url='login')
 def delete_category(request, pk):
     """
     Deletes the selected Category
@@ -130,6 +142,7 @@ def delete_category(request, pk):
     return render(request, 'actions/delete_category.html', context)
 
 
+@login_required(login_url='login')
 def add_priority(request):
     """
     Submits the PriorityForm and Creates a Priority
@@ -145,6 +158,7 @@ def add_priority(request):
     return render(request, 'actions/add_priority.html', context)
 
 
+@login_required(login_url='login')
 def update_priority(request, pk):
     """
     Submits the PriorityForm and Updates a Priority
@@ -162,6 +176,7 @@ def update_priority(request, pk):
     return render(request, 'actions/update_priority.html', context)
 
 
+@login_required(login_url='login')
 def delete_priority(request, pk):
     """
     Deletes the selected Priority
@@ -173,3 +188,48 @@ def delete_priority(request, pk):
 
     context = {'item': priority}
     return render(request, 'actions/delete_priority.html', context)
+
+
+def register_page(request):
+    """
+    Allows new user registrations
+    """
+    form = CreateUserForm()
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account created for ' + user)
+            return redirect('/login/')
+
+    context = {'form': form}
+    return render(request, 'actions/register.html', context)
+
+
+def login_page(request):
+    """
+    Allows user login
+    """
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('/actions/')
+        else:
+            messages.info(request, 'Username OR Password is incorrect')
+
+    context = {}
+    return render(request, 'actions/login.html', context)
+
+
+def logout_user(request):
+    """
+    Logs out the user
+    """
+    logout(request)
+    return redirect('/login/')

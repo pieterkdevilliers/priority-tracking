@@ -7,6 +7,8 @@
     <title>Action List</title>
 </head>
 <body>
+    <p>Hello, {{request.user}}</p>
+    <a href="{% url 'logout' %}">Logout</a>
     <h1>Things I need to do:</h1>
     <table>
         {% for action in actions %}
