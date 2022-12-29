@@ -11,7 +11,7 @@
     <a href="{% url 'logout' %}">Logout</a>
     <h1>Things I need to do:</h1>
     <table>
-        {% for action in actions %}
+        {% for action in user.action.all %}
             <tr>
                 <td>{{ action.title }}</td>
                 <td>{{ action.trackedTime }}</td>

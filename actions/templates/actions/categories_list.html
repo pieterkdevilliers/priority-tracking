@@ -11,7 +11,7 @@
     <a href="{% url 'logout' %}">Logout</a>
     <h1>My Categories:</h1>
     <table>
-        {% for category in categories %}
+        {% for category in user.categories.all %}
             <tr>
                 <td>{{ category.title }}</td>
                 <td>{{ category.description }}</td>

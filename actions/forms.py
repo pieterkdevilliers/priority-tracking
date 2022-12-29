@@ -3,7 +3,6 @@ ModelForms for Actions App
 """
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django import forms
 from django.forms import ModelForm
 from .models import Action, Priority, Category
 
@@ -29,7 +28,7 @@ class CategoryForm(ModelForm):
         Meta class for CategoryForm
         """
         model = Category
-        fields = '__all__'
+        fields = ['title', 'description']
 
 
 class PriorityForm(ModelForm):
@@ -41,7 +40,7 @@ class PriorityForm(ModelForm):
         Meta class for PriorityForm
         """
         model = Priority
-        fields = '__all__'
+        fields = ['title', 'description', 'activeStatus']
 
 
 class CreateUserForm(UserCreationForm):

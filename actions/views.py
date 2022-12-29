@@ -55,7 +55,9 @@ def add_action(request):
     if request.method == "POST":
         actionform = ActionForm(request.POST)
         if actionform.is_valid():
-            actionform.save()
+            instance = actionform.save(commit=False)
+            instance.user = request.user
+            instance.save()
             return redirect('/actions/')
 
     context = {'actionform': actionform}
@@ -103,7 +105,9 @@ def add_category(request):
     if request.method == "POST":
         categoryform = CategoryForm(request.POST)
         if categoryform.is_valid():
-            categoryform.save()
+            instance = categoryform.save(commit=False)
+            instance.user = request.user
+            instance.save()
             return redirect('/categories/')
 
     context = {'categoryform': categoryform}
@@ -151,7 +155,9 @@ def add_priority(request):
     if request.method == "POST":
         priorityform = PriorityForm(request.POST)
         if priorityform.is_valid():
-            priorityform.save()
+            instance = priorityform.save(commit=False)
+            instance.user = request.user
+            instance.save()
             return redirect('/priorities/')
 
     context = {'priorityform': priorityform}

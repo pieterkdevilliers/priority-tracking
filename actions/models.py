@@ -3,6 +3,7 @@ All models for the Actions App
 '''
 
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -13,6 +14,8 @@ class Category(models.Model):
     """
     title = models.CharField(max_length=50, null=False, blank=False)
     description = models.CharField(max_length=150)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="categories", null=True)
 
     def __str__(self):
         return str(self.title)
@@ -25,6 +28,8 @@ class Priority(models.Model):
     title = models.CharField(max_length=50, null=False, blank=False)
     description = models.CharField(max_length=150)
     activeStatus = models.BooleanField(null=False, blank=False, default=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="priorities", null=True)
 
     def __str__(self):
         return str(self.title)
@@ -42,6 +47,8 @@ class Action(models.Model):
         Category, on_delete=models.CASCADE, null=False, blank=False)
     priority = models.ForeignKey(
         Priority, on_delete=models.CASCADE, null=False, blank=False)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="action", null=True)
 
     def __str__(self):
         return str(self.title)
