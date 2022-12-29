@@ -14,6 +14,8 @@
                 <td>{{ priority.title }}</td>
                 <td>{{ priority.description }}</td>
                 <td>{{ priority.activeStatus }}</td>
+                <td><a href="{% url 'update_priority' priority.id %}">Update</a></td>
+                <td><a href="{% url 'delete_priority' priority.id %}">Delete</a></td>
             </tr>
         {% endfor %}
     </table>
