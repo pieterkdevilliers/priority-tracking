@@ -1,3 +1,6 @@
+"""
+Registered Models for Actions App
+"""
 from django.contrib import admin
 from .models import Action, Category, Priority
 
