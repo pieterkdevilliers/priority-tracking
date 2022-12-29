@@ -7,6 +7,8 @@
     <title>Priorities List</title>
 </head>
 <body>
+    <p>Hello, {{request.user}}</p>
+    <a href="{% url 'logout' %}">Logout</a>
     <h1>My Priorities:</h1>
     <table>
         {% for priority in priorities %}

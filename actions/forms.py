@@ -1,6 +1,9 @@
 """
 ModelForms for Actions App
 """
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
 from django.forms import ModelForm
 from .models import Action, Priority, Category
 
@@ -39,3 +42,15 @@ class PriorityForm(ModelForm):
         """
         model = Priority
         fields = '__all__'
+
+
+class CreateUserForm(UserCreationForm):
+    """
+    ModelForm for User Registration
+    """
+    class Meta:
+        """
+        Meta class for CreateUserForm
+        """
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']

@@ -7,6 +7,8 @@
     <title>Add Action</title>
 </head>
 <body>
+    <p>Hello, {{request.user}}</p>
+    <a href="{% url 'logout' %}">Logout</a>
     <h1>Add an Action</h1>
 
     <form method="POST" action="/add-new-action/">

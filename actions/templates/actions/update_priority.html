@@ -7,6 +7,8 @@
     <title>Update Priority</title>
 </head>
 <body>
+    <p>Hello, {{request.user}}</p>
+    <a href="{% url 'logout' %}">Logout</a>
     <h1>Update Priority</h1>
     <form method="POST" action="">
         {% csrf_token %}

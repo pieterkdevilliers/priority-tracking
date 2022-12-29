@@ -18,10 +18,13 @@ from django.urls import path
 from actions.views import get_action_list, get_priorities_list,\
     get_categories_list, add_action, add_category, add_priority,\
     update_action, update_category, update_priority, delete_action,\
-    delete_category, delete_priority
+    delete_category, delete_priority, login_page, register_page, logout_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', login_page, name='login'),
+    path('logout/', logout_user, name='logout'),
+    path('register/', register_page, name='register'),
     path('actions/', get_action_list, name='get_action_list'),
     path('priorities/', get_priorities_list, name='get_priorities_list'),
     path('categories/', get_categories_list, name='get_categories_list'),
