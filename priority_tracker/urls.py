@@ -22,7 +22,7 @@ from actions.views import get_action_list, get_priorities_list,\
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', get_action_list, name='get_action_list'),
+    path('actions/', get_action_list, name='get_action_list'),
     path('priorities/', get_priorities_list, name='get_priorities_list'),
     path('categories/', get_categories_list, name='get_categories_list'),
     path('add-action/', add_action, name='add_action'),

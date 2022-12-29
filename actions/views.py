@@ -49,7 +49,7 @@ def add_action(request):
         actionform = ActionForm(request.POST)
         if actionform.is_valid():
             actionform.save()
-            return redirect('/')
+            return redirect('/actions/')
 
     context = {'actionform': actionform}
     return render(request, 'actions/add_action.html', context)
@@ -66,7 +66,7 @@ def update_action(request, pk):
         actionform = ActionForm(request.POST, instance=action)
         if actionform.is_valid():
             actionform.save()
-            return redirect('/')
+            return redirect('/actions/')
 
     context = {'actionform': actionform}
     return render(request, 'actions/update_action.html', context)
@@ -79,7 +79,7 @@ def delete_action(request, pk):
     action = Action.objects.get(id=pk)
     if request.method == "POST":
         action.delete()
-        return redirect('/')
+        return redirect('/actions/')
 
     context = {'item': action}
     return render(request, 'actions/delete_action.html', context)
