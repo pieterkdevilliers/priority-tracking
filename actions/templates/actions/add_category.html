@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Categories</title>
-</head>
+{% extends 'actions/main.html' %}
+
+{% block content %}
+
 <body>
     <p>Hello, {{request.user}}</p>
     <a href="{% url 'logout' %}">Logout</a>
@@ -18,4 +14,5 @@
         <input type="submit" name="Add Category">
     </form>
 </body>
-</html>
+
+{% endblock %}
