@@ -3,10 +3,8 @@
 {% block content %}
 
 <body>
-    <p>Hello, {{request.user}}</p>
-    <a href="{% url 'logout' %}">Logout</a>
     <h1>Things I need to do:</h1>
-    <table>
+    <table class="table table-striped">
         {% for action in user.action.all %}
         {% if action.doneStatus == False %}
             <tr>
@@ -14,9 +12,17 @@
                 <td>{{ action.trackedTime }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
-                <td><a href="{% url 'complete_action' action.id %}">Done</a></td>
-                <td><a href="{% url 'update_action' action.id %}">Update</a></td>
-                <td><a href="{% url 'delete_action' action.id %}">Delete</a></td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Done</a></li>
+                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
+                          <li><a class="dropdown-item" href="{% url 'delete_action' action.id %}">Delete</a></li>
+                        </ul>
+                      </div>
+                </td>
             </tr>
         {% endif %}    
         {% empty %}
@@ -30,7 +36,7 @@
     <hr>
 
     <h1>Things I've Done:</h1>
-    <table>
+    <table class="table table-striped">
         {% for action in user.action.all %}
         {% if action.doneStatus == True %}
             <tr>
@@ -38,8 +44,17 @@
                 <td>{{ action.trackedTime }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
-                <td><a href="{% url 'complete_action' action.id %}">Undo</a></td>
-                <td><a href="{% url 'delete_action' action.id %}">Delete</a></td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Undo</a></li>
+                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
+                        </ul>
+                      </div>
+                </td>
             </tr>
         {% endif %}    
         {% empty %}
