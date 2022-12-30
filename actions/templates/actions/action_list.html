@@ -39,7 +39,6 @@
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
                 <td><a href="{% url 'complete_action' action.id %}">Undo</a></td>
-                <td><a href="{% url 'update_action' action.id %}">Update</a></td>
                 <td><a href="{% url 'delete_action' action.id %}">Delete</a></td>
             </tr>
         {% endif %}    
