@@ -5,6 +5,11 @@
 <body>
     <h1>My Categories:</h1>
     <table class="table table-striped">
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Options</th>
+        </tr>
         {% for category in user.categories.all %}
             <tr>
                 <td>{{ category.title }}</td>
@@ -22,7 +27,7 @@
             </tr>
         {% endfor %}
     </table>
-    <a href="/add-category/">Add New Category</a>
+    <a class="btn btn-primary" role="button" href="/add-category/">Add New Category</a>
 </body>
 
 {% endblock %}

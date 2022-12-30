@@ -5,6 +5,13 @@
 <body>
     <h1>Things I need to do:</h1>
     <table class="table table-striped">
+        <tr>
+            <th>Action</th>
+            <th>Time Tracked</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Options</th>
+        </tr>
         {% for action in user.action.all %}
         {% if action.doneStatus == False %}
             <tr>
@@ -15,6 +22,7 @@
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Options
                         </button>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Done</a></li>
@@ -31,12 +39,19 @@
 
 
     </table>
-    <a href="/add-action/">Add New Action</a>
+    <a class="btn btn-primary" role="button" href="/add-action/">Add New Action</a>
 
     <hr>
 
     <h1>Things I've Done:</h1>
     <table class="table table-striped">
+        <tr>
+            <th>Action</th>
+            <th>Time Tracked</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Options</th>
+        </tr>
         {% for action in user.action.all %}
         {% if action.doneStatus == True %}
             <tr>
@@ -47,7 +62,7 @@
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          
+                          Options
                         </button>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Undo</a></li>
@@ -58,7 +73,7 @@
             </tr>
         {% endif %}    
         {% empty %}
-        <tr><td>You have nothing to do.</td></tr>
+
         {% endfor %}
 
 
