@@ -8,20 +8,47 @@
     <h1>Things I need to do:</h1>
     <table>
         {% for action in user.action.all %}
+        {% if action.doneStatus == False %}
             <tr>
                 <td>{{ action.title }}</td>
                 <td>{{ action.trackedTime }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
-                <td>{{ action.doneStatus }}</td>
+                <td><a href="{% url 'complete_action' action.id %}">Done</a></td>
                 <td><a href="{% url 'update_action' action.id %}">Update</a></td>
                 <td><a href="{% url 'delete_action' action.id %}">Delete</a></td>
             </tr>
+        {% endif %}    
         {% empty %}
         <tr><td>You have nothing to do.</td></tr>
         {% endfor %}
+
+
     </table>
     <a href="/add-action/">Add New Action</a>
+
+    <hr>
+
+    <h1>Things I've Done:</h1>
+    <table>
+        {% for action in user.action.all %}
+        {% if action.doneStatus == True %}
+            <tr>
+                <td>{{ action.title }}</td>
+                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.priority }}</td>
+                <td>{{ action.category }}</td>
+                <td><a href="{% url 'complete_action' action.id %}">Undo</a></td>
+                <td><a href="{% url 'update_action' action.id %}">Update</a></td>
+                <td><a href="{% url 'delete_action' action.id %}">Delete</a></td>
+            </tr>
+        {% endif %}    
+        {% empty %}
+        <tr><td>You have nothing to do.</td></tr>
+        {% endfor %}
+
+
+    </table>
 </body>
 
 {% endblock %}

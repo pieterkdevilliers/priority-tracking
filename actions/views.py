@@ -65,6 +65,20 @@ def add_action(request):
 
 
 @login_required(login_url='login')
+def complete_action(request, pk):
+    """
+    Submits the ActionForm and Updates an Action
+    """
+    action = Action.objects.get(id=pk)
+    action.doneStatus = not action.doneStatus
+    action.save()
+    return redirect('/actions/')
+
+    context = {'actionform': actionform}
+    return render(request, 'actions/update_action.html', context)
+
+
+@login_required(login_url='login')
 def update_action(request, pk):
     """
     Submits the ActionForm and Updates an Action
