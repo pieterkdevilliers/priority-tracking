@@ -15,9 +15,14 @@ def get_action_list(request):
     """
     Retrieves the action_list template.
     """
+    query_dict = request.GET
+    query = query_dict.get("actionDate")
     actions = Action.objects.all()
+    filteredActions = Action.objects.filter(actionDate=query)
     context = {
-        "actions": actions
+        "actions": actions,
+        "query": query,
+        "filteredActions": filteredActions
     }
     return render(request, 'actions/action_list.html', context)
 

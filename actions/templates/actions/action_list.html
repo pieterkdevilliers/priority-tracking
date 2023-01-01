@@ -3,7 +3,14 @@
 {% block content %}
 
 <body>
+
+    <form action="" method="GET">
+        <input type="date" name="actionDate">
+        <input type="submit">
+    </form>
     <h1>Things I need to do:</h1>
+    {{ query }}
+
     <table class="table table-striped">
         <tr>
             <th>Action</th>
@@ -11,14 +18,16 @@
             <th>Priority</th>
             <th>Category</th>
             <th>Options</th>
+            <th>Date</th>
         </tr>
-        {% for action in user.action.all %}
+        {% for action in filteredActions %}
         {% if action.doneStatus == False %}
             <tr>
                 <td>{{ action.title }}</td>
                 <td>{{ action.trackedTime }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
+                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,7 +41,7 @@
                       </div>
                 </td>
             </tr>
-        {% endif %}    
+        {% endif %}
         {% empty %}
         <tr><td>You have nothing to do.</td></tr>
         {% endfor %}
@@ -51,14 +60,16 @@
             <th>Priority</th>
             <th>Category</th>
             <th>Options</th>
+            <th>Date</th>
         </tr>
-        {% for action in user.action.all %}
+        {% for action in filteredActions %}
         {% if action.doneStatus == True %}
             <tr>
                 <td>{{ action.title }}</td>
                 <td>{{ action.trackedTime }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
+                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -75,6 +86,7 @@
         {% empty %}
 
         {% endfor %}
+    
 
 
     </table>
