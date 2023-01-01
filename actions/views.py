@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from datetime import date
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
 from .models import Action, Category, Priority
 # Create your views here.
@@ -15,6 +16,24 @@ def get_action_list(request):
     """
     Retrieves the action_list template.
     """
+    # query_dict = request.GET
+    # query = query_dict.get("actionDate")
+    query = date.today()
+    actions = Action.objects.all()
+    filteredActions = Action.objects.filter(actionDate=query)
+    context = {
+        "actions": actions,
+        "query": query,
+        "filteredActions": filteredActions
+    }
+    return render(request, 'actions/action_list.html', context)
+
+
+@login_required(login_url='login')
+def get_filtered_action_list(request):
+    """
+    Retrieves the filtered action_list template.
+    """
     query_dict = request.GET
     query = query_dict.get("actionDate")
     actions = Action.objects.all()
@@ -24,7 +43,7 @@ def get_action_list(request):
         "query": query,
         "filteredActions": filteredActions
     }
-    return render(request, 'actions/action_list.html', context)
+    return render(request, 'actions/filtered_action_list.html', context)
 
 
 @login_required(login_url='login')

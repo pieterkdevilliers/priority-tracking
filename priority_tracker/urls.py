@@ -23,6 +23,7 @@ urlpatterns = [
     path('logout/', views.logout_user, name='logout'),
     path('register/', views.register_page, name='register'),
     path('actions/', views.get_action_list, name='get_action_list'),
+    path('filtered-actions/', views.get_filtered_action_list, name='get_filtered_action_list'),
     path('priorities/', views.get_priorities_list, name='get_priorities_list'),
     path('categories/', views.get_categories_list, name='get_categories_list'),
     path('add-action/', views.add_action, name='add_action'),
