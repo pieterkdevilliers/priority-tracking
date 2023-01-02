@@ -3,6 +3,7 @@ All models for the Actions App
 '''
 
 from django.db import models
+from datetime import datetime
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -41,6 +42,8 @@ class Action(models.Model):
     """
     title = models.CharField(max_length=50, null=False, blank=False)
     trackedTime = models.DurationField(null=True, blank=True)
+    trackedStart = models.DateTimeField(null=True, blank=True)
+    trackedStop = models.DateTimeField(null=True, blank=True)
     doneStatus = models.BooleanField(null=False, blank=False, default=False)
     actionDate = models.DateField(auto_now_add=True)
     category = models.ForeignKey(
