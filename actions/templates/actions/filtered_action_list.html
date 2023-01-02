@@ -4,9 +4,9 @@
 
 <body>
 
-    <form action="" method="GET">
-        <input type="date" name="actionDate">
-        <input type="submit">
+    <form class="mb-3" action="" method="GET">
+        <input class="form-control" type="date" name="actionDate">
+        <input class="form-control" type="submit">
     </form>
     <h1>Things I need to do:</h1>
     {{ query }}
@@ -37,6 +37,7 @@
                           <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Done</a></li>
                           <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
                           <li><a class="dropdown-item" href="{% url 'delete_action' action.id %}">Delete</a></li>
+                          <li><a class="dropdown-item" href="{% url 'relist_action' action.id %}">Relist</a></li>
                         </ul>
                       </div>
                 </td>

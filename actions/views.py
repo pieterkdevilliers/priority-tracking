@@ -16,8 +16,6 @@ def get_action_list(request):
     """
     Retrieves the action_list template.
     """
-    # query_dict = request.GET
-    # query = query_dict.get("actionDate")
     query = date.today()
     actions = Action.objects.all()
     filteredActions = Action.objects.filter(actionDate=query)
@@ -93,8 +91,24 @@ def complete_action(request, pk):
     """
     Submits the ActionForm and Updates an Action
     """
+    actionform = ActionForm()
     action = Action.objects.get(id=pk)
     action.doneStatus = not action.doneStatus
+    action.save()
+    return redirect('/actions/')
+
+    context = {'actionform': actionform}
+    return render(request, 'actions/update_action.html', context)
+
+
+@login_required(login_url='login')
+def relist_action(request, pk):
+    """
+    Submits the ActionForm and Relists an Action
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.actionDate = date.today()
     action.save()
     return redirect('/actions/')
 

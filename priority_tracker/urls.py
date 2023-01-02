@@ -33,6 +33,7 @@ urlpatterns = [
     path('add-new-category/', views.add_category, name='add_new_category'),
     path('add-new-priority/', views.add_priority, name='add_new_priority'),
     path('update-action/<str:pk>/', views.update_action, name='update_action'),
+    path('relist-action/<str:pk>/', views.relist_action, name='relist_action'),
     path('update-priority/<str:pk>/', views.update_priority, name='update_priority'),
     path('update-category/<str:pk>/', views.update_category, name='update_category'),
     path('delete-action/<str:pk>/', views.delete_action, name='delete_action'),
