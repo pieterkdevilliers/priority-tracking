@@ -3,21 +3,33 @@
 {% block content %}
 
 <body>
-    <p>Hello, {{request.user}}</p>
-    <a href="{% url 'logout' %}">Logout</a>
     <h1>My Priorities:</h1>
-    <table>
+    <table class="table table-striped">
+        <tr>
+            <th>Priority</th>
+            <th>Description</th>
+            <th>Active Status</th>
+            <th>Options</th>
+        </tr>
         {% for priority in user.priorities.all %}
             <tr>
                 <td>{{ priority.title }}</td>
                 <td>{{ priority.description }}</td>
                 <td>{{ priority.activeStatus }}</td>
-                <td><a href="{% url 'update_priority' priority.id %}">Update</a></td>
-                <td><a href="{% url 'delete_priority' priority.id %}">Delete</a></td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'update_priority' priority.id %}">Update</a></li>
+                          <li><a class="dropdown-item" href="{% url 'delete_priority' priority.id %}">Delete</a></li>
+                        </ul>
+                      </div>
+                </td>
             </tr>
         {% endfor %}
     </table>
-    <a href="/add-priority/">Add New Priority</a>
+    <a class="btn btn-primary" role="button" href="/add-priority/">Add New Priority</a>
 </body>
 
 {% endblock %}

@@ -3,6 +3,11 @@
 {% block content %}
 
 <body>
+
+    <form class="mb-3" action="" method="GET">
+        <input class="form-control" type="date" name="actionDate">
+        <input class="form-control" type="submit">
+    </form>
     <h1>Things I need to do:</h1>
     {{ query }}
 
@@ -12,8 +17,8 @@
             <th>Time Tracked</th>
             <th>Priority</th>
             <th>Category</th>
-            <th>Date</th>
             <th>Options</th>
+            <th>Date</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == False %}
@@ -32,6 +37,7 @@
                           <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Done</a></li>
                           <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
                           <li><a class="dropdown-item" href="{% url 'delete_action' action.id %}">Delete</a></li>
+                          <li><a class="dropdown-item" href="{% url 'relist_action' action.id %}">Relist</a></li>
                         </ul>
                       </div>
                 </td>
@@ -54,8 +60,8 @@
             <th>Time Tracked</th>
             <th>Priority</th>
             <th>Category</th>
-            <th>Date</th>
             <th>Options</th>
+            <th>Date</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == True %}

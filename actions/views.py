@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from datetime import date
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
 from .models import Action, Category, Priority
 # Create your views here.
@@ -15,11 +16,32 @@ def get_action_list(request):
     """
     Retrieves the action_list template.
     """
+    query = date.today()
     actions = Action.objects.all()
+    filteredActions = Action.objects.filter(actionDate=query)
     context = {
-        "actions": actions
+        "actions": actions,
+        "query": query,
+        "filteredActions": filteredActions
     }
     return render(request, 'actions/action_list.html', context)
+
+
+@login_required(login_url='login')
+def get_filtered_action_list(request):
+    """
+    Retrieves the filtered action_list template.
+    """
+    query_dict = request.GET
+    query = query_dict.get("actionDate")
+    actions = Action.objects.all()
+    filteredActions = Action.objects.filter(actionDate=query)
+    context = {
+        "actions": actions,
+        "query": query,
+        "filteredActions": filteredActions
+    }
+    return render(request, 'actions/filtered_action_list.html', context)
 
 
 @login_required(login_url='login')
@@ -69,8 +91,24 @@ def complete_action(request, pk):
     """
     Submits the ActionForm and Updates an Action
     """
+    actionform = ActionForm()
     action = Action.objects.get(id=pk)
     action.doneStatus = not action.doneStatus
+    action.save()
+    return redirect('/actions/')
+
+    context = {'actionform': actionform}
+    return render(request, 'actions/update_action.html', context)
+
+
+@login_required(login_url='login')
+def relist_action(request, pk):
+    """
+    Submits the ActionForm and Relists an Action
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.actionDate = date.today()
     action.save()
     return redirect('/actions/')
 

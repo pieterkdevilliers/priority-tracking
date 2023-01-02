@@ -3,20 +3,31 @@
 {% block content %}
 
 <body>
-    <p>Hello, {{request.user}}</p>
-    <a href="{% url 'logout' %}">Logout</a>
     <h1>My Categories:</h1>
-    <table>
+    <table class="table table-striped">
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Options</th>
+        </tr>
         {% for category in user.categories.all %}
             <tr>
                 <td>{{ category.title }}</td>
                 <td>{{ category.description }}</td>
-                <td><a href="{% url 'update_category' category.id %}">Update</a></td>
-                <td><a href="{% url 'delete_category' category.id %}">Delete</a></td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'update_category' category.id %}">Update</a></li>
+                          <li><a class="dropdown-item" href="{% url 'delete_category' category.id %}">Delete</a></li>
+                        </ul>
+                      </div>
+                </td>
             </tr>
         {% endfor %}
     </table>
-    <a href="/add-category/">Add New Category</a>
+    <a class="btn btn-primary" role="button" href="/add-category/">Add New Category</a>
 </body>
 
 {% endblock %}
