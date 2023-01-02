@@ -1,9 +1,9 @@
 '''
 All models for the Actions App
 '''
-
-from django.db import models
 from datetime import datetime
+from dateutil import relativedelta
+from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -41,10 +41,9 @@ class Action(models.Model):
     Model for Actions - Used to track Actions.
     """
     title = models.CharField(max_length=50, null=False, blank=False)
-    trackedTime = models.TimeField(null=True, blank=True)
-    trackedStart = models.TimeField(null=True, blank=True)
-    trackedStop = models.TimeField(null=True, blank=True)
-    activeTimeTracked = models.TimeField(null=True, blank=True)
+    trackedTime = models.DateTimeField(null=True, blank=True)
+    trackedStart = models.DateTimeField(null=True, blank=True)
+    trackedStop = models.DateTimeField(null=True, blank=True)
     doneStatus = models.BooleanField(null=False, blank=False, default=False)
     actionDate = models.DateField(auto_now_add=True)
     category = models.ForeignKey(
@@ -56,3 +55,8 @@ class Action(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    # @property
+    # def activeTimeTracked(self):
+    #     activeTimeTracked = self.trackedStart
+    #     return activeTimeTracked

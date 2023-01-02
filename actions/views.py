@@ -1,7 +1,7 @@
 """
 Views for the Actions App.
 """
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timezone, timedelta
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -317,11 +317,12 @@ def stop_timer(request, pk):
     actionform = ActionForm()
     action = Action.objects.get(id=pk)
     action.trackedStop = datetime.now(timezone.utc)
-    action.activeTimeTracked = action.trackedStop - action.trackedStart
+    action.trackedTime = action.trackedStop
     action.save()
     return redirect('/actions/')
 
     context = {'actionform': actionform}
     return render(request, 'actions/update_action.html', context)
+
 
 
