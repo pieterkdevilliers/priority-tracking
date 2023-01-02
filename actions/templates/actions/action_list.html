@@ -22,7 +22,7 @@
         {% if action.doneStatus == False %}
             <tr>
                 <td>{{ action.title }}</td>
-                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.trackedTime|date:"G:i:s" }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
                 <td>{{ action.actionDate|date:"Y-m-d" }}</td>
@@ -40,9 +40,9 @@
                         </ul>
                       </div>
                 </td>
-                <td>{{ action.activeTimeTracked}}</td>
-                <td>{{ action.trackedStart.time }}</td>
-                <td>{{ action.trackedStop.time }}</td>
+                <td>{{ action.activeTimeTracked }}</td>
+                <td>{{ action.trackedStart|date:"G:i:s" }}</td>
+                <td>{{ action.trackedStop|date:"G:i:s" }}</td>
             </tr>
         {% endif %}
         {% empty %}
@@ -72,7 +72,7 @@
         {% if action.doneStatus == True %}
             <tr>
                 <td>{{ action.title }}</td>
-                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.trackedTime|date:"G:i:s" }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
                 <td>{{ action.actionDate|date:"Y-m-d" }}</td>
@@ -87,9 +87,9 @@
                         </ul>
                       </div>
                 </td>
-                <td>{{ action.activeTimeTracked}}</td>
-                <td>{{ action.trackedStart }}</td>
-                <td>{{ action.trackedStop }}</td>
+                <td>{{ action.activeTimeTracked }}</td>
+                <td>{{ action.trackedStart|date:"G:i:s" }}</td>
+                <td>{{ action.trackedStop|date:"G:i:s" }}</td>
             </tr>
         {% endif %}    
         {% empty %}

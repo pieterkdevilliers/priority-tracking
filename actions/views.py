@@ -1,11 +1,11 @@
 """
 Views for the Actions App.
 """
+from datetime import date, datetime, timezone
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from datetime import date, datetime
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
 from .models import Action, Category, Priority
 # Create your views here.
@@ -300,8 +300,9 @@ def start_timer(request, pk):
     """
     actionform = ActionForm()
     action = Action.objects.get(id=pk)
-    action.trackedStart = datetime.now()
-    action.trackedStop = datetime.now()
+
+    action.trackedStart = datetime.now(timezone.utc)
+    action.trackedStop = datetime.now(timezone.utc)
     action.save()
     return redirect('/actions/')
 
@@ -315,7 +316,8 @@ def stop_timer(request, pk):
     """
     actionform = ActionForm()
     action = Action.objects.get(id=pk)
-    action.trackedStop = datetime.now()
+    action.trackedStop = datetime.now(timezone.utc)
+    action.activeTimeTracked = action.trackedStop - action.trackedStart
     action.save()
     return redirect('/actions/')
 

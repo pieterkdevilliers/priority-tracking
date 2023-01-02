@@ -41,9 +41,10 @@ class Action(models.Model):
     Model for Actions - Used to track Actions.
     """
     title = models.CharField(max_length=50, null=False, blank=False)
-    trackedTime = models.DateTimeField(null=True, blank=True)
-    trackedStart = models.DateTimeField(null=True, blank=True)
-    trackedStop = models.DateTimeField(null=True, blank=True)
+    trackedTime = models.TimeField(null=True, blank=True)
+    trackedStart = models.TimeField(null=True, blank=True)
+    trackedStop = models.TimeField(null=True, blank=True)
+    activeTimeTracked = models.TimeField(null=True, blank=True)
     doneStatus = models.BooleanField(null=False, blank=False, default=False)
     actionDate = models.DateField(auto_now_add=True)
     category = models.ForeignKey(
