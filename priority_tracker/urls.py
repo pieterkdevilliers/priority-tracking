@@ -40,4 +40,6 @@ urlpatterns = [
     path('delete-category/<str:pk>/', views.delete_category, name='delete_category'),
     path('delete-priority/<str:pk>/', views.delete_priority, name='delete_priority'),
     path('complete-action/<str:pk>/', views.complete_action, name='complete_action'),
+    path('start-timer/<str:pk>/', views.start_timer, name='start_timer'),
+    path('stop-timer/<str:pk>/', views.stop_timer, name='stop_timer'),
 ]

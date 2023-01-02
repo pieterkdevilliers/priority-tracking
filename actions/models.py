@@ -41,7 +41,7 @@ class Action(models.Model):
     Model for Actions - Used to track Actions.
     """
     title = models.CharField(max_length=50, null=False, blank=False)
-    trackedTime = models.DurationField(null=True, blank=True)
+    trackedTime = models.DateTimeField(null=True, blank=True)
     trackedStart = models.DateTimeField(null=True, blank=True)
     trackedStop = models.DateTimeField(null=True, blank=True)
     doneStatus = models.BooleanField(null=False, blank=False, default=False)
@@ -55,5 +55,3 @@ class Action(models.Model):
 
     def __str__(self):
         return str(self.title)
-
-

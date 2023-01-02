@@ -9,11 +9,14 @@
     <table class="table table-striped">
         <tr>
             <th>Action</th>
-            <th>Time Tracked</th>
+            <th>Total Time Tracked</th>
             <th>Priority</th>
             <th>Category</th>
             <th>Date</th>
             <th>Options</th>
+            <th>Active Time Tracked</th>
+            <th>Timer Start</th>
+            <th>Timer Stop</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == False %}
@@ -32,9 +35,14 @@
                           <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Done</a></li>
                           <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
                           <li><a class="dropdown-item" href="{% url 'delete_action' action.id %}">Delete</a></li>
+                          <li><a class="dropdown-item" href="{% url 'start_timer' action.id %}">Start</a></li>
+                          <li><a class="dropdown-item" href="{% url 'stop_timer' action.id %}">Stop</a></li>
                         </ul>
                       </div>
                 </td>
+                <td>{{ action.activeTimeTracked}}</td>
+                <td>{{ action.trackedStart.time }}</td>
+                <td>{{ action.trackedStop.time }}</td>
             </tr>
         {% endif %}
         {% empty %}
@@ -51,11 +59,14 @@
     <table class="table table-striped">
         <tr>
             <th>Action</th>
-            <th>Time Tracked</th>
+            <th>Total Time Tracked</th>
             <th>Priority</th>
             <th>Category</th>
             <th>Date</th>
             <th>Options</th>
+            <th>Active Time Tracked</th>
+            <th>Timer Start</th>
+            <th>Timer Stop</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == True %}
@@ -76,6 +87,9 @@
                         </ul>
                       </div>
                 </td>
+                <td>{{ action.activeTimeTracked}}</td>
+                <td>{{ action.trackedStart }}</td>
+                <td>{{ action.trackedStop }}</td>
             </tr>
         {% endif %}    
         {% empty %}

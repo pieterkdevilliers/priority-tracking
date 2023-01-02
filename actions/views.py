@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from datetime import date
+from datetime import date, datetime
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
 from .models import Action, Category, Priority
 # Create your views here.
@@ -291,3 +291,35 @@ def logout_user(request):
     """
     logout(request)
     return redirect('/login/')
+
+
+@login_required(login_url='login')
+def start_timer(request, pk):
+    """
+    Submits the ActionForm and sets the start time for an Action
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.trackedStart = datetime.now()
+    action.trackedStop = datetime.now()
+    action.save()
+    return redirect('/actions/')
+
+    context = {'actionform': actionform}
+    return render(request, 'actions/update_action.html', context)
+
+@login_required(login_url='login')
+def stop_timer(request, pk):
+    """
+    Submits the ActionForm and sets the start time for an Action
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.trackedStop = datetime.now()
+    action.save()
+    return redirect('/actions/')
+
+    context = {'actionform': actionform}
+    return render(request, 'actions/update_action.html', context)
+
+
