@@ -4,7 +4,7 @@
 
 <body>
     <h1>Things I need to do:</h1>
-    {{ query }}
+    <br>
 
     <table class="table table-striped">
         <tr>
@@ -22,7 +22,7 @@
         {% if action.doneStatus == False %}
             <tr>
                 <td>{{ action.title }}</td>
-                <td>{{ action.trackedTime|date:"G:i:s" }}</td>
+                <td>{{ action.trackedTime }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
                 <td>{{ action.actionDate|date:"Y-m-d" }}</td>
@@ -38,11 +38,11 @@
                           <li><a class="dropdown-item" href="{% url 'start_timer' action.id %}">Start</a></li>
                           <li><a class="dropdown-item" href="{% url 'stop_timer' action.id %}">Stop</a></li>
                         </ul>
-                      </div>
+                      </div>      
                 </td>
-                <td>{{ action.activeTimeTracked }}</td>
-                <td>{{ action.trackedStart|date:"G:i:s" }}</td>
-                <td>{{ action.trackedStop|date:"G:i:s" }}</td>
+                <td>{{ action.activeTrackedTime }}</td>
+                <td>{{ action.trackedStart }}</td>
+                <td>{{ action.trackedStop }}</td>
             </tr>
         {% endif %}
         {% empty %}
@@ -72,7 +72,7 @@
         {% if action.doneStatus == True %}
             <tr>
                 <td>{{ action.title }}</td>
-                <td>{{ action.trackedTime|date:"G:i:s" }}</td>
+                <td>{{ action.trackedTime }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
                 <td>{{ action.actionDate|date:"Y-m-d" }}</td>
@@ -88,8 +88,8 @@
                       </div>
                 </td>
                 <td>{{ action.activeTimeTracked }}</td>
-                <td>{{ action.trackedStart|date:"G:i:s" }}</td>
-                <td>{{ action.trackedStop|date:"G:i:s" }}</td>
+                <td>{{ action.trackedStart }}</td>
+                <td>{{ action.trackedStop }}</td>
             </tr>
         {% endif %}    
         {% empty %}
@@ -99,6 +99,7 @@
 
 
     </table>
+
 </body>
 
 {% endblock %}
