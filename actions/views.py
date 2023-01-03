@@ -301,8 +301,8 @@ def start_timer(request, pk):
     """
     actionform = ActionForm()
     action = Action.objects.get(id=pk)
-
     action.trackedStart = datetime.datetime.now(timezone.utc)
+    action.trackingStatus = True
     action.save()
     return redirect('/actions/')
 
@@ -314,8 +314,9 @@ def stop_timer(request, pk):
     """
     actionform = ActionForm()
     action = Action.objects.get(id=pk)
+    action.trackingStatus = False
     action.trackedStop = datetime.datetime.now(timezone.utc)
-    if action.activeTrackedTime == None:
+    if action.activeTrackedTime is None:
         action.activeTrackedTime = action.trackedStop - action.trackedStart
         action.trackedTime = action.activeTrackedTime
     else:

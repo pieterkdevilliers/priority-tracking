@@ -13,10 +13,10 @@
             <th>Priority</th>
             <th>Category</th>
             <th>Date</th>
-            <th>Options</th>
-            <th>Active Time Tracked</th>
-            <th>Timer Start</th>
-            <th>Timer Stop</th>
+            <th>Tracking</th>
+            <th>Status</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == False %}
@@ -26,23 +26,26 @@
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
                 <td>{{ action.actionDate|date:"Y-m-d" }}</td>
+
+                {% if action.trackingStatus == False %}
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Options
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Done</a></li>
-                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
-                          <li><a class="dropdown-item" href="{% url 'delete_action' action.id %}">Delete</a></li>
-                          <li><a class="dropdown-item" href="{% url 'start_timer' action.id %}">Start</a></li>
-                          <li><a class="dropdown-item" href="{% url 'stop_timer' action.id %}">Stop</a></li>
-                        </ul>
-                      </div>      
+                    <a class="btn btn-primary" role="button" href="{% url 'start_timer' action.id %}">Start Timer</a>
                 </td>
-                <td>{{ action.activeTrackedTime }}</td>
-                <td>{{ action.trackedStart }}</td>
-                <td>{{ action.trackedStop }}</td>
+                {% endif %}
+                {% if action.trackingStatus == True %}
+                <td>
+                    <a class="btn btn-warning" role="button" href="{% url 'stop_timer' action.id %}">Stop Timer</a>
+                </td>
+                {% endif %}
+                <td>
+                    <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Done</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" role="button" href="{% url 'update_action' action.id %}">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" role="button" href="{% url 'delete_action' action.id %}">Delete</a>
+                </td>
             </tr>
         {% endif %}
         {% empty %}
@@ -63,10 +66,7 @@
             <th>Priority</th>
             <th>Category</th>
             <th>Date</th>
-            <th>Options</th>
-            <th>Active Time Tracked</th>
-            <th>Timer Start</th>
-            <th>Timer Stop</th>
+            <th>Status</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == True %}
@@ -77,19 +77,8 @@
                 <td>{{ action.category }}</td>
                 <td>{{ action.actionDate|date:"Y-m-d" }}</td>
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Options
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Undo</a></li>
-                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
-                        </ul>
-                      </div>
+                    <a class="btn btn-success" role="button" href="{% url 'complete_action' action.id %}">Undo</a>
                 </td>
-                <td>{{ action.activeTimeTracked }}</td>
-                <td>{{ action.trackedStart }}</td>
-                <td>{{ action.trackedStop }}</td>
             </tr>
         {% endif %}    
         {% empty %}
