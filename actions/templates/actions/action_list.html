@@ -13,10 +13,7 @@
             <th>Priority</th>
             <th>Category</th>
             <th>Date</th>
-            <th>Tracking</th>
-            <th>Status</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Tracking and Edit</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == False %}
@@ -26,24 +23,16 @@
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
                 <td>{{ action.actionDate|date:"Y-m-d" }}</td>
-
-                {% if action.trackingStatus == False %}
                 <td>
+                {% if action.trackingStatus == False %}
+                
                     <a class="btn btn-primary" role="button" href="{% url 'start_timer' action.id %}">Start Timer</a>
-                </td>
                 {% endif %}
                 {% if action.trackingStatus == True %}
-                <td>
                     <a class="btn btn-warning" role="button" href="{% url 'stop_timer' action.id %}">Stop Timer</a>
-                </td>
                 {% endif %}
-                <td>
                     <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Done</a>
-                </td>
-                <td>
                     <a class="btn btn-primary" role="button" href="{% url 'update_action' action.id %}">Edit</a>
-                </td>
-                <td>
                     <a class="btn btn-primary" role="button" href="{% url 'delete_action' action.id %}">Delete</a>
                 </td>
             </tr>
