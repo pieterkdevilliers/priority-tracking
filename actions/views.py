@@ -364,4 +364,4 @@ def add_report(request):
             return redirect('/actions/')
 
     context = {'reportform': reportform}
-    return render(request, 'actions/action_list.html.html', context)
+    return render(request, 'actions/add_report.html', context)
