@@ -3,51 +3,81 @@
 {% block content %}
 
 <body>
-    <p>Hello, {{request.user}}</p>
-    <a href="{% url 'logout' %}">Logout</a>
     <h1>Things I need to do:</h1>
-    <table>
-        {% for action in user.action.all %}
+    <br>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Action</th>
+            <th>Total Time Tracked</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Tracking and Edit</th>
+        </tr>
+        {% for action in filteredActions %}
         {% if action.doneStatus == False %}
             <tr>
                 <td>{{ action.title }}</td>
                 <td>{{ action.trackedTime }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
-                <td><a href="{% url 'complete_action' action.id %}">Done</a></td>
-                <td><a href="{% url 'update_action' action.id %}">Update</a></td>
-                <td><a href="{% url 'delete_action' action.id %}">Delete</a></td>
+                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
+                <td>
+                {% if action.trackingStatus == False %}
+                
+                    <a class="btn btn-primary" role="button" href="{% url 'start_timer' action.id %}">Start Timer</a>
+                {% endif %}
+                {% if action.trackingStatus == True %}
+                    <a class="btn btn-warning" role="button" href="{% url 'stop_timer' action.id %}">Stop Timer</a>
+                {% endif %}
+                    <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Done</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'update_action' action.id %}">Edit</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'delete_action' action.id %}">Delete</a>
+                </td>
             </tr>
-        {% endif %}    
+        {% endif %}
         {% empty %}
         <tr><td>You have nothing to do.</td></tr>
         {% endfor %}
 
 
     </table>
-    <a href="/add-action/">Add New Action</a>
+    <a class="btn btn-primary" role="button" href="/add-action/">Add New Action</a>
 
     <hr>
 
     <h1>Things I've Done:</h1>
-    <table>
-        {% for action in user.action.all %}
+    <table class="table table-striped">
+        <tr>
+            <th>Action</th>
+            <th>Total Time Tracked</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        {% for action in filteredActions %}
         {% if action.doneStatus == True %}
             <tr>
                 <td>{{ action.title }}</td>
                 <td>{{ action.trackedTime }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
-                <td><a href="{% url 'complete_action' action.id %}">Undo</a></td>
-                <td><a href="{% url 'delete_action' action.id %}">Delete</a></td>
+                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
+                <td>
+                    <a class="btn btn-success" role="button" href="{% url 'complete_action' action.id %}">Undo</a>
+                </td>
             </tr>
         {% endif %}    
         {% empty %}
-        <tr><td>You have nothing to do.</td></tr>
+
         {% endfor %}
+    
 
 
     </table>
+
 </body>
 
 {% endblock %}

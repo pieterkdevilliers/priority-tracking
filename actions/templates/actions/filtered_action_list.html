@@ -1,0 +1,100 @@
+{% extends 'actions/main.html' %}
+
+{% block content %}
+
+<body>
+
+    <form class="mb-3" action="" method="GET">
+        <input class="form-control" type="date" name="actionDate">
+        <input class="form-control" type="submit">
+    </form>
+    <h1>Things I need to do:</h1>
+    {{ query }}
+
+    <table class="table table-striped">
+        <tr>
+            <th>Action</th>
+            <th>Total Time Tracked</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Options</th>
+            <th>Date</th>
+            <th>Active Time Tracked</th>
+        </tr>
+        {% for action in filteredActions %}
+        {% if action.doneStatus == False %}
+            <tr>
+                <td>{{ action.title }}</td>
+                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.priority }}</td>
+                <td>{{ action.category }}</td>
+                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Options
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Done</a></li>
+                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
+                          <li><a class="dropdown-item" href="{% url 'delete_action' action.id %}">Delete</a></li>
+                          <li><a class="dropdown-item" href="{% url 'relist_action' action.id %}">Relist</a></li>
+                        </ul>
+                      </div>
+                </td>
+                <td>{{ action.activeTimeTracked}}</td>
+            </tr>
+        {% endif %}
+        {% empty %}
+        <tr><td>You have nothing to do.</td></tr>
+        {% endfor %}
+
+
+    </table>
+    <a class="btn btn-primary" role="button" href="/add-action/">Add New Action</a>
+
+    <hr>
+
+    <h1>Things I've Done:</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Action</th>
+            <th>Total Time Tracked</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Options</th>
+            <th>Date</th>
+            <th>Active Time Tracked</th>
+        </tr>
+        {% for action in filteredActions %}
+        {% if action.doneStatus == True %}
+            <tr>
+                <td>{{ action.title }}</td>
+                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.priority }}</td>
+                <td>{{ action.category }}</td>
+                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Options
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Undo</a></li>
+                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
+                        </ul>
+                      </div>
+                </td>
+                <td>{{ action.activeTimeTracked}}</td>
+            </tr>
+        {% endif %}    
+        {% empty %}
+
+        {% endfor %}
+    
+
+
+    </table>
+</body>
+
+{% endblock %}

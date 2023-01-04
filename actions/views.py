@@ -1,6 +1,8 @@
 """
 Views for the Actions App.
 """
+import datetime
+from datetime import timezone, date
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -15,11 +17,32 @@ def get_action_list(request):
     """
     Retrieves the action_list template.
     """
+    query = date.today()
     actions = Action.objects.all()
+    filteredActions = Action.objects.filter(actionDate=query)
     context = {
-        "actions": actions
+        "actions": actions,
+        "query": query,
+        "filteredActions": filteredActions
     }
     return render(request, 'actions/action_list.html', context)
+
+
+@login_required(login_url='login')
+def get_filtered_action_list(request):
+    """
+    Retrieves the filtered action_list template.
+    """
+    query_dict = request.GET
+    query = query_dict.get("actionDate")
+    actions = Action.objects.all()
+    filteredActions = Action.objects.filter(actionDate=query)
+    context = {
+        "actions": actions,
+        "query": query,
+        "filteredActions": filteredActions
+    }
+    return render(request, 'actions/filtered_action_list.html', context)
 
 
 @login_required(login_url='login')
@@ -69,8 +92,24 @@ def complete_action(request, pk):
     """
     Submits the ActionForm and Updates an Action
     """
+    actionform = ActionForm()
     action = Action.objects.get(id=pk)
     action.doneStatus = not action.doneStatus
+    action.save()
+    return redirect('/actions/')
+
+    context = {'actionform': actionform}
+    return render(request, 'actions/update_action.html', context)
+
+
+@login_required(login_url='login')
+def relist_action(request, pk):
+    """
+    Submits the ActionForm and Relists an Action
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.actionDate = date.today()
     action.save()
     return redirect('/actions/')
 
@@ -253,3 +292,49 @@ def logout_user(request):
     """
     logout(request)
     return redirect('/login/')
+
+
+@login_required(login_url='login')
+def start_timer(request, pk):
+    """
+    Submits the ActionForm and sets the start time for an Action
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.trackedStart = datetime.datetime.now(timezone.utc)
+    action.trackingStatus = True
+    action.save()
+    return redirect('/actions/')
+
+
+@login_required(login_url='login')
+def stop_timer(request, pk):
+    """
+    Submits the ActionForm and sets the start time for an Action
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.trackingStatus = False
+    action.trackedStop = datetime.datetime.now(timezone.utc)
+    if action.activeTrackedTime is None:
+        action.activeTrackedTime = action.trackedStop - action.trackedStart
+        action.trackedTime = action.activeTrackedTime
+    else:
+        action.activeTrackedTime = action.trackedStop - action.trackedStart
+        action.trackedTime = action.trackedTime + action.activeTrackedTime
+    action.save()
+    return redirect('/actions/')
+
+
+@login_required(login_url='login')
+def tracking_status(request, pk):
+    """
+    Submits the ActionForm and Updates an Action Tracking Status
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.trackingStatus = not action.trackingStatus
+    action.save()
+    return redirect('/actions/')
+
+
