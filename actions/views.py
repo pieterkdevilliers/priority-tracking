@@ -7,7 +7,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
+from django.db.models import Sum
+from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, CreateReportForm
 from .models import Action, Category, Priority
 # Create your views here.
 
@@ -18,6 +19,10 @@ def get_action_list(request):
     Retrieves the action_list template.
     """
     query = date.today()
+    completedActionsCount = Action.objects.filter(doneStatus=True, actionDate=query).count()
+    openActionsCount = Action.objects.filter(doneStatus=False, actionDate=query).count()
+    totalActionTime = Action.objects.filter(actionDate=query).aggregate(Sum('trackedTime'))
+    totalSeconds = totalActionTime['trackedTime__sum'].total_seconds()
     actions = Action.objects.all()
     filteredActions = Action.objects.filter(actionDate=query)
     priorities = Priority.objects.all()
@@ -25,7 +30,11 @@ def get_action_list(request):
         "actions": actions,
         "query": query,
         "filteredActions": filteredActions,
-        "priorities": priorities
+        "priorities": priorities,
+        "completedActionsCount": completedActionsCount,
+        "openActionsCount": openActionsCount,
+        "totalActionTime": totalActionTime,
+        "totalSeconds": totalSeconds
     }
     return render(request, 'actions/action_list.html', context)
 
@@ -340,3 +349,19 @@ def tracking_status(request, pk):
     return redirect('/actions/')
 
 
+@login_required(login_url='login')
+def add_report(request):
+    """
+    Submits the ReportForm and Creates a Report
+    """
+    reportform = CreateReportForm()
+    if request.method == "POST":
+        reportform = CreateReportForm(request.POST)
+        if reportform.is_valid():
+            instance = reportform.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            return redirect('/actions/')
+
+    context = {'reportform': reportform}
+    return render(request, 'actions/action_list.html.html', context)

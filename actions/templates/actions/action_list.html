@@ -44,6 +44,7 @@
 
     </table>
     <a class="btn btn-primary" role="button" href="/add-action/">Add New Action</a>
+    <a class="btn btn-primary" role="button" href="{% url 'add_report' %}">Create Report</a>
 
     <hr>
 
@@ -93,6 +94,20 @@
     
     {% endif %}
     {% endfor %}
+
+    <hr>
+    <h4 class="card-title">Reporting - Today</h4>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Action Tracking</h5>
+          <h4 class="card-title">Completed Actions</h4>
+          <p class="card-text">{{ completedActionsCount }}</p>
+          <h4 class="card-title">Open Actions</h4>
+          <p class="card-text">{{ openActionsCount }}</p>
+          <h4 class="card-title">Total Time Tracked</h4>
+          <p class="card-text">{{ totalSeconds }}</p>
+        </div>
+      </div>
 
 </body>
 

@@ -29,7 +29,8 @@ ALLOWED_HOSTS = []
 
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-pieterkdevi-prioritytra-lbfu7psylfm.ws-eu80.gitpod.io',
-    'https://8000-pieterkdevi-prioritytra-8qejs3uz0nv.ws-eu80.gitpod.io'
+    'https://8000-pieterkdevi-prioritytra-8qejs3uz0nv.ws-eu80.gitpod.io',
+    'https://8000-pieterkdevi-prioritytra-lbfu7psylfm.ws-eu81.gitpod.io',
     ]
 
 

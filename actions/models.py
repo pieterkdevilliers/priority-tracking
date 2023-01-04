@@ -58,3 +58,21 @@ class Action(models.Model):
     def __str__(self):
         return str(self.title)
 
+
+class Report(models.Model):
+    """
+    Model for Reports - Used to track reporting per day.
+    """
+    reportDate = models.DateTimeField(auto_now_add=True)
+    timeTrackedToday = models.DurationField(null=True, blank=True)
+    actionsCompleted = models.IntegerField(null=True, blank=True)
+    openActions = models.IntegerField(null=True, blank=True)
+    percOnPriority = models.FloatField(null=True, blank=True)
+    percOffPriority = models.FloatField(null=True, blank=True)
+    timeOnPriority = models.DurationField(null=True, blank=True)
+    timeOffPriority = models.DurationField(null=True, blank=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="report", null=True)
+
+    def __str__(self):
+        return str(self.reportDate)

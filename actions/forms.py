@@ -4,7 +4,7 @@ ModelForms for Actions App
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from .models import Action, Priority, Category
+from .models import Action, Priority, Category, Report
 
 
 class ActionForm(ModelForm):
@@ -53,4 +53,16 @@ class CreateUserForm(UserCreationForm):
         """
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+
+class CreateReportForm(ModelForm):
+    """
+    ModelForm for Reports
+    """
+    class Meta:
+        """
+        Meta class for CreateReportForm
+        """
+        model = Report
+        fields = ['timeTrackedToday', 'actionsCompleted', 'openActions', 'percOnPriority','percOffPriority', 'timeOnPriority', 'timeOffPriority']
 
