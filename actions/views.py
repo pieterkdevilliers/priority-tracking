@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, CreateReportForm
+from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
 from .models import Action, Category, Priority
 # Create your views here.
 
@@ -34,7 +34,7 @@ def get_action_list(request):
         "completedActionsCount": completedActionsCount,
         "openActionsCount": openActionsCount,
         "totalActionTime": totalActionTime,
-        "totalSeconds": totalSeconds
+        "totalSeconds": totalSeconds,
     }
     return render(request, 'actions/action_list.html', context)
 
@@ -348,20 +348,3 @@ def tracking_status(request, pk):
     action.save()
     return redirect('/actions/')
 
-
-@login_required(login_url='login')
-def add_report(request):
-    """
-    Submits the ReportForm and Creates a Report
-    """
-    reportform = CreateReportForm()
-    if request.method == "POST":
-        reportform = CreateReportForm(request.POST)
-        if reportform.is_valid():
-            instance = reportform.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            return redirect('/actions/')
-
-    context = {'reportform': reportform}
-    return render(request, 'actions/add_report.html', context)

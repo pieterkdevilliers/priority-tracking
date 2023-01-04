@@ -94,7 +94,7 @@
     
     {% endif %}
     {% endfor %}
-
+    
     <hr>
     <h4 class="card-title">Reporting - Today</h4>
     <div class="card" style="width: 18rem;">
@@ -105,7 +105,15 @@
           <h4 class="card-title">Open Actions</h4>
           <p class="card-text">{{ openActionsCount }}</p>
           <h4 class="card-title">Total Time Tracked</h4>
-          <p class="card-text">{{ totalSeconds }}</p>
+          <p class="card-text">{{ totalActionTime }}</p>
+          <h4 class="card-title">% On Priority</h4>
+          <p class="card-text">{{ percOnPriority }}</p>
+          <h4 class="card-title">% Off Priority</h4>
+          <p class="card-text">{{ percOffPriority }}</p>
+          <h4 class="card-title">Time On Priority</h4>
+          <p class="card-text">{{ timeOnPriority }}</p>
+          <h4 class="card-title">Time Off Priority</h4>
+          <p class="card-text">{{ timeOffPriority }}</p>
         </div>
       </div>
 

@@ -4,10 +4,10 @@
 
 <body>
     <h1>Add Report</h1>
-    <form method="POST" action="/add-report/">
+    <form class="mb-3" method="POST" action="/add-report/">
         {% csrf_token %}
 
-        {{ createreportform }}
+        {{ reportform }}
         
         <input type="submit" name="Add Report">
     </form>
