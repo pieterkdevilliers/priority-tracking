@@ -77,6 +77,21 @@
 
 
     </table>
+    <hr>
+
+    {% for priority in priorities %}
+    {% if priority.activeStatus == True %}
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h4 class="card-title">{{ priority.title }}</h4>
+          <p class="card-text">{{ priority.description }}</p>
+          <h5 class="card-title">{{ priority.category }}</h5>
+        </div>
+      </div>
+    
+    {% endif %}
+    {% endfor %}
 
 </body>
 

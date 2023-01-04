@@ -40,7 +40,7 @@ class PriorityForm(ModelForm):
         Meta class for PriorityForm
         """
         model = Priority
-        fields = ['title', 'description', 'activeStatus']
+        fields = ['title', 'description', 'category', 'activeStatus']
 
 
 class CreateUserForm(UserCreationForm):

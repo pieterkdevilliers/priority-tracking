@@ -20,10 +20,12 @@ def get_action_list(request):
     query = date.today()
     actions = Action.objects.all()
     filteredActions = Action.objects.filter(actionDate=query)
+    priorities = Priority.objects.all()
     context = {
         "actions": actions,
         "query": query,
-        "filteredActions": filteredActions
+        "filteredActions": filteredActions,
+        "priorities": priorities
     }
     return render(request, 'actions/action_list.html', context)
 

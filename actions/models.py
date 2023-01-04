@@ -1,8 +1,6 @@
 '''
 All models for the Actions App
 '''
-from datetime import datetime
-from dateutil import parser
 from django.db import models
 from django.contrib.auth.models import User
 
