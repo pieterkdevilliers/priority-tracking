@@ -4,16 +4,16 @@
 
 <body>
     <h1>Things I need to do:</h1>
-    {{ query }}
+    <br>
 
     <table class="table table-striped">
         <tr>
             <th>Action</th>
-            <th>Time Tracked</th>
+            <th>Total Time Tracked</th>
             <th>Priority</th>
             <th>Category</th>
             <th>Date</th>
-            <th>Options</th>
+            <th>Tracking and Edit</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == False %}
@@ -24,16 +24,16 @@
                 <td>{{ action.category }}</td>
                 <td>{{ action.actionDate|date:"Y-m-d" }}</td>
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Options
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Done</a></li>
-                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
-                          <li><a class="dropdown-item" href="{% url 'delete_action' action.id %}">Delete</a></li>
-                        </ul>
-                      </div>
+                {% if action.trackingStatus == False %}
+                
+                    <a class="btn btn-primary" role="button" href="{% url 'start_timer' action.id %}">Start Timer</a>
+                {% endif %}
+                {% if action.trackingStatus == True %}
+                    <a class="btn btn-warning" role="button" href="{% url 'stop_timer' action.id %}">Stop Timer</a>
+                {% endif %}
+                    <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Done</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'update_action' action.id %}">Edit</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'delete_action' action.id %}">Delete</a>
                 </td>
             </tr>
         {% endif %}
@@ -51,11 +51,11 @@
     <table class="table table-striped">
         <tr>
             <th>Action</th>
-            <th>Time Tracked</th>
+            <th>Total Time Tracked</th>
             <th>Priority</th>
             <th>Category</th>
             <th>Date</th>
-            <th>Options</th>
+            <th>Status</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == True %}
@@ -66,15 +66,7 @@
                 <td>{{ action.category }}</td>
                 <td>{{ action.actionDate|date:"Y-m-d" }}</td>
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Options
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Undo</a></li>
-                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
-                        </ul>
-                      </div>
+                    <a class="btn btn-success" role="button" href="{% url 'complete_action' action.id %}">Undo</a>
                 </td>
             </tr>
         {% endif %}    
@@ -85,6 +77,7 @@
 
 
     </table>
+
 </body>
 
 {% endblock %}

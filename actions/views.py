@@ -1,11 +1,12 @@
 """
 Views for the Actions App.
 """
+import datetime
+from datetime import timezone, date
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from datetime import date
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
 from .models import Action, Category, Priority
 # Create your views here.
@@ -291,3 +292,49 @@ def logout_user(request):
     """
     logout(request)
     return redirect('/login/')
+
+
+@login_required(login_url='login')
+def start_timer(request, pk):
+    """
+    Submits the ActionForm and sets the start time for an Action
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.trackedStart = datetime.datetime.now(timezone.utc)
+    action.trackingStatus = True
+    action.save()
+    return redirect('/actions/')
+
+
+@login_required(login_url='login')
+def stop_timer(request, pk):
+    """
+    Submits the ActionForm and sets the start time for an Action
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.trackingStatus = False
+    action.trackedStop = datetime.datetime.now(timezone.utc)
+    if action.activeTrackedTime is None:
+        action.activeTrackedTime = action.trackedStop - action.trackedStart
+        action.trackedTime = action.activeTrackedTime
+    else:
+        action.activeTrackedTime = action.trackedStop - action.trackedStart
+        action.trackedTime = action.trackedTime + action.activeTrackedTime
+    action.save()
+    return redirect('/actions/')
+
+
+@login_required(login_url='login')
+def tracking_status(request, pk):
+    """
+    Submits the ActionForm and Updates an Action Tracking Status
+    """
+    actionform = ActionForm()
+    action = Action.objects.get(id=pk)
+    action.trackingStatus = not action.trackingStatus
+    action.save()
+    return redirect('/actions/')
+
+

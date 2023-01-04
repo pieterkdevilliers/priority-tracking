@@ -14,11 +14,12 @@
     <table class="table table-striped">
         <tr>
             <th>Action</th>
-            <th>Time Tracked</th>
+            <th>Total Time Tracked</th>
             <th>Priority</th>
             <th>Category</th>
             <th>Options</th>
             <th>Date</th>
+            <th>Active Time Tracked</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == False %}
@@ -41,6 +42,7 @@
                         </ul>
                       </div>
                 </td>
+                <td>{{ action.activeTimeTracked}}</td>
             </tr>
         {% endif %}
         {% empty %}
@@ -57,11 +59,12 @@
     <table class="table table-striped">
         <tr>
             <th>Action</th>
-            <th>Time Tracked</th>
+            <th>Total Time Tracked</th>
             <th>Priority</th>
             <th>Category</th>
             <th>Options</th>
             <th>Date</th>
+            <th>Active Time Tracked</th>
         </tr>
         {% for action in filteredActions %}
         {% if action.doneStatus == True %}
@@ -82,6 +85,7 @@
                         </ul>
                       </div>
                 </td>
+                <td>{{ action.activeTimeTracked}}</td>
             </tr>
         {% endif %}    
         {% empty %}

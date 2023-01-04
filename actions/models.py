@@ -1,7 +1,8 @@
 '''
 All models for the Actions App
 '''
-
+from datetime import datetime
+from dateutil import parser
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -41,8 +42,12 @@ class Action(models.Model):
     """
     title = models.CharField(max_length=50, null=False, blank=False)
     trackedTime = models.DurationField(null=True, blank=True)
+    activeTrackedTime = models.DurationField(null=True, blank=True)
+    trackedStart = models.DateTimeField(null=True, blank=True)
+    trackedStop = models.DateTimeField(null=True, blank=True)
     doneStatus = models.BooleanField(null=False, blank=False, default=False)
     actionDate = models.DateField(auto_now_add=True)
+    trackingStatus = models.BooleanField(null=False, blank=False, default=False)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=False, blank=False)
     priority = models.ForeignKey(
@@ -52,5 +57,4 @@ class Action(models.Model):
 
     def __str__(self):
         return str(self.title)
-
 
