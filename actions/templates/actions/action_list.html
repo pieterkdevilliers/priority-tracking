@@ -93,6 +93,35 @@
     
     {% endif %}
     {% endfor %}
+    
+    <hr>
+    <h4 class="card-title">Reporting - Today</h4>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Action Tracking</h5>
+          <h4 class="card-title">Completed Actions</h4>
+          <p class="card-text">{{ completedActionsCount }}</p>
+          <h4 class="card-title">Open Actions</h4>
+          <p class="card-text">{{ openActionsCount }}</p>
+          <h4 class="card-title">Total Actions</h4>
+          <p class="card-text">{{ totalActionsCount }}</p>
+          <h4 class="card-title">Total Time Tracked</h4>
+          <p class="card-text">{{ convertedTrackedTime }}</p>
+          <h4 class="card-title">% On Priority</h4>
+          <p class="card-text">{{ onPriorityPerc|floatformat:2 }}%</p>
+          <h4 class="card-title">% Off Priority</h4>
+          <p class="card-text">{{ offPriorityPerc|floatformat:2 }}%</p>
+          <h4 class="card-title">Time On Priority</h4>
+          <p class="card-text">{{ convertedOnPriorityTime }}</p>
+          <h4 class="card-title">Time Off Priority</h4>
+          <p class="card-text">{{ convertedOffPriorityTime }}</p>
+          <h5 class="card-title">Averages over time</h5>
+          <h4 class="card-title">% On Priority</h4>
+          <p class="card-text">{{ onPriorityPercAllTime|floatformat:2 }}</p>
+          <h4 class="card-title">% Off Priority</h4>
+          <p class="card-text">{{ offPriorityPercAllTime|floatformat:2 }}</p>
+        </div>
+      </div>
 
 </body>
 

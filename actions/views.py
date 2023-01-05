@@ -1,12 +1,13 @@
 """
 Views for the Actions App.
 """
-import datetime
+import datetime, time
 from datetime import timezone, date
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.db.models import Sum
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
 from .models import Action, Category, Priority
 # Create your views here.
@@ -18,6 +19,30 @@ def get_action_list(request):
     Retrieves the action_list template.
     """
     query = date.today()
+    completedActionsCount = completedActions(query)
+    openActionsCount = openActions(query)
+    totalActionsCount = totalActions(query)
+    totalActionTime = trackedTime(query)
+    totalSeconds = int(trackedSeconds(totalActionTime))
+    convertedTrackedTime = trackedToday(totalSeconds)
+    onPriorityCount = onPriorityActions(query)
+    offPriorityCount = offPriorityActions(query)
+    onPriorityTime = onPriorityTrackedTime(query)
+    offPriorityTime = offPriorityTrackedTime(query)
+    onPrioritySeconds = int(trackedSeconds(onPriorityTime))
+    offPrioritySeconds = int(trackedSeconds(offPriorityTime))
+    convertedOnPriorityTime = trackedToday(onPrioritySeconds)
+    convertedOffPriorityTime = trackedToday(offPrioritySeconds)
+    onPriorityPerc = onPriorityCalc(totalSeconds, onPrioritySeconds)
+    offPriorityPerc = offPriorityCalc(totalSeconds, offPrioritySeconds)
+    allTimeTracked = trackedTimeAll(query)
+    allTimeSeconds = int(trackedSeconds(allTimeTracked))
+    allTimeOnPriorityTracked = onPriorityTrackedAllTime(query)
+    allTimeOffPriorityTracked = offPriorityTrackedAllTime(query)
+    allTimeOnPrioritySeconds = int(trackedSeconds(allTimeOnPriorityTracked))
+    allTimeOffPrioritySeconds = int(trackedSeconds(allTimeOffPriorityTracked))
+    onPriorityPercAllTime = onPriorityCalc(allTimeSeconds, allTimeOnPrioritySeconds)
+    offPriorityPercAllTime = offPriorityCalc(allTimeSeconds, allTimeOffPrioritySeconds)
     actions = Action.objects.all()
     filteredActions = Action.objects.filter(actionDate=query)
     priorities = Priority.objects.all()
@@ -25,9 +50,155 @@ def get_action_list(request):
         "actions": actions,
         "query": query,
         "filteredActions": filteredActions,
-        "priorities": priorities
+        "priorities": priorities,
+        "completedActionsCount": completedActionsCount,
+        "openActionsCount": openActionsCount,
+        "totalActionTime": totalActionTime,
+        "totalActionsCount": totalActionsCount,
+        "convertedTrackedTime": convertedTrackedTime,
+        "onPriorityCount": onPriorityCount,
+        "offPriorityCount": offPriorityCount,
+        "onPriorityPerc": onPriorityPerc,
+        "offPriorityPerc": offPriorityPerc,
+        "onPriorityTime": onPriorityTime,
+        "offPriorityTime": offPriorityTime,
+        "onPrioritySeconds": onPrioritySeconds,
+        "offPrioritySeconds": offPrioritySeconds,
+        "convertedOnPriorityTime": convertedOnPriorityTime,
+        "convertedOffPriorityTime": convertedOffPriorityTime,
+        "allTimeTracked": allTimeTracked,
+        "allTimeSeconds": allTimeSeconds,
+        "allTimeOnPriorityTracked": allTimeOnPriorityTracked,
+        "allTimeOffPriorityTracked": allTimeOffPriorityTracked,
+        "onPriorityPercAllTime": onPriorityPercAllTime,
+        "offPriorityPercAllTime": offPriorityPercAllTime
     }
     return render(request, 'actions/action_list.html', context)
+
+
+# Internal Functions
+
+def openActions(query):
+    """
+    Calculating the number of Open Actions.
+    """
+    openActions = Action.objects.filter(doneStatus=False, actionDate=query).count()
+    return openActions
+
+
+def completedActions(query):
+    """
+    Calculating the number of Completed Actions.
+    """
+    completedActions = Action.objects.filter(doneStatus=True, actionDate=query).count()
+    return completedActions
+
+
+def totalActions(query):
+    """
+    Calculating the number of Actions.
+    """
+    totalActions = Action.objects.filter(actionDate=query).count()
+    return totalActions
+
+
+def trackedTime(query):
+    """
+    Calculating the tracked time for the query date.
+    """
+    trackedTime = Action.objects.filter(actionDate=query).aggregate(Sum('trackedTime'))
+    return trackedTime
+
+
+def trackedSeconds(totalActionTime):
+    """
+    Converting trackedTime object into Seconds.
+    """
+    trackedSeconds = totalActionTime['trackedTime__sum'].total_seconds()
+    return trackedSeconds
+
+
+def trackedToday(totalSeconds):
+    """
+    Converting trackedSeconds into HH:MM:SS.
+    """
+    seconds = totalSeconds
+    minutes = seconds // 60
+    hours = minutes // 60
+    trackedToday = "%02d:%02d:%02d" % (hours, minutes % 60, seconds % 60)
+    return trackedToday
+
+
+def onPriorityActions(query):
+    """
+    Calculating the number of On Priority Actions.
+    """
+    onPriorityActions = Action.objects.filter(actionDate=query).exclude(priority__isnull=True).count()
+    return onPriorityActions
+
+
+def offPriorityActions(query):
+    """
+    Calculating the number of Off Priority Actions.
+    """
+    offPriorityActions = Action.objects.filter(actionDate=query).exclude(priority__isnull=False).count()
+    return offPriorityActions
+
+
+def onPriorityCalc(totalSeconds, onPrioritySeconds):
+    """
+    Calculating the % of On Priority Actions.
+    """
+    onPriorityCalc = (onPrioritySeconds * 100) / totalSeconds
+    return onPriorityCalc
+
+
+def offPriorityCalc(totalSeconds, offPrioritySeconds):
+    """
+    Calculating the % of Off Priority Actions.
+    """
+    offPriorityCalc = (offPrioritySeconds * 100) / totalSeconds
+    return offPriorityCalc
+
+
+def onPriorityTrackedTime(query):
+    """
+    Calculating the time tracked for On Priority Actions.
+    """
+    onPriorityTrackedTime = Action.objects.filter(actionDate=query).exclude(priority__isnull=True).aggregate(Sum('trackedTime'))
+    return onPriorityTrackedTime
+
+
+def offPriorityTrackedTime(query):
+    """
+    Calculating the time tracked for Off Priority Actions.
+    """
+    offPriorityTrackedTime = Action.objects.filter(actionDate=query).exclude(priority__isnull=False).aggregate(Sum('trackedTime'))
+    return offPriorityTrackedTime
+
+
+def trackedTimeAll(query):
+    """
+    Calculating the tracked time for all time.
+    """
+    trackedTimeAll = Action.objects.all().aggregate(Sum('trackedTime'))
+    return trackedTimeAll
+
+
+def onPriorityTrackedAllTime(query):
+    """
+    Calculating the time tracked for On Priority All Time.
+    """
+    onPriorityTrackedAllTime = Action.objects.all().exclude(priority__isnull=True).aggregate(Sum('trackedTime'))
+    return onPriorityTrackedAllTime
+
+
+def offPriorityTrackedAllTime(query):
+    """
+    Calculating the time tracked for Off Priority All Time.
+    """
+    offPriorityTrackedAllTime = Action.objects.all().exclude(priority__isnull=False).aggregate(Sum('trackedTime'))
+    return offPriorityTrackedAllTime
 
 
 @login_required(login_url='login')
@@ -338,5 +509,4 @@ def tracking_status(request, pk):
     action.trackingStatus = not action.trackingStatus
     action.save()
     return redirect('/actions/')
-
 
