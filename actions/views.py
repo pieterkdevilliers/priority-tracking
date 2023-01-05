@@ -25,6 +25,10 @@ def get_action_list(request):
     totalActionTime = trackedTime(query)
     totalSeconds = int(trackedSeconds(totalActionTime))
     convertedTrackedTime = trackedToday(totalSeconds)
+    onPriorityCount = onPriorityActions(query)
+    offPriorityCount = offPriorityActions(query)
+    onPriorityPerc = onPriorityCalc(totalActionsCount, onPriorityCount)
+    offPriorityPerc = offPriorityCalc(totalActionsCount, offPriorityCount)
     actions = Action.objects.all()
     filteredActions = Action.objects.filter(actionDate=query)
     priorities = Priority.objects.all()
@@ -36,9 +40,12 @@ def get_action_list(request):
         "completedActionsCount": completedActionsCount,
         "openActionsCount": openActionsCount,
         "totalActionTime": totalActionTime,
-        "totalSeconds": totalSeconds,
         "totalActionsCount": totalActionsCount,
         "convertedTrackedTime": convertedTrackedTime,
+        "onPriorityCount": onPriorityCount,
+        "offPriorityCount": offPriorityCount,
+        "onPriorityPerc": onPriorityPerc,
+        "offPriorityPerc": offPriorityPerc
     }
     return render(request, 'actions/action_list.html', context)
 
@@ -94,6 +101,38 @@ def trackedToday(totalSeconds):
     hours = minutes // 60
     trackedToday = "%02d:%02d:%02d" % (hours, minutes % 60, seconds % 60)
     return trackedToday
+
+
+def onPriorityActions(query):
+    """
+    Calculating the number of On Priority Actions.
+    """
+    onPriorityActions = Action.objects.filter(actionDate=query).exclude(priority__isnull=True).count()
+    return onPriorityActions
+
+
+def offPriorityActions(query):
+    """
+    Calculating the number of Off Priority Actions.
+    """
+    offPriorityActions = Action.objects.filter(actionDate=query).exclude(priority__isnull=False).count()
+    return offPriorityActions
+
+
+def onPriorityCalc(totalActionsCount, onPriorityCount):
+    """
+    Calculating the % of On Priority Actions.
+    """
+    onPriorityCalc = (onPriorityCount * 100) // totalActionsCount
+    return float(onPriorityCalc)
+
+
+def offPriorityCalc(totalActionsCount, offPriorityCount):
+    """
+    Calculating the % of Off Priority Actions.
+    """
+    offPriorityCalc = float(offPriorityCount * 100) // totalActionsCount
+    return offPriorityCalc
 
 
 @login_required(login_url='login')
