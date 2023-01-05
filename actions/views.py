@@ -123,15 +123,15 @@ def onPriorityCalc(totalActionsCount, onPriorityCount):
     """
     Calculating the % of On Priority Actions.
     """
-    onPriorityCalc = (onPriorityCount * 100) // totalActionsCount
-    return float(onPriorityCalc)
+    onPriorityCalc = (onPriorityCount * 100) / totalActionsCount
+    return onPriorityCalc
 
 
 def offPriorityCalc(totalActionsCount, offPriorityCount):
     """
     Calculating the % of Off Priority Actions.
     """
-    offPriorityCalc = float(offPriorityCount * 100) // totalActionsCount
+    offPriorityCalc = (offPriorityCount * 100) / totalActionsCount
     return offPriorityCalc
 
 
