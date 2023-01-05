@@ -1,7 +1,7 @@
 """
 Views for the Actions App.
 """
-import datetime
+import datetime, time
 from datetime import timezone, date
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -19,10 +19,12 @@ def get_action_list(request):
     Retrieves the action_list template.
     """
     query = date.today()
-    completedActionsCount = Action.objects.filter(doneStatus=True, actionDate=query).count()
-    openActionsCount = Action.objects.filter(doneStatus=False, actionDate=query).count()
-    totalActionTime = Action.objects.filter(actionDate=query).aggregate(Sum('trackedTime'))
-    totalSeconds = totalActionTime['trackedTime__sum'].total_seconds()
+    completedActionsCount = completedActions(query)
+    openActionsCount = openActions(query)
+    totalActionsCount = totalActions(query)
+    totalActionTime = trackedTime(query)
+    totalSeconds = int(trackedSeconds(totalActionTime))
+    convertedTrackedTime = trackedToday(totalSeconds)
     actions = Action.objects.all()
     filteredActions = Action.objects.filter(actionDate=query)
     priorities = Priority.objects.all()
@@ -35,8 +37,63 @@ def get_action_list(request):
         "openActionsCount": openActionsCount,
         "totalActionTime": totalActionTime,
         "totalSeconds": totalSeconds,
+        "totalActionsCount": totalActionsCount,
+        "convertedTrackedTime": convertedTrackedTime,
     }
     return render(request, 'actions/action_list.html', context)
+
+
+# Internal Functions
+
+def openActions(query):
+    """
+    Calculating the number of Open Actions.
+    """
+    openActions = Action.objects.filter(doneStatus=False, actionDate=query).count()
+    return openActions
+
+
+def completedActions(query):
+    """
+    Calculating the number of Completed Actions.
+    """
+    completedActions = Action.objects.filter(doneStatus=True, actionDate=query).count()
+    return completedActions
+
+
+def totalActions(query):
+    """
+    Calculating the number of Actions.
+    """
+    totalActions = Action.objects.filter(actionDate=query).count()
+    return totalActions
+
+
+def trackedTime(query):
+    """
+    Calculating the number of Completed Actions.
+    """
+    trackedTime = Action.objects.filter(actionDate=query).aggregate(Sum('trackedTime'))
+    return trackedTime
+
+
+def trackedSeconds(totalActionTime):
+    """
+    Converting trackedTime object into Seconds.
+    """
+    trackedSeconds = totalActionTime['trackedTime__sum'].total_seconds()
+    return trackedSeconds
+
+
+def trackedToday(totalSeconds):
+    """
+    Converting trackedSeconds into HH:MM:SS.
+    """
+    seconds = totalSeconds
+    minutes = seconds // 60
+    hours = minutes // 60
+    trackedToday = "%02d:%02d:%02d" % (hours, minutes % 60, seconds % 60)
+    return trackedToday
 
 
 @login_required(login_url='login')

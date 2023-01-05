@@ -44,7 +44,6 @@
 
     </table>
     <a class="btn btn-primary" role="button" href="/add-action/">Add New Action</a>
-    <a class="btn btn-primary" role="button" href="/add-report/">Add New Report</a>
 
     <hr>
 
@@ -104,8 +103,10 @@
           <p class="card-text">{{ completedActionsCount }}</p>
           <h4 class="card-title">Open Actions</h4>
           <p class="card-text">{{ openActionsCount }}</p>
+          <h4 class="card-title">Total Actions</h4>
+          <p class="card-text">{{ totalActionsCount }}</p>
           <h4 class="card-title">Total Time Tracked</h4>
-          <p class="card-text">{{ totalActionTime }}</p>
+          <p class="card-text">{{ convertedTrackedTime }}</p>
           <h4 class="card-title">% On Priority</h4>
           <p class="card-text">{{ percOnPriority }}</p>
           <h4 class="card-title">% Off Priority</h4>
