@@ -109,14 +109,17 @@
           <p class="card-text">{{ convertedTrackedTime }}</p>
           <h4 class="card-title">% On Priority</h4>
           <p class="card-text">{{ onPriorityPerc|floatformat:2 }}%</p>
-          <p class="card-text">{{ onPriorityCount }}</p>
           <h4 class="card-title">% Off Priority</h4>
           <p class="card-text">{{ offPriorityPerc|floatformat:2 }}%</p>
-          <p class="card-text">{{ offPriorityCount }}</p>
           <h4 class="card-title">Time On Priority</h4>
-          <p class="card-text">{{ timeOnPriority }}</p>
+          <p class="card-text">{{ convertedOnPriorityTime }}</p>
           <h4 class="card-title">Time Off Priority</h4>
-          <p class="card-text">{{ timeOffPriority }}</p>
+          <p class="card-text">{{ convertedOffPriorityTime }}</p>
+          <h5 class="card-title">Averages over time</h5>
+          <h4 class="card-title">% On Priority</h4>
+          <p class="card-text">{{ onPriorityPercAllTime|floatformat:2 }}</p>
+          <h4 class="card-title">% Off Priority</h4>
+          <p class="card-text">{{ offPriorityPercAllTime|floatformat:2 }}</p>
         </div>
       </div>
 
