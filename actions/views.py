@@ -181,7 +181,10 @@ def onPriorityCalc(totalSeconds, onPrioritySeconds):
     """
     Calculating the % of On Priority Actions.
     """
-    onPriorityCalc = (onPrioritySeconds * 100) / totalSeconds
+    if totalSeconds == 0:
+        onPriorityCalc = 0
+    else:    
+        onPriorityCalc = (onPrioritySeconds * 100) / totalSeconds
     return onPriorityCalc
 
 
@@ -189,7 +192,10 @@ def offPriorityCalc(totalSeconds, offPrioritySeconds):
     """
     Calculating the % of Off Priority Actions.
     """
-    offPriorityCalc = (offPrioritySeconds * 100) / totalSeconds
+    if totalSeconds == 0:
+        offPriorityCalc = 0
+    else:
+        offPriorityCalc = (offPrioritySeconds * 100) / totalSeconds
     return offPriorityCalc
 
 
