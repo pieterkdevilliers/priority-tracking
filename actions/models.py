@@ -1,8 +1,9 @@
 '''
 All models for the Actions App
 '''
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -14,7 +15,7 @@ class Category(models.Model):
     title = models.CharField(max_length=50, null=False, blank=False)
     description = models.CharField(max_length=150)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="categories", null=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="categories", null=True)
 
     def __str__(self):
         return str(self.title)
@@ -30,7 +31,7 @@ class Priority(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="priorities", null=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="priorities", null=True)
 
     def __str__(self):
         return str(self.title)
@@ -53,7 +54,10 @@ class Action(models.Model):
     priority = models.ForeignKey(
         Priority, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="action", null=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="action", null=True)
 
     def __str__(self):
         return str(self.title)
+
+class User(AbstractUser):
+    email = models.EmailField(unique=True)

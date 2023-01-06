@@ -1,5 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
+User = get_user_model()
 
 # Create your tests here.
 
@@ -65,11 +67,11 @@ class TestCreateUserForm(TestCase):
         self.assertIn('username', form.errors.keys())
         self.assertEqual(form.errors['username'][0], 'This field is required.')
 
-    # def test_create_user_email_field_is_required(self):
-    #     form = CreateUserForm({'username': 'testuser', 'email': '', 'password1': 'testPassword1', 'password2': 'testPassword1'})
-    #     self.assertFalse(form.is_valid())
-    #     self.assertIn('email', form.errors.keys())
-    #     self.assertEqual(form.errors['email'][0], 'This field is required.')
+    def test_create_user_email_field_is_required(self):
+        form = CreateUserForm({'username': 'testuser', 'email': '', 'password1': 'testPassword1', 'password2': 'testPassword1'})
+        self.assertFalse(form.is_valid())
+        self.assertIn('email', form.errors.keys())
+        self.assertEqual(form.errors['email'][0], 'This field is required.')
 
     def test_create_user_password1_field_is_required(self):
         form = CreateUserForm({'username': 'testuser', 'email': 'test@test.com', 'password1': '', 'password2': 'testPassword1'})

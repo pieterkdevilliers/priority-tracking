@@ -1,11 +1,12 @@
 """
 ModelForms for Actions App
 """
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from .models import Action, Priority, Category
 
+User = get_user_model()
 
 class ActionForm(ModelForm):
     """
