@@ -1,7 +1,7 @@
 """
 Views for the Actions App.
 """
-import datetime, time
+import datetime
 from datetime import timezone, date
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -22,27 +22,54 @@ def get_action_list(request):
     completedActionsCount = completedActions(query)
     openActionsCount = openActions(query)
     totalActionsCount = totalActions(query)
-    totalActionTime = trackedTime(query)
-    totalSeconds = int(trackedSeconds(totalActionTime))
-    convertedTrackedTime = trackedToday(totalSeconds)
-    onPriorityCount = onPriorityActions(query)
-    offPriorityCount = offPriorityActions(query)
-    onPriorityTime = onPriorityTrackedTime(query)
-    offPriorityTime = offPriorityTrackedTime(query)
-    onPrioritySeconds = int(trackedSeconds(onPriorityTime))
-    offPrioritySeconds = int(trackedSeconds(offPriorityTime))
-    convertedOnPriorityTime = trackedToday(onPrioritySeconds)
-    convertedOffPriorityTime = trackedToday(offPrioritySeconds)
-    onPriorityPerc = onPriorityCalc(totalSeconds, onPrioritySeconds)
-    offPriorityPerc = offPriorityCalc(totalSeconds, offPrioritySeconds)
-    allTimeTracked = trackedTimeAll(query)
-    allTimeSeconds = int(trackedSeconds(allTimeTracked))
-    allTimeOnPriorityTracked = onPriorityTrackedAllTime(query)
-    allTimeOffPriorityTracked = offPriorityTrackedAllTime(query)
-    allTimeOnPrioritySeconds = int(trackedSeconds(allTimeOnPriorityTracked))
-    allTimeOffPrioritySeconds = int(trackedSeconds(allTimeOffPriorityTracked))
-    onPriorityPercAllTime = onPriorityCalc(allTimeSeconds, allTimeOnPrioritySeconds)
-    offPriorityPercAllTime = offPriorityCalc(allTimeSeconds, allTimeOffPrioritySeconds)
+
+    if totalActionsCount > 0:
+
+        totalActionTime = trackedTime(query)
+        totalSeconds = int(trackedSeconds(totalActionTime))
+        convertedTrackedTime = trackedToday(totalSeconds)
+        onPriorityCount = onPriorityActions(query)
+        offPriorityCount = offPriorityActions(query)
+        onPriorityTime = onPriorityTrackedTime(query)
+        offPriorityTime = offPriorityTrackedTime(query)
+        onPrioritySeconds = int(trackedSeconds(onPriorityTime))
+        offPrioritySeconds = int(trackedSeconds(offPriorityTime))
+        convertedOnPriorityTime = trackedToday(onPrioritySeconds)
+        convertedOffPriorityTime = trackedToday(offPrioritySeconds)
+        onPriorityPerc = onPriorityCalc(totalSeconds, onPrioritySeconds)
+        offPriorityPerc = offPriorityCalc(totalSeconds, offPrioritySeconds)
+        allTimeTracked = trackedTimeAll(query)
+        allTimeSeconds = int(trackedSeconds(allTimeTracked))
+        allTimeOnPriorityTracked = onPriorityTrackedAllTime(query)
+        allTimeOffPriorityTracked = offPriorityTrackedAllTime(query)
+        allTimeOnPrioritySeconds = int(trackedSeconds(allTimeOnPriorityTracked))
+        allTimeOffPrioritySeconds = int(trackedSeconds(allTimeOffPriorityTracked))
+        onPriorityPercAllTime = onPriorityCalc(allTimeSeconds, allTimeOnPrioritySeconds)
+        offPriorityPercAllTime = offPriorityCalc(allTimeSeconds, allTimeOffPrioritySeconds)
+
+    else:
+        totalActionTime = 0
+        totalSeconds = 0
+        convertedTrackedTime = 0
+        onPriorityCount = 0
+        offPriorityCount = 0
+        onPriorityTime = 0
+        offPriorityTime = 0
+        onPrioritySeconds = 0
+        offPrioritySeconds = 0
+        convertedOnPriorityTime = 0
+        convertedOffPriorityTime = 0
+        onPriorityPerc = 0
+        offPriorityPerc = 0
+        allTimeTracked = 0
+        allTimeSeconds = 0
+        allTimeOnPriorityTracked = 0
+        allTimeOffPriorityTracked = 0
+        allTimeOnPrioritySeconds = 0
+        allTimeOffPrioritySeconds = 0
+        onPriorityPercAllTime = 0
+        offPriorityPercAllTime = 0
+
     actions = Action.objects.all()
     filteredActions = Action.objects.filter(actionDate=query)
     priorities = Priority.objects.all()
@@ -114,7 +141,12 @@ def trackedSeconds(totalActionTime):
     """
     Converting trackedTime object into Seconds.
     """
-    trackedSeconds = totalActionTime['trackedTime__sum'].total_seconds()
+    time_dict = totalActionTime
+    time = time_dict.get("trackedTime__sum")
+    if time == None:
+        trackedSeconds = 0
+    else:
+        trackedSeconds = totalActionTime['trackedTime__sum'].total_seconds()
     return trackedSeconds
 
 
