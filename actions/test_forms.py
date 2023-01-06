@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .forms import ActionForm, CategoryForm, PriorityForm
+from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
 
 # Create your tests here.
 
@@ -55,3 +55,35 @@ class TestPriorityForm(TestCase):
     def test_priorityform_fields_are_explicit_in_form_metaclass(self):
         form = CategoryForm()
         self.assertEqual(form.Meta.fields, ['title', 'description'])
+
+
+class TestCreateUserForm(TestCase):
+
+    def test_create_user_username_field_is_required(self):
+        form = CreateUserForm({'username': '', 'email': 'test@test.com', 'password1': 'testPassword1', 'password2': 'testPassword1'})
+        self.assertFalse(form.is_valid())
+        self.assertIn('username', form.errors.keys())
+        self.assertEqual(form.errors['username'][0], 'This field is required.')
+
+    # def test_create_user_email_field_is_required(self):
+    #     form = CreateUserForm({'username': 'testuser', 'email': '', 'password1': 'testPassword1', 'password2': 'testPassword1'})
+    #     self.assertFalse(form.is_valid())
+    #     self.assertIn('email', form.errors.keys())
+    #     self.assertEqual(form.errors['email'][0], 'This field is required.')
+
+    def test_create_user_password1_field_is_required(self):
+        form = CreateUserForm({'username': 'testuser', 'email': 'test@test.com', 'password1': '', 'password2': 'testPassword1'})
+        self.assertFalse(form.is_valid())
+        self.assertIn('password1', form.errors.keys())
+        self.assertEqual(form.errors['password1'][0], 'This field is required.')
+
+    def test_create_user_password2_field_is_required(self):
+        form = CreateUserForm({'username': 'testuser', 'email': 'test@test.com', 'password1': 'testPassword1', 'password2': ''})
+        self.assertFalse(form.is_valid())
+        self.assertIn('password2', form.errors.keys())
+        self.assertEqual(form.errors['password2'][0], 'This field is required.')
+
+    def test_createuserform_fields_are_explicit_in_form_metaclass(self):
+        form = CreateUserForm()
+        self.assertEqual(form.Meta.fields, ['username', 'email', 'password1', 'password2'])
+
