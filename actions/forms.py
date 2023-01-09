@@ -8,6 +8,7 @@ from .models import Action, Priority, Category
 
 User = get_user_model()
 
+
 class ActionForm(ModelForm):
     """
     ModelForm for adding Actions
