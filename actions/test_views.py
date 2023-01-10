@@ -187,9 +187,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'actions/delete_priority.html')
 
-
-# Test for CRUD Functionality
-
     def test_complete_action(self):
         """
         Successfully marking an action as complete
@@ -202,4 +199,4 @@ class TestViews(TestCase):
             response, '/actions/', status_code=301, target_status_code=200)
         updated_action = Action.objects.get(id=action.id)
         self.assertTrue(updated_action.done_status)
-        
+
