@@ -1,1 +1,1 @@
-web: gunicorn django_priority_tracker.wsgi:application
+web: gunicorn wsgi:app

@@ -27,10 +27,13 @@ SECRET_KEY = 'SECRET_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEBUG'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'https://ci-priority-tracker.herokuapp.com'
+]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-pieterkdevi-prioritytra-x9x9n2ts09q.ws-eu81.gitpod.io'
+    'https://8000-pieterkdevi-prioritytra-x9x9n2ts09q.ws-eu81.gitpod.io',
+    'https://ci-priority-tracker.herokuapp.com'
     ]
 
 
