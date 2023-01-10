@@ -1,1 +1,1 @@
-web: gunicorn actions.wsgi:application
+web: gunicorn priority_tracker.wsgi:application
