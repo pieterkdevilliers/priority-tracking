@@ -27,7 +27,7 @@ SECRET_KEY = 'SECRET_KEY'
 DEBUG = 'DEBUG'
 
 ALLOWED_HOSTS = [
-    'https://ci-priority-tracker.herokuapp.com'
+    'ci-priority-tracker.herokuapp.com'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
