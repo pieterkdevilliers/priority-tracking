@@ -5,7 +5,7 @@
 <body>
 
     <form class="mb-3" action="" method="GET">
-        <input class="form-control" type="date" name="actionDate">
+        <input class="form-control" type="date" name="action_date">
         <input class="form-control" type="submit">
     </form>
     <h1>Things I need to do:</h1>
@@ -21,14 +21,14 @@
             <th>Date</th>
             <th>Active Time Tracked</th>
         </tr>
-        {% for action in filteredActions %}
-        {% if action.doneStatus == False %}
+        {% for action in filtered_actions %}
+        {% if action.done_status == False %}
             <tr>
                 <td>{{ action.title }}</td>
-                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.tracked_time }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
-                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
+                <td>{{ action.action_date|date:"Y-m-d" }}</td>
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,14 +66,14 @@
             <th>Date</th>
             <th>Active Time Tracked</th>
         </tr>
-        {% for action in filteredActions %}
-        {% if action.doneStatus == True %}
+        {% for action in filtered_actions %}
+        {% if action.done_status == True %}
             <tr>
                 <td>{{ action.title }}</td>
-                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.tracked_time }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
-                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
+                <td>{{ action.action_date|date:"Y-m-d" }}</td>
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

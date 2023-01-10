@@ -15,20 +15,20 @@
             <th>Date</th>
             <th>Tracking and Edit</th>
         </tr>
-        {% for action in filteredActions %}
-        {% if action.doneStatus == False %}
+        {% for action in filtered_actions %}
+        {% if action.done_status == False %}
             <tr>
                 <td>{{ action.title }}</td>
-                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.tracked_time }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
-                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
+                <td>{{ action.action_date|date:"Y-m-d" }}</td>
                 <td>
-                {% if action.trackingStatus == False %}
+                {% if action.tracking_status == False %}
                 
                     <a class="btn btn-primary" role="button" href="{% url 'start_timer' action.id %}">Start Timer</a>
                 {% endif %}
-                {% if action.trackingStatus == True %}
+                {% if action.tracking_status == True %}
                     <a class="btn btn-warning" role="button" href="{% url 'stop_timer' action.id %}">Stop Timer</a>
                 {% endif %}
                     <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Done</a>
@@ -57,14 +57,14 @@
             <th>Date</th>
             <th>Status</th>
         </tr>
-        {% for action in filteredActions %}
-        {% if action.doneStatus == True %}
+        {% for action in filtered_actions %}
+        {% if action.done_status == True %}
             <tr>
                 <td>{{ action.title }}</td>
-                <td>{{ action.trackedTime }}</td>
+                <td>{{ action.tracked_time }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.category }}</td>
-                <td>{{ action.actionDate|date:"Y-m-d" }}</td>
+                <td>{{ action.action_date|date:"Y-m-d" }}</td>
                 <td>
                     <a class="btn btn-success" role="button" href="{% url 'complete_action' action.id %}">Undo</a>
                 </td>
@@ -100,21 +100,21 @@
         <div class="card-body">
             <h5 class="card-title">Action Tracking</h5>
           <h4 class="card-title">Completed Actions</h4>
-          <p class="card-text">{{ completedActionsCount }}</p>
+          <p class="card-text">{{ completed_actions_count }}</p>
           <h4 class="card-title">Open Actions</h4>
-          <p class="card-text">{{ openActionsCount }}</p>
+          <p class="card-text">{{ open_actions_count }}</p>
           <h4 class="card-title">Total Actions</h4>
-          <p class="card-text">{{ totalActionsCount }}</p>
+          <p class="card-text">{{ total_actions_count }}</p>
           <h4 class="card-title">Total Time Tracked</h4>
-          <p class="card-text">{{ convertedTrackedTime }}</p>
+          <p class="card-text">{{ converted_tracked_time }}</p>
           <h4 class="card-title">% On Priority</h4>
-          <p class="card-text">{{ onPriorityPerc|floatformat:2 }}%</p>
+          <p class="card-text">{{ on_priority_perc|floatformat:2 }}%</p>
           <h4 class="card-title">% Off Priority</h4>
-          <p class="card-text">{{ offPriorityPerc|floatformat:2 }}%</p>
+          <p class="card-text">{{ off_priority_perc|floatformat:2 }}%</p>
           <h4 class="card-title">Time On Priority</h4>
-          <p class="card-text">{{ convertedOnPriorityTime }}</p>
+          <p class="card-text">{{ converted_on_priority_time }}</p>
           <h4 class="card-title">Time Off Priority</h4>
-          <p class="card-text">{{ convertedOffPriorityTime }}</p>
+          <p class="card-text">{{ converted_off_priority_time }}</p>
         </div>
       </div>
       <h4 class="card-title">Reporting - Averages</h4>
@@ -122,9 +122,9 @@
         <div class="card-body">
             <h5 class="card-title">Priority Tracking</h5>
           <h4 class="card-title">% On Priority</h4>
-          <p class="card-text">{{ onPriorityPercAllTime|floatformat:2 }}</p>
+          <p class="card-text">{{ on_priority_perc_all_time|floatformat:2 }}</p>
           <h4 class="card-title">% Off Priority</h4>
-          <p class="card-text">{{ offPriorityPercAllTime|floatformat:2 }}</p>
+          <p class="card-text">{{ off_priority_perc_all_time|floatformat:2 }}</p>
         </div>
       </div>
 
