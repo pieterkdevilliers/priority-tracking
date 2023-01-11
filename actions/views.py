@@ -39,18 +39,18 @@ def get_action_list(request):
         on_priority_perc = on_priority_calc(total_seconds, on_priority_seconds)
         off_priority_perc = off_priority_calc(
             total_seconds, off_priority_seconds)
-        all_time_tracked = tracked_time_all(query)
-        all_time_seconds = int(tracked_seconds(all_time_tracked))
-        all_time_on_priority_tracked = on_priority_tracked_all_time(query)
-        all_time_off_priority_tracked = off_priority_tracked_all_time(query)
-        all_time_on_priority_seconds = int(
-            tracked_seconds(all_time_on_priority_tracked))
-        all_time_off_priority_seconds = int(
-            tracked_seconds(all_time_off_priority_tracked))
-        on_priority_perc_all_time = on_priority_calc(
-            all_time_seconds, all_time_on_priority_seconds)
-        off_priority_perc_all_time = off_priority_calc(
-            all_time_seconds, all_time_off_priority_seconds)
+        # all_time_tracked = tracked_time_all(query)
+        # all_time_seconds = int(tracked_seconds(all_time_tracked))
+        # all_time_on_priority_tracked = on_priority_tracked_all_time(query)
+        # all_time_off_priority_tracked = off_priority_tracked_all_time(query)
+        # all_time_on_priority_seconds = int(
+        #     tracked_seconds(all_time_on_priority_tracked))
+        # all_time_off_priority_seconds = int(
+        #     tracked_seconds(all_time_off_priority_tracked))
+        # on_priority_perc_all_time = on_priority_calc(
+        #     all_time_seconds, all_time_on_priority_seconds)
+        # off_priority_perc_all_time = off_priority_calc(
+        #     all_time_seconds, all_time_off_priority_seconds)
 
     else:
         total_action_time = 0
@@ -74,6 +74,19 @@ def get_action_list(request):
         # all_time_off_priority_seconds = 0
         # on_priority_perc_all_time = 0
         # off_priority_perc_all_time = 0
+    
+    all_time_tracked = tracked_time_all(query)
+    all_time_seconds = int(tracked_seconds(all_time_tracked))
+    all_time_on_priority_tracked = on_priority_tracked_all_time(query)
+    all_time_off_priority_tracked = off_priority_tracked_all_time(query)
+    all_time_on_priority_seconds = int(
+            tracked_seconds(all_time_on_priority_tracked))
+    all_time_off_priority_seconds = int(
+            tracked_seconds(all_time_off_priority_tracked))
+    on_priority_perc_all_time = on_priority_calc(
+            all_time_seconds, all_time_on_priority_seconds)
+    off_priority_perc_all_time = off_priority_calc(
+            all_time_seconds, all_time_off_priority_seconds)
 
     actions = Action.objects.all()
     filtered_actions = Action.objects.filter(action_date=query)
