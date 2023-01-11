@@ -446,7 +446,7 @@ def priority_active_status(request, pk):
     priorityform = PriorityForm()
     priority = Priority.objects.get(id=pk)
     priority.activeStatus = not priority.activeStatus
-    action.save()
+    priority.save()
     return redirect('/priorities/')
 
 
