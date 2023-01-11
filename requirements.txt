@@ -6,3 +6,4 @@ Django==4.1.5
 gunicorn==20.1.0
 psycopg2-binary==2.9.5
 sqlparse==0.4.3
+fontawesomefree==6.2.1

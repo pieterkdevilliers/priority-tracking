@@ -26,10 +26,10 @@
                 <td>
                 {% if action.tracking_status == False %}
                 
-                    <a class="btn btn-primary" role="button" href="{% url 'start_timer' action.id %}">Start Timer</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'start_timer' action.id %}"></i>Start Timer</a>
                 {% endif %}
                 {% if action.tracking_status == True %}
-                    <a class="btn btn-warning" role="button" href="{% url 'stop_timer' action.id %}">Stop Timer</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'stop_timer' action.id %}">Stop Timer</a>
                 {% endif %}
                     <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Done</a>
                     <a class="btn btn-primary" role="button" href="{% url 'update_action' action.id %}">Edit</a>
