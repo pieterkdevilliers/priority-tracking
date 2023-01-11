@@ -66,14 +66,14 @@ def get_action_list(request):
         converted_off_priority_time = 0
         on_priority_perc = 0
         off_priority_perc = 0
-        all_time_tracked = 0
-        all_time_seconds = 0
-        all_time_on_priority_tracked = 0
-        all_time_off_priority_tracked = 0
-        all_time_on_priority_seconds = 0
-        all_time_off_priority_seconds = 0
-        on_priority_perc_all_time = 0
-        off_priority_perc_all_time = 0
+        # all_time_tracked = 0
+        # all_time_seconds = 0
+        # all_time_on_priority_tracked = 0
+        # all_time_off_priority_tracked = 0
+        # all_time_on_priority_seconds = 0
+        # all_time_off_priority_seconds = 0
+        # on_priority_perc_all_time = 0
+        # off_priority_perc_all_time = 0
 
     actions = Action.objects.all()
     filtered_actions = Action.objects.filter(action_date=query)
