@@ -3,92 +3,89 @@
 {% block content %}
 
 <body>
-    <h1>Things I need to do:</h1>
+    <div class="d-flex p-2 justify-content-between flex-row bd-highlight">
+        <h1>Things I need to do:</h1>
+        <a class="fa-solid fa-plus" role="button" href="/add-action/"></a>
+    </div>
     <br>
 
-    <table class="table table-striped">
-        <tr>
-            <th>Action</th>
-            <th>Total Time Tracked</th>
-            <th>Priority</th>
-            <th>Category</th>
-            <th>Date</th>
-            <th>Tracking and Edit</th>
-        </tr>
+    <div class="d-flex p-2 flex-column bd-highlight">
         {% for action in filtered_actions %}
         {% if action.done_status == False %}
-            <tr>
-                <td>{{ action.title }}</td>
-                <td>{{ action.tracked_time }}</td>
-                <td>{{ action.priority }}</td>
-                <td>{{ action.category }}</td>
-                <td>{{ action.action_date|date:"Y-m-d" }}</td>
-                <td>
-                {% if action.tracking_status == False %}
-                
-                    <a class="fa-solid fa-hourglass" role="button" href="{% url 'start_timer' action.id %}"></i></a>
-                {% endif %}
-                {% if action.tracking_status == True %}
-                    <a class="fa-solid fa-hourglass-end" role="button" href="{% url 'stop_timer' action.id %}"></a>
-                {% endif %}
-                    <a class="fa-solid fa-check" role="button" href="{% url 'complete_action' action.id %}"></a>
-                    <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_action' action.id %}"></a>
-                    <a class="fa-solid fa-trash" role="button" href="{% url 'delete_action' action.id %}"></a>
-                </td>
-            </tr>
-        {% endif %}
-        {% empty %}
-        <tr><td>You have nothing to do.</td></tr>
-        {% endfor %}
-
-
-    </table>
-    <a class="fa-solid fa-plus" role="button" href="/add-action/"></a>
+            <div class="p-2 card bd-highlight">
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <p class="bd-highlight">{{ action.title }}</p>
+                    <p class="bd-highlight">{{ action.tracked_time }}</p>
+                </div>
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <p class="bd-highlight">{{ action.priority }}</p>
+                    <p class="bd-highlight">{{ action.category }}</p>
+                    <p class="bd-highlight">{{ action.action_date|date:"Y-m-d" }}</p>
+                </div>
+                <div class="d-flex p-2 justify-content-between flex-row bd-highlight">
+                    {% if action.tracking_status == False %}
+                        <div>
+                            <a class="fa-solid fa-hourglass p-2 bd-highlight" role="button" href="{% url 'start_timer' action.id %}"></i></a>
+                        </div>
+                    {% endif %}
+                    {% if action.tracking_status == True %}
+                        <div>
+                            <a class="fa-solid fa-hourglass-end p-2 bd-highlight" role="button" href="{% url 'stop_timer' action.id %}"></a>
+                        </div>
+                    {% endif %}
+                        <div>
+                            <a class="fa-solid fa-check p-2 bd-highlight" role="button" href="{% url 'complete_action' action.id %}"></a>
+                        </div>
+                        <div>
+                            <a class="fa-solid fa-pen-to-square p-2 bd-highlight" role="button" href="{% url 'update_action' action.id %}"></a>
+                        </div>
+                        <div>
+                            <a class="fa-solid fa-trash p-2 bd-highlight" role="button" href="{% url 'delete_action' action.id %}"></a>
+                        </div> 
+                </div>
+            </div>
+            {% endif %}
+            {% empty %}
+            <H2 class="p-2 bd-highlight">You have nothing to do.</H2>
+            {% endfor %}
 
     <hr>
 
     <h1>Things I've Done:</h1>
-    <table class="table table-striped">
-        <tr>
-            <th>Action</th>
-            <th>Total Time Tracked</th>
-            <th>Priority</th>
-            <th>Category</th>
-            <th>Date</th>
-            <th>Status</th>
-        </tr>
+    <div class="d-flex flex-column bd-highlight">
         {% for action in filtered_actions %}
         {% if action.done_status == True %}
-            <tr>
-                <td>{{ action.title }}</td>
-                <td>{{ action.tracked_time }}</td>
-                <td>{{ action.priority }}</td>
-                <td>{{ action.category }}</td>
-                <td>{{ action.action_date|date:"Y-m-d" }}</td>
-                <td>
+            <div class="card p-2 bd-highlight">
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <p class="bd-highlight">{{ action.title }}</p>
+                    <p class="bd-highlight">{{ action.tracked_time }}</p>
+                </div>
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <p class="bd-highlight">{{ action.priority }}</p>
+                    <p class="bd-highlight">{{ action.category }}</p>
+                    <p class="bd-highlight">{{ action.action_date|date:"Y-m-d" }}</p>
+                </div>
+                <div>
                     <a class="fa-solid fa-rotate-left" role="button" href="{% url 'complete_action' action.id %}"></a>
-                </td>
-            </tr>
-        {% endif %}    
-        {% empty %}
+                </div>
+            </div>
+            <br>
+    </div>
 
+        {% endif %}
         {% endfor %}
     
-
-
-    </table>
-    
     <hr>
+    <h1>Active Priorities:</h1>
 
     {% for priority in priorities %}
     {% if priority.activeStatus == True %}
 
-    <div class="d-flex flex-row bd-highlight mb-3">
+    <div class="d-flex p-2 flex-column bd-highlight">
         <div class="card p-2 bd-highlight">
             <div class="card-body">
             <h4 class="card-title">{{ priority.title }}</h4>
             <p class="card-text">{{ priority.description }}</p>
-            <h5 class="card-title">Category</h5>
             <h5 class="card-title">{{ priority.category }}</h5>
             </div>
         </div>
@@ -101,39 +98,77 @@
 
     
     <hr>
-    <h4 class="card-title">Reporting - Today</h4>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Action Tracking</h5>
-          <h4 class="card-title">Completed Actions</h4>
-          <p class="card-text">{{ completed_actions_count }}</p>
-          <h4 class="card-title">Open Actions</h4>
-          <p class="card-text">{{ open_actions_count }}</p>
-          <h4 class="card-title">Total Actions</h4>
-          <p class="card-text">{{ total_actions_count }}</p>
-          <h4 class="card-title">Total Time Tracked</h4>
-          <p class="card-text">{{ converted_tracked_time }}</p>
-          <h4 class="card-title">% On Priority</h4>
-          <p class="card-text">{{ on_priority_perc|floatformat:2 }}%</p>
-          <h4 class="card-title">% Off Priority</h4>
-          <p class="card-text">{{ off_priority_perc|floatformat:2 }}%</p>
-          <h4 class="card-title">Time On Priority</h4>
-          <p class="card-text">{{ converted_on_priority_time }}</p>
-          <h4 class="card-title">Time Off Priority</h4>
-          <p class="card-text">{{ converted_off_priority_time }}</p>
+    <div class="d-flex p-2 flex-column bd-highlight">
+        <div class="card p-2 bd-highlight">
+            <div class="card-body p-2 bd-highlight">
+                <h5 class="card-title">Time - Today</h5>
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div>
+                        <h4 class="card-title">Completed Actions</h4>
+                        <p class="card-text">{{ completed_actions_count }}</p>
+                    </div>
+                    <div>
+                        <h4 class="card-title">Open Actions</h4>
+                        <p class="card-text">{{ open_actions_count }}</p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div>
+                        <h4 class="card-title">Total Actions</h4>
+                        <p class="card-text">{{ total_actions_count }}</p>
+                    </div>
+                    <div>
+                        <h4 class="card-title">Total Time Tracked</h4>
+                        <p class="card-text">{{ converted_tracked_time }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-      <h4 class="card-title">Reporting - Averages</h4>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Priority Tracking</h5>
-          <h4 class="card-title">% On Priority</h4>
-          <p class="card-text">{{ on_priority_perc_all_time|floatformat:2 }}</p>
-          <h4 class="card-title">% Off Priority</h4>
-          <p class="card-text">{{ off_priority_perc_all_time|floatformat:2 }}</p>
+    <div class="d-flex p-2 flex-column bd-highlight">
+        <div class="card p-2 bd-highlight">
+            <div class="card-body p-2 bd-highlight">
+                <h5 class="card-title">Focus - Today</h5>
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div>
+                        <h4 class="card-title">% On Priority</h4>
+                        <p class="card-text">{{ on_priority_perc|floatformat:2 }}%</p>
+                    </div>
+                    <div>
+                        <h4 class="card-title">% Off Priority</h4>
+                        <p class="card-text">{{ off_priority_perc|floatformat:2 }}%</p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div>
+                        <h4 class="card-title">Time On Priority</h4>
+                        <p class="card-text">{{ converted_on_priority_time }}</p>
+                    </div>
+                    <div>
+                        <h4 class="card-title">Time Off Priority</h4>
+                        <p class="card-text">{{ converted_off_priority_time }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
+    </div>
+    <div class="d-flex p-2 flex-column bd-highlight">
+        <div class="card p-2 bd-highlight">
+            <div class="card-body p-2 bd-highlight">
+                <h5 class="card-title">Averages</h5>
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div>
+                        <h4 class="card-title">% On Priority</h4>
+                        <p class="card-text">{{ on_priority_perc_all_time|floatformat:2 }}</p>
+                    </div>
+                    <div>
+                        <h4 class="card-title">% Off Priority</h4>
+                        <p class="card-text">{{ off_priority_perc_all_time|floatformat:2 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 {% endblock %}
