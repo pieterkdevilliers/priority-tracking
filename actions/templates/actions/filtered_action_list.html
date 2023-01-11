@@ -29,17 +29,10 @@
                 <td>{{ action.category }}</td>
                 <td>{{ action.action_date|date:"Y-m-d" }}</td>
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Options
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Done</a></li>
-                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
-                          <li><a class="dropdown-item" href="{% url 'delete_action' action.id %}">Delete</a></li>
-                          <li><a class="dropdown-item" href="{% url 'relist_action' action.id %}">Relist</a></li>
-                        </ul>
-                      </div>
+                    <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Done</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'update_action' action.id %}">Update</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'delete_action' action.id %}">Delete</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'relist_action' action.id %}">Relist</a>
                 </td>
                 <td>{{ action.activeTimeTracked}}</td>
             </tr>
@@ -74,15 +67,8 @@
                 <td>{{ action.category }}</td>
                 <td>{{ action.action_date|date:"Y-m-d" }}</td>
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Options
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{% url 'complete_action' action.id %}">Undo</a></li>
-                          <li><a class="dropdown-item" href="{% url 'update_action' action.id %}">Update</a></li>
-                        </ul>
-                      </div>
+                    <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Undo</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'update_action' action.id %}">Update</a>
                 </td>
                 <td>{{ action.activeTimeTracked}}</td>
             </tr>
