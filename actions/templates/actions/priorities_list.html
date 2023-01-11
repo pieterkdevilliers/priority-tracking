@@ -3,33 +3,48 @@
 {% block content %}
 
 <body>
-    <h1>My Priorities:</h1>
+    <h1>Active Priorities:</h1>
     <table class="table table-striped">
         <tr>
             <th>Priority</th>
             <th>Description</th>
-            <th>Active Status</th>
-            <th>Options</th>
+            <th>Status</th>
         </tr>
         {% for priority in user.priorities.all %}
+        {% if priority.activeStatus == True %}
             <tr>
                 <td>{{ priority.title }}</td>
                 <td>{{ priority.description }}</td>
                 <td>
-                    {% if priority.activeStatus == False %}
-                
-                    <a class="btn btn-primary" role="button" href="{% url 'priority_active_status' priority.id %}">Activate</a>
-                {% endif %}
-                {% if priority.activeStatus == True %}
                     <a class="btn btn-warning" role="button" href="{% url 'priority_active_status' priority.id %}">Deactivate</a>
-                {% endif %}
-                    <a class="btn btn-primary" role="button" href="{% url 'update_priority' priority.id %}">Edit</a>
-                    <a class="btn btn-primary" role="button" href="{% url 'delete_priority' priority.id %}">Delete</a>
+        {% endif %}
                 </td>
             </tr>
         {% endfor %}
     </table>
     <a class="btn btn-primary" role="button" href="/add-priority/">Add New Priority</a>
+    <hr>
+    <h1>Inactive Priorities:</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Priority</th>
+            <th>Description</th>
+            <th>Options</th>
+        </tr>
+        {% for priority in user.priorities.all %}
+        {% if priority.activeStatus == False %}
+            <tr>
+                <td>{{ priority.title }}</td>
+                <td>{{ priority.description }}</td>
+                <td>
+                    <a class="btn btn-primary" role="button" href="{% url 'priority_active_status' priority.id %}">Activate</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'update_priority' priority.id %}">Edit</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'delete_priority' priority.id %}">Delete</a>
+        {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 </body>
 
 {% endblock %}
