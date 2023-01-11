@@ -20,6 +20,7 @@ from actions import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login_page, name='login'),
+    path('', views.login_page, name='login'),
     path('logout/', views.logout_user, name='logout'),
     path('register/', views.register_page, name='register'),
     path('actions/', views.get_action_list, name='get_action_list'),
