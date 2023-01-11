@@ -17,14 +17,8 @@
                 <td>{{ priority.description }}</td>
                 <td>{{ priority.activeStatus }}</td>
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{% url 'update_priority' priority.id %}">Update</a></li>
-                          <li><a class="dropdown-item" href="{% url 'delete_priority' priority.id %}">Delete</a></li>
-                        </ul>
-                      </div>
+                    <a class="btn btn-primary" role="button" href="{% url 'update_priority' priority.id %}">Edit</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'delete_priority' priority.id %}">Delete</a>
                 </td>
             </tr>
         {% endfor %}
