@@ -17,6 +17,13 @@
                 <td>{{ priority.description }}</td>
                 <td>{{ priority.activeStatus }}</td>
                 <td>
+                    {% if priority.activeStatus == False %}
+                
+                    <a class="btn btn-primary" role="button" href="{% url 'priority_active_status' priority.id %}">Start Timer</a>
+                {% endif %}
+                {% if priority.activeStatus == True %}
+                    <a class="btn btn-warning" role="button" href="{% url 'priority_active_status' priority.id %}">Stop Timer</a>
+                {% endif %}
                     <a class="btn btn-primary" role="button" href="{% url 'update_priority' priority.id %}">Edit</a>
                     <a class="btn btn-primary" role="button" href="{% url 'delete_priority' priority.id %}">Delete</a>
                 </td>

@@ -439,6 +439,18 @@ def update_priority(request, pk):
 
 
 @login_required(login_url='login')
+def priority_active_status(request, pk):
+    """
+    Submits the PriorityForm and Updates an Active Status
+    """
+    priorityform = PriorityForm()
+    priority = Priority.objects.get(id=pk)
+    priority.activeStatus = not priority.activeStatus
+    action.save()
+    return redirect('/priorities/')
+
+
+@login_required(login_url='login')
 def delete_priority(request, pk):
     """
     Deletes the selected Priority
