@@ -19,10 +19,10 @@
                 <td>
                     {% if priority.activeStatus == False %}
                 
-                    <a class="btn btn-primary" role="button" href="{% url 'priority_active_status' priority.id %}">Deactivate</a>
+                    <a class="btn btn-primary" role="button" href="{% url 'priority_active_status' priority.id %}">Activate</a>
                 {% endif %}
                 {% if priority.activeStatus == True %}
-                    <a class="btn btn-warning" role="button" href="{% url 'priority_active_status' priority.id %}">Activate</a>
+                    <a class="btn btn-warning" role="button" href="{% url 'priority_active_status' priority.id %}">Deactivate</a>
                 {% endif %}
                     <a class="btn btn-primary" role="button" href="{% url 'update_priority' priority.id %}">Edit</a>
                     <a class="btn btn-primary" role="button" href="{% url 'delete_priority' priority.id %}">Delete</a>
