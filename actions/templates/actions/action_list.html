@@ -77,22 +77,28 @@
 
 
     </table>
+    
     <hr>
 
     {% for priority in priorities %}
     {% if priority.activeStatus == True %}
 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h4 class="card-title">{{ priority.title }}</h4>
-          <p class="card-text">{{ priority.description }}</p>
-          <h5 class="card-title">Category</h5>
-          <h5 class="card-title">{{ priority.category }}</h5>
+    <div class="d-flex flex-row bd-highlight mb-3">
+        <div class="card p-2 bd-highlight">
+            <div class="card-body">
+            <h4 class="card-title">{{ priority.title }}</h4>
+            <p class="card-text">{{ priority.description }}</p>
+            <h5 class="card-title">Category</h5>
+            <h5 class="card-title">{{ priority.category }}</h5>
+            </div>
         </div>
-      </div>
+    </div>
+
+    
     
     {% endif %}
     {% endfor %}
+
     
     <hr>
     <h4 class="card-title">Reporting - Today</h4>
@@ -116,7 +122,7 @@
           <h4 class="card-title">Time Off Priority</h4>
           <p class="card-text">{{ converted_off_priority_time }}</p>
         </div>
-      </div>
+    </div>
       <h4 class="card-title">Reporting - Averages</h4>
     <div class="card" style="width: 18rem;">
         <div class="card-body">
