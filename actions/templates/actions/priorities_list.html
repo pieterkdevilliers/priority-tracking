@@ -16,13 +16,14 @@
                 <td>{{ priority.title }}</td>
                 <td>{{ priority.description }}</td>
                 <td>
-                    <a class="btn btn-warning" role="button" href="{% url 'priority_active_status' priority.id %}">Deactivate</a>
+                    <a class="fa-solid fa-toggle-off" role="button" href="{% url 'priority_active_status' priority.id %}"></a>
+                    <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_priority' priority.id %}"></a>
         {% endif %}
                 </td>
             </tr>
         {% endfor %}
     </table>
-    <a class="btn btn-primary" role="button" href="/add-priority/">Add New Priority</a>
+    <a class="fa-solid fa-plus" role="button" href="/add-priority/"></a>
     <hr>
     <h1>Inactive Priorities:</h1>
     <table class="table table-striped">
@@ -37,9 +38,9 @@
                 <td>{{ priority.title }}</td>
                 <td>{{ priority.description }}</td>
                 <td>
-                    <a class="btn btn-primary" role="button" href="{% url 'priority_active_status' priority.id %}">Activate</a>
-                    <a class="btn btn-primary" role="button" href="{% url 'update_priority' priority.id %}">Edit</a>
-                    <a class="btn btn-primary" role="button" href="{% url 'delete_priority' priority.id %}">Delete</a>
+                    <a class="fa-solid fa-toggle-on" role="button" href="{% url 'priority_active_status' priority.id %}"></a>
+                    <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_priority' priority.id %}"></a>
+                    <a class="fa-solid fa-trash" role="button" href="{% url 'delete_priority' priority.id %}"></a>
         {% endif %}
                 </td>
             </tr>

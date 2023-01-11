@@ -29,10 +29,10 @@
                 <td>{{ action.category }}</td>
                 <td>{{ action.action_date|date:"Y-m-d" }}</td>
                 <td>
-                    <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Done</a>
-                    <a class="btn btn-primary" role="button" href="{% url 'update_action' action.id %}">Update</a>
-                    <a class="btn btn-primary" role="button" href="{% url 'delete_action' action.id %}">Delete</a>
-                    <a class="btn btn-primary" role="button" href="{% url 'relist_action' action.id %}">Relist</a>
+                    <a class="fa-solid fa-check" role="button" href="{% url 'complete_action' action.id %}"></a>
+                    <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_action' action.id %}"></a>
+                    <a class="fa-solid fa-trash" role="button" href="{% url 'delete_action' action.id %}"></a>
+                    <a class="fa-solid fa-rotate-left" role="button" href="{% url 'relist_action' action.id %}"></a>
                 </td>
                 <td>{{ action.activeTimeTracked}}</td>
             </tr>
@@ -43,7 +43,7 @@
 
 
     </table>
-    <a class="btn btn-primary" role="button" href="/add-action/">Add New Action</a>
+    <a class="fa-solid fa-plus" role="button" href="/add-action/"></a>
 
     <hr>
 
@@ -67,8 +67,7 @@
                 <td>{{ action.category }}</td>
                 <td>{{ action.action_date|date:"Y-m-d" }}</td>
                 <td>
-                    <a class="btn btn-primary" role="button" href="{% url 'complete_action' action.id %}">Undo</a>
-                    <a class="btn btn-primary" role="button" href="{% url 'update_action' action.id %}">Update</a>
+                    <a class="fa-solid fa-rotate-left" role="button" href="{% url 'complete_action' action.id %}"></a>
                 </td>
                 <td>{{ action.activeTimeTracked}}</td>
             </tr>

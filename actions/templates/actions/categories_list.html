@@ -15,13 +15,13 @@
                 <td>{{ category.title }}</td>
                 <td>{{ category.description }}</td>
                 <td>
-                    <a class="btn btn-primary" role="button" href="{% url 'update_category' category.id %}">Edit</a>
-                    <a class="btn btn-primary" role="button" href="{% url 'delete_category' category.id %}">Delete</a>
+                    <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_category' category.id %}"></a>
+                    <a class="fa-solid fa-trash" role="button" href="{% url 'delete_category' category.id %}"></a>
                 </td>
             </tr>
         {% endfor %}
     </table>
-    <a class="btn btn-primary" role="button" href="/add-category/">Add New Category</a>
+    <a class="fa-solid fa-plus" role="button" href="/add-category/"></a>
 </body>
 
 {% endblock %}
