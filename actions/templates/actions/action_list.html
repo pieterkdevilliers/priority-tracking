@@ -44,6 +44,8 @@
                         </div> 
                 </div>
             </div>
+            <br>
+
             {% endif %}
             {% empty %}
             <H2 class="p-2 bd-highlight">You have nothing to do.</H2>
@@ -52,7 +54,7 @@
     <hr>
 
     <h1>Things I've Done:</h1>
-    <div class="d-flex flex-column bd-highlight">
+    <div class="d-flex p-2 flex-column bd-highlight">
         {% for action in filtered_actions %}
         {% if action.done_status == True %}
             <div class="card p-2 bd-highlight">
@@ -69,8 +71,8 @@
                     <a class="fa-solid fa-rotate-left" role="button" href="{% url 'complete_action' action.id %}"></a>
                 </div>
             </div>
-            <br>
     </div>
+    <br>
 
         {% endif %}
         {% endfor %}

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'actions',
     'fontawesomefree',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -159,3 +160,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redefining the Auth User Model
 AUTH_USER_MODEL = 'actions.User'
+
+# Adding Crispy Forms for Bootstrap
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'

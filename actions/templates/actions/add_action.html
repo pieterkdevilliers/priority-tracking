@@ -4,14 +4,15 @@
 
 <body>
     <h1>Add an Action</h1>
+    <div class="mb-3 form-group">
+        <form method="POST" action="/add-new-action/">
+            {% csrf_token %}
 
-    <form method="POST" action="/add-new-action/">
-        {% csrf_token %}
-
-        {{actionform}}
-        
-        <input type="submit" name="Add Action">
-    </form>
+            {{ actionform }}
+            <br>
+            <button class="btn btn-primary" type="submit" name="Add Action">Add Action</button>
+        </form>
+    </div>
 
 </body>
 

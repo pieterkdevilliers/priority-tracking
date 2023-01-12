@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from .models import Action, Priority, Category
+from django import forms
 
 User = get_user_model()
 
@@ -20,6 +21,15 @@ class ActionForm(ModelForm):
         model = Action
         fields = ['title', 'priority', 'category']
 
+        widgets = {
+                'title': forms.TextInput(attrs={'class': 'form-control'}),
+                'priority': forms.Select(attrs={'class': 'form-control'}),
+                'category': forms.Select(attrs={'class': 'form-control'}),
+            }
+    
+    
+
+
 
 class CategoryForm(ModelForm):
     """
@@ -32,6 +42,11 @@ class CategoryForm(ModelForm):
         model = Category
         fields = ['title', 'description']
 
+        widgets = {
+                'title': forms.TextInput(attrs={'class': 'form-control'}),
+                'description': forms.TextInput(attrs={'class': 'form-control'}),
+            }
+
 
 class PriorityForm(ModelForm):
     """
@@ -43,6 +58,13 @@ class PriorityForm(ModelForm):
         """
         model = Priority
         fields = ['title', 'description', 'category', 'activeStatus']
+
+        widgets = {
+                'title': forms.TextInput(attrs={'class': 'form-control'}),
+                'description': forms.TextInput(attrs={'class': 'form-control'}),
+                'category': forms.Select(attrs={'class': 'form-control'}),
+                'activeStatus': forms.CheckboxInput(attrs={'class': 'form-control form-check-input'}),
+            }
 
 
 class CreateUserForm(UserCreationForm):

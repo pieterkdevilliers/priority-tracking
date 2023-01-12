@@ -6,11 +6,10 @@
     <h1>Delete Action Confirmation Request</h1>
     <p>Are you sure you want to delete "{{item}}"?</p>
 
-    <form action="{% url 'delete_action' item.id %}" method="POST">
+    <form class="p-2" action="{% url 'delete_action' item.id %}" method="POST">
         {% csrf_token %}
-        <a href="{% url 'get_action_list' %}">Cancel</a>
-
-        <input type="submit" name="Yes, Delete!">
+        <a class="btn btn-success" href="{% url 'get_action_list' %}">Cancel</a>
+        <button class="btn btn-danger" type="submit">Yes, Delete!</button>
     </form>
 </body>
 
