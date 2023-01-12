@@ -3,49 +3,50 @@
 {% block content %}
 
 <body>
-    <h1>Active Priorities:</h1>
-    <table class="table table-striped">
-        <tr>
-            <th>Priority</th>
-            <th>Description</th>
-            <th>Status</th>
-        </tr>
-        {% for priority in user.priorities.all %}
-        {% if priority.activeStatus == True %}
-            <tr>
-                <td>{{ priority.title }}</td>
-                <td>{{ priority.description }}</td>
-                <td>
-                    <a class="fa-solid fa-toggle-off" role="button" href="{% url 'priority_active_status' priority.id %}"></a>
-                    <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_priority' priority.id %}"></a>
-        {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="d-flex p-2 justify-content-between flex-row bd-highlight">
+        <h1>Active Priorities:</h1>
     <a class="fa-solid fa-plus" role="button" href="/add-priority/"></a>
-    <hr>
-    <h1>Inactive Priorities:</h1>
-    <table class="table table-striped">
-        <tr>
-            <th>Priority</th>
-            <th>Description</th>
-            <th>Options</th>
-        </tr>
-        {% for priority in user.priorities.all %}
-        {% if priority.activeStatus == False %}
-            <tr>
-                <td>{{ priority.title }}</td>
-                <td>{{ priority.description }}</td>
-                <td>
-                    <a class="fa-solid fa-toggle-on" role="button" href="{% url 'priority_active_status' priority.id %}"></a>
-                    <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_priority' priority.id %}"></a>
-                    <a class="fa-solid fa-trash" role="button" href="{% url 'delete_priority' priority.id %}"></a>
-        {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    </div>
+    {% for priority in user.priorities.all %}
+    {% if priority.activeStatus == True %}
+    <div class="d-flex p-2 flex-column bd-highlight">
+        
+        <div class="p-2 card bd-highlight">
+            <div class="d-flex justify-content-between flex-row bd-highlight">
+                <p class="bd-highlight">{{ priority.title }}</p>
+                <p class="bd-highlight">{{ priority.description }}</p>
+            </div>
+            <div class="d-flex justify-content-between flex-row bd-highlight">
+                <a class="fa-solid fa-toggle-off" role="button" href="{% url 'priority_active_status' priority.id %}"></a>
+                <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_priority' priority.id %}"></a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <div>
+        <h1>Inactive Priorities:</h1>
+    </div>
+    {% for priority in user.priorities.all %}
+    {% if priority.activeStatus == False %}
+    <div class="d-flex p-2 flex-column bd-highlight">
+        
+        <div class="p-2 card bd-highlight">
+            <div class="d-flex justify-content-between flex-row bd-highlight">
+                <p class="bd-highlight">{{ priority.title }}</p>
+                <p class="bd-highlight">{{ priority.description }}</p>
+            </div>
+            <div class="d-flex justify-content-between flex-row bd-highlight">
+                <a class="fa-solid fa-toggle-on" role="button" href="{% url 'priority_active_status' priority.id %}"></a>
+                <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_priority' priority.id %}"></a>
+                <a class="fa-solid fa-trash" role="button" href="{% url 'delete_priority' priority.id %}"></a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
 </body>
 
 {% endblock %}

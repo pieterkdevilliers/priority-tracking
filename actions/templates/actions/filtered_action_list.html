@@ -3,82 +3,68 @@
 {% block content %}
 
 <body>
+    <div class="d-flex p-2 justify-content-between flex-row bd-highlight">
+        <h1>Things I need to do:</h1>
+        <a class="fa-solid fa-plus" role="button" href="/add-action/"></a>
+    </div>
+    <br>
 
-    <form class="mb-3" action="" method="GET">
-        <input class="form-control" type="date" name="action_date">
-        <input class="form-control" type="submit">
-    </form>
-    <h1>Things I need to do:</h1>  
-
-    <table class="table table-striped">
-        <tr>
-            <th>Action</th>
-            <th>Total Time Tracked</th>
-            <th>Priority</th>
-            <th>Category</th>
-            <th>Options</th>
-            <th>Date</th>
-            <th>Active Time Tracked</th>
-        </tr>
+    <div class="d-flex p-2 flex-column bd-highlight">
         {% for action in filtered_actions %}
         {% if action.done_status == False %}
-            <tr>
-                <td>{{ action.title }}</td>
-                <td>{{ action.tracked_time }}</td>
-                <td>{{ action.priority }}</td>
-                <td>{{ action.category }}</td>
-                <td>{{ action.action_date|date:"Y-m-d" }}</td>
-                <td>
-                    <a class="fa-solid fa-check" role="button" href="{% url 'complete_action' action.id %}"></a>
-                    <a class="fa-solid fa-pen-to-square" role="button" href="{% url 'update_action' action.id %}"></a>
-                    <a class="fa-solid fa-trash" role="button" href="{% url 'delete_action' action.id %}"></a>
-                    <a class="fa-solid fa-rotate-left" role="button" href="{% url 'relist_action' action.id %}"></a>
-                </td>
-                <td>{{ action.activeTimeTracked}}</td>
-            </tr>
+            <div class="p-2 card bd-highlight">
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <p class="bd-highlight">{{ action.title }}</p>
+                    <p class="bd-highlight">{{ action.tracked_time }}</p>
+                </div>
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <p class="bd-highlight">{{ action.priority }}</p>
+                    <p class="bd-highlight">{{ action.category }}</p>
+                    <p class="bd-highlight">{{ action.action_date|date:"Y-m-d" }}</p>
+                </div>
+                <div class="d-flex p-2 justify-content-between flex-row bd-highlight">
+                        <div>
+                            <a class="fa-solid fa-check p-2 bd-highlight" role="button" href="{% url 'complete_action' action.id %}"></a>
+                        </div>
+                        <div>
+                            <a class="fa-solid fa-pen-to-square p-2 bd-highlight" role="button" href="{% url 'update_action' action.id %}"></a>
+                        </div>
+                        <div>
+                            <a class="fa-solid fa-trash p-2 bd-highlight" role="button" href="{% url 'delete_action' action.id %}"></a>
+                        </div>
+                        <div>
+                            <a class="fa-solid fa-rotate-left" role="button" href="{% url 'relist_action' action.id %}"></a>
+                        </div> 
+                </div>
+            </div>
         {% endif %}
         {% empty %}
-        <tr><td>You have nothing to do.</td></tr>
+        <H2 class="p-2 bd-highlight">You have nothing to do.</H2>
         {% endfor %}
-
-
-    </table>
-    <a class="fa-solid fa-plus" role="button" href="/add-action/"></a>
 
     <hr>
 
     <h1>Things I've Done:</h1>
-    <table class="table table-striped">
-        <tr>
-            <th>Action</th>
-            <th>Total Time Tracked</th>
-            <th>Priority</th>
-            <th>Category</th>
-            <th>Options</th>
-            <th>Date</th>
-            <th>Active Time Tracked</th>
-        </tr>
+    <div class="d-flex flex-column bd-highlight">
         {% for action in filtered_actions %}
         {% if action.done_status == True %}
-            <tr>
-                <td>{{ action.title }}</td>
-                <td>{{ action.tracked_time }}</td>
-                <td>{{ action.priority }}</td>
-                <td>{{ action.category }}</td>
-                <td>{{ action.action_date|date:"Y-m-d" }}</td>
-                <td>
+            <div class="card p-2 bd-highlight">
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <p class="bd-highlight">{{ action.title }}</p>
+                    <p class="bd-highlight">{{ action.tracked_time }}</p>
+                </div>
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <p class="bd-highlight">{{ action.priority }}</p>
+                    <p class="bd-highlight">{{ action.category }}</p>
+                    <p class="bd-highlight">{{ action.action_date|date:"Y-m-d" }}</p>
+                </div>
+                <div>
                     <a class="fa-solid fa-rotate-left" role="button" href="{% url 'complete_action' action.id %}"></a>
-                </td>
-                <td>{{ action.activeTimeTracked}}</td>
-            </tr>
-        {% endif %}    
-        {% empty %}
+                </div>
+            </div>
+            <br>
+    </div>
 
+        {% endif %}
         {% endfor %}
-    
-
-
-    </table>
-</body>
-
 {% endblock %}
