@@ -5,7 +5,7 @@
 <body>
     <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>Things I need to do:</h1>
-        <a class="fa-solid fa-plus" role="button" href="/add-action/"></a>
+        <a class="fa-solid fa-lg fa-plus" role="button" href="/add-action/"></a>
     </div>
 
     <div class="container d-flex p-2 flex-column bd-highlight">
@@ -24,22 +24,22 @@
                 <div class="d-flex justify-content-between flex-row bd-highlight">
                     {% if action.tracking_status == False %}
                         <div>
-                            <a class="fa-solid fa-hourglass p-2 bd-highlight" role="button" href="{% url 'start_timer' action.id %}"></a>
+                            <a class="fa-solid fa-lg fa-hourglass p-2 bd-highlight" role="button" href="{% url 'start_timer' action.id %}"></a>
                         </div>
                     {% endif %}
                     {% if action.tracking_status == True %}
                         <div>
-                            <a class="fa-solid fa-hourglass-end p-2 bd-highlight" role="button" href="{% url 'stop_timer' action.id %}"></a>
+                            <a class="fa-solid fa-lg fa-hourglass-end p-2 bd-highlight" role="button" href="{% url 'stop_timer' action.id %}"></a>
                         </div>
                     {% endif %}
                         <div>
-                            <a class="fa-solid fa-check p-2 bd-highlight" role="button" href="{% url 'complete_action' action.id %}"></a>
+                            <a class="fa-solid fa-lg fa-check p-2 bd-highlight" role="button" href="{% url 'complete_action' action.id %}"></a>
                         </div>
                         <div>
-                            <a class="fa-solid fa-pen-to-square p-2 bd-highlight" role="button" href="{% url 'update_action' action.id %}"></a>
+                            <a class="fa-solid fa-lg fa-pen-to-square p-2 bd-highlight" role="button" href="{% url 'update_action' action.id %}"></a>
                         </div>
                         <div>
-                            <a class="fa-solid fa-trash p-2 bd-highlight" role="button" href="{% url 'delete_action' action.id %}"></a>
+                            <a class="fa-solid fa-lg fa-trash p-2 bd-highlight" role="button" href="{% url 'delete_action' action.id %}"></a>
                         </div> 
                 </div>
             </div>
@@ -54,7 +54,7 @@
         <h1>Things I've Done:</h1>
     </div>
 
-    <div class="container d-flex flex-column bd-highlight">
+    <div class="container d-flex p-2 flex-column bd-highlight">
         {% for action in filtered_actions %}
         {% if action.done_status == True %}
             <div class="p-2 card bd-highlight">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="d-flex justify-content-between flex-row bd-highlight">
                 <div>
-                    <a class="fa-solid fa-rotate-left" role="button" href="{% url 'complete_action' action.id %}"></a>
+                    <a class="fa-solid fa-lg fa-rotate-left" role="button" href="{% url 'complete_action' action.id %}"></a>
                 </div>
                 </div>
             </div>
