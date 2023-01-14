@@ -1,0 +1,51 @@
+/* Colour styling for icons */
+
+.fa-hourglass {
+    color: orange;
+}
+
+.fa-check {
+    color: green;
+}
+
+.fa-pen-to-square {
+    color: blueviolet;
+}
+
+.fa-trash {
+    color: red;
+}
+
+.fa-arrow-up-right-from-square {
+    color: darkblue;
+}
+
+.fa-toggle-off {
+    color: chocolate;
+}
+
+.fa-toggle-on {
+    color: darkcyan;
+}
+
+
+/* Colour styling for action borders */
+
+.open-actions-border {
+    border: 1px solid orange;
+}
+
+.completed-actions-border {
+    border: 1px solid green;
+}
+
+
+.completed-actions-container {
+    width: 100%;
+}
+
+/* Remove Underline from Achor Tags */
+
+a {
+    text-decoration: none;
+  }
