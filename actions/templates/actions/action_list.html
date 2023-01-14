@@ -6,13 +6,13 @@
 <body>
     <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>Things I need to do:</h1>
-        <a class="fa-solid fa-lg p-2 fa-plus" role="button" href="/add-action/"></a>
+        <a class="fa-solid fa-2xl p-2 fa-square-plus" role="button" href="/add-action/"></a>
     </div>
 
     <div class="container d-flex p-2 flex-column bd-highlight">
         {% for action in filtered_actions %}
         {% if action.done_status == False %}
-        <div class="p-2 card bd-highlight">
+        <div class="p-2 card bd-highlight open-actions-border">
             <div class="d-flex justify-content-between flex-row bd-highlight">
                 <h5 class="card-title bd-highlight">{{ action.title }}</h5>
                 <h6 class="card-subtitle bd-highlight">{{ action.tracked_time }}</h6>
@@ -49,21 +49,22 @@
                 </div>
             </div>
         </div>
-        <br>
+    <br>
 
         {% endif %}
         {% empty %}
         <H2 class="p-2 bd-highlight">You have nothing to do.</H2>
         {% endfor %}
+    </div>
         <hr>
-        <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
-            <h1>Things I've Done:</h1>
-        </div>
-
+    <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
+        <h1>Things I've Done:</h1>
+    </div>
+    <div>
         <div class="container d-flex p-2 flex-column bd-highlight">
             {% for action in filtered_actions %}
             {% if action.done_status == True %}
-            <div class="p-2 card bd-highlight">
+            <div class="p-2 card bd-highlight completed-actions-border">
                 <div class="d-flex justify-content-between flex-row bd-highlight">
                     <h5 class="card-title bd-highlight">{{ action.title }}</h5>
                     <h6 class="card-subtitle bd-highlight">{{ action.tracked_time }}</h6>
@@ -82,12 +83,11 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <br>
-
-        {% endif %}
-        {% endfor %}
-        <hr>
+<br>
+    {% endif %}
+    {% endfor %}
+    </div>
+    <hr>
         <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
             <h1>Active Priorities:</h1>
         </div>
@@ -177,6 +177,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
 
 {% endblock %}

@@ -3,10 +3,11 @@
 {% block content %}
 
 <body>
-    <div class="d-flex p-2 justify-content-between flex-row bd-highlight">
+    <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>My Categories:</h1>
-        <a class="fa-solid fa-lg p-2 fa-plus" role="button" href="/add-category/"></a>
+        <a class="fa-solid fa-2xl p-2 fa-square-plus" role="button" href="/add-category/"></a>
     </div>
+    <div class="container d-flex p-2 flex-column bd-highlight">
     {% for category in user.categories.all %}
     <div class="d-flex p-2 flex-column bd-highlight">
         
@@ -26,6 +27,7 @@
         </div>
     </div>
         {% endfor %}
+    </div>
 </body>
 
 {% endblock %}
