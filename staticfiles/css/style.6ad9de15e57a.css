@@ -1,6 +1,6 @@
 /* Colour styling for icons */
 
-.fa-hourglass {
+.fa-hourglass, .fa-hourglass-end {
     color: orange;
 }
 

@@ -3,8 +3,8 @@
 {% block content %}
 
 <body>
-    <h1>Add an Action</h1>
-    <div class="mb-3 form-group">
+    <h1 class="d-flex p-2 justify-content-center">Add an Action</h1>
+    <div class="d-flex justify-content-center mb-3 form-group p-2">
         <form method="POST" action="/add-new-action/">
             {% csrf_token %}
 
