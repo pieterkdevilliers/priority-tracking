@@ -313,7 +313,6 @@ def relist_action(request, pk):
     """
     Submits the ActionForm and Relists an Action
     """
-    actionform = ActionForm()
     action = Action.objects.get(id=pk)
     action.action_date = date.today()
     action.save()
