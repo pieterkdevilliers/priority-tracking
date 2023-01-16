@@ -3,14 +3,16 @@
 {% block content %}
 
 <body>
-    <h1>Update a Category</h1>
-    <form method="POST" action="">
-        {% csrf_token %}
-
-        {{categoryform}}
-        
-        <input type="submit" name="Update Category">
-    </form>
+    <h1 class="d-flex p-2 justify-content-center">Update a Category</h1>
+    <div class="d-flex justify-content-center mb-3 form-group p-2">
+        <form method="POST" action="">
+            {% csrf_token %}
+    
+            {{categoryform}}
+            <br>
+            <button class="btn btn-primary" type="submit" name="Update Category">Update Category</button>
+        </form>
+    </div>
 </body>
 
 {% endblock %}

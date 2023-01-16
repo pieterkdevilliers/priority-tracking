@@ -3,14 +3,17 @@
 {% block content %}
 
 <body>
-    <h1>Update Priority</h1>
-    <form method="POST" action="">
-        {% csrf_token %}
-
-        {{priorityform}}
-        
-        <input type="submit" name="Update Priority">
-    </form>
+    <h1 class="d-flex p-2 justify-content-center">Update Priority</h1>
+    <div class="d-flex justify-content-center mb-3 form-group p-2">
+        <form method="POST" action="">
+            {% csrf_token %}
+    
+            {{priorityform}}
+            <br>
+            <button class="btn btn-primary" type="submit" name="Update Priority">Update Priority</button>
+        </form>
+    </div>
+    
 </body>
 
 {% endblock %}

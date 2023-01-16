@@ -3,15 +3,19 @@
 {% block content %}
 
 <body>
-    <h1>Delete Category Confirmation Request</h1>
-    <p>Are you sure you want to delete "{{item}}"?</p>
-
-    <form action="{% url 'delete_category' item.id %}" method="POST">
-        {% csrf_token %}
-        <a href="{% url 'get_categories_list' %}">Cancel</a>
-
-        <input type="submit" name="Yes, Delete!">
-    </form>
+    <div class="d-flex p-2 justify-content-center">
+        <h1>Delete Category Confirmation Request</h1>
+    </div>
+    <div class="d-flex p-2 justify-content-center">
+        <p>Are you sure you want to delete "{{item}}"?</p>
+    </div>
+    <div class="d-flex justify-content-center mb-3 form-group p-2">
+        <form action="{% url 'delete_category' item.id %}" method="POST">
+            {% csrf_token %}
+            <a class="btn btn-success" href="{% url 'get_categories_list' %}">Cancel</a>
+            <button class="btn btn-danger" type="submit">Yes, Delete!</button>
+        </form>
+    </div>
 </body>
 
 {% endblock %}

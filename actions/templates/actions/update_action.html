@@ -3,15 +3,17 @@
 {% block content %}
 
 <body>
-    <h1>Update an Action</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-
-        {{actionform}}
-        
-        <input type="submit" name="Update Action">
-    </form>
+    <h1 class="d-flex p-2 justify-content-center">Update an Action</h1>
+    <div class="d-flex justify-content-center mb-3 form-group p-2">
+        <form method="POST" action="">
+            {% csrf_token %}
+    
+            {{actionform}}
+            <br>
+            <button class="btn btn-primary" type="submit" name="Update Action">Update Action</button>
+        </form>
+    </div>
+    
 
 </body>
 
