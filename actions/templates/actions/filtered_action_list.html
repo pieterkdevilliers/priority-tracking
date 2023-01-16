@@ -13,7 +13,6 @@
         <h1>Things I need to do:</h1>
         <a class="fa-solid p-2 fa-2xl fa-square-plus" role="button" href="/add-action/"></a>
     </div>
-
     <div class="container d-flex p-2 flex-column bd-highlight">
         {% for action in filtered_actions %}
         {% if action.done_status == False %}
@@ -42,10 +41,10 @@
                 </div>
             </div>
         </div>
-    </div>
     <br>
 
     {% endif %}
+
     {% empty %}
     <H2 class="p-2 bd-highlight">You have nothing to do.</H2>
     {% endfor %}

@@ -1,6 +1,6 @@
 /* Colour styling for icons */
 
-.fa-hourglass {
+.fa-hourglass, .fa-hourglass-end {
     color: orange;
 }
 
@@ -42,6 +42,16 @@
 
 .completed-actions-container {
     width: 100%;
+}
+
+/* Colour highlight of priority reports */
+
+.on-priority {
+    background-color: green;
+}
+
+.off-priority {
+    background-color: red;
 }
 
 /* Remove Underline from Achor Tags */

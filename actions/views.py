@@ -84,7 +84,7 @@ def get_action_list(request):
         "converted_on_priority_time": converted_on_priority_time,
         "converted_off_priority_time": converted_off_priority_time,
         "on_priority_perc_all_time": on_priority_perc_all_time,
-        "off_priority_perc_all_time": off_priority_perc_all_time
+        "off_priority_perc_all_time": off_priority_perc_all_time,
     }
     return render(request, 'actions/action_list.html', context)
 
@@ -550,4 +550,3 @@ def tracking_status(request, pk):
     action.tracking_status = not action.tracking_status
     action.save()
     return redirect('/actions/')
-

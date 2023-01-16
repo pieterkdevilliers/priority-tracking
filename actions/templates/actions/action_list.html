@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
 <body>
     <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>Things I need to do:</h1>
@@ -106,24 +105,40 @@
             <div class="card p-2 bd-highlight">
                 <div class="card-body p-2 bd-highlight">
                     <h3 class="card-title">Time - Today</h3>
-                    <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div class="p-2 d-flex flex-row bd-highlight justify-content-between">
                         <div>
-                            <h5 class="card-title">Completed Actions</h5>
-                            <h6 class="card-text text-muted">{{ completed_actions_count }}</h6>
+                            <div class="d-flex justify-content-start">
+                                <h6 class="card-title">Completed Actions</h6>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <h5 class="card-text text-muted">{{ completed_actions_count }}</h5>
+                            </div>
                         </div>
                         <div>
-                            <h5 class="card-title">Open Actions</h5>
-                            <h6 class="card-text text-muted">{{ open_actions_count }}</h6>
+                            <div class="d-flex justify-content-end">
+                                <h6 class="card-title">Open Actions</h6>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <h5 class="card-text text-muted">{{ open_actions_count }}</h5>
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div class="p-2 d-flex justify-content-between flex-row bd-highlight">
                         <div>
-                            <h5 class="card-title">Total Actions</h5>
-                            <h6 class="card-text text-muted">{{ total_actions_count }}</h6>
+                            <div class="d-flex justify-content-start">
+                                <h6 class="card-title">Total Actions</h6>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <h5 class="card-text text-muted">{{ total_actions_count }}</h5>
+                            </div>
                         </div>
                         <div>
-                            <h5 class="card-title">Total Time Tracked</h5>
-                            <h6 class="card-text text-muted">{{ converted_tracked_time }}</h6>
+                            <div class="d-flex justify-content-end">
+                                <h6 class="card-title">Total Time Tracked</h6>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <h5 class="card-text text-muted">{{ converted_tracked_time }}</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,26 +146,42 @@
         </div>
         <div class="container d-flex p-2 flex-column bd-highlight">
             <div class="card p-2 bd-highlight">
-                <div class="card-body p-2 bd-highlight">
+                <div id="today-report" class="card-body p-2 bd-highlight">
                     <h3 class="card-title">Focus - Today</h3>
-                    <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div class="p-2 d-flex justify-content-between flex-row bd-highlight">
                         <div>
-                            <h5 class="card-title">% On Priority</h5>
-                            <h6 class="card-text text-muted">{{ on_priority_perc|floatformat:2 }}%</h6>
+                            <div class="d-flex justify-content-start">
+                                <h6 class="card-title">% On Priority</h6>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <h5 class="card-text text-muted"><span id="on-priority-perc">{{ on_priority_perc|floatformat:2 }}</span><span>%</span></h5>
+                            </div>
                         </div>
                         <div>
-                            <h5 class="card-title">% Off Priority</h5>
-                            <h6 class="card-text text-muted">{{ off_priority_perc|floatformat:2 }}%</h6>
+                            <div class="d-flex justify-content-end">
+                                <h6 class="card-title">% Off Priority</h6>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <h5 class="card-text text-muted">{{ off_priority_perc|floatformat:2 }}%</h5>
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div class="p-2 d-flex justify-content-between flex-row bd-highlight">
                         <div>
-                            <h5 class="card-title">Time On Priority</h5>
-                            <h6 class="card-text text-muted">{{ converted_on_priority_time }}</h6>
+                            <div class="d-flex justify-content-start">
+                                <h6 class="card-title">Time On Priority</h6>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <h5 class="card-text text-muted">{{ converted_on_priority_time }}</h5>
+                            </div>
                         </div>
                         <div>
-                            <h5 class="card-title">Time Off Priority</h5>
-                            <h6 class="card-text text-muted">{{ converted_off_priority_time }}</h6>
+                            <div class="d-flex justify-content-end">
+                                <h6 class="card-title">Time Off Priority</h6>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <h5 class="card-text text-muted">{{ converted_off_priority_time }}</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,16 +189,24 @@
         </div>
         <div class="container d-flex p-2 flex-column bd-highlight">
             <div class="card p-2 bd-highlight">
-                <div class="card-body p-2 bd-highlight">
+                <div id="averages-report" class="card-body p-2 bd-highlight">
                     <h3 class="card-title">Averages</h3>
-                    <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <div class="p-2 d-flex justify-content-between flex-row bd-highlight">
                         <div>
-                            <h5 class="card-title">% On Priority</h5>
-                            <h6 class="card-text text-muted">{{ on_priority_perc_all_time|floatformat:2 }}</h6>
+                            <div class="d-flex justify-content-start">
+                                <h6 class="card-title">% On Priority</h6>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <h5 class="card-text text-muted"><span id="on_priority_perc_all_time">{{ on_priority_perc_all_time|floatformat:2 }}</span><span>%</span></h5>
+                            </div>
                         </div>
                         <div>
-                            <h5 class="card-title">% Off Priority</h5>
-                            <h6 class="card-text text-muted">{{ off_priority_perc_all_time|floatformat:2 }}</h6>
+                            <div class="d-flex justify-content-end">
+                                <h6 class="card-title">% Off Priority</h6>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <h5 class="card-text text-muted">{{ off_priority_perc_all_time|floatformat:2 }}%</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
