@@ -316,7 +316,7 @@ def relist_action(request, pk):
     action = Action.objects.get(id=pk)
     action.action_date = date.today()
     action.save()
-    return redirect('/actions/')
+    return redirect('/filtered-actions/')
 
 
 @login_required(login_url='login')
