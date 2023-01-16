@@ -301,7 +301,6 @@ def complete_action(request, pk):
     """
     Submits the ActionForm and Updates an Action
     """
-    actionform = ActionForm()
     action = Action.objects.get(id=pk)
     action.done_status = not action.done_status
     action.save()
@@ -309,10 +308,11 @@ def complete_action(request, pk):
 
 
 @login_required(login_url='login')
-def relist_action(request, pk):
+def relist_action(request, pk, query):
     """
     Submits the ActionForm and Relists an Action
     """
+    print(query)
     action = Action.objects.get(id=pk)
     action.action_date = date.today()
     action.save()
@@ -442,7 +442,6 @@ def priority_active_status(request, pk):
     """
     Submits the PriorityForm and Updates an Active Status
     """
-    priorityform = PriorityForm()
     priority = Priority.objects.get(id=pk)
     priority.activeStatus = not priority.activeStatus
     priority.save()
@@ -513,7 +512,6 @@ def start_timer(request, pk):
     """
     Submits the ActionForm and sets the start time for an Action
     """
-    actionform = ActionForm()
     action = Action.objects.get(id=pk)
     action.tracked_start = datetime.datetime.now(timezone.utc)
     action.tracking_status = True
@@ -526,7 +524,6 @@ def stop_timer(request, pk):
     """
     Submits the ActionForm and sets the start time for an Action
     """
-    actionform = ActionForm()
     action = Action.objects.get(id=pk)
     action.tracking_status = False
     action.tracked_stop = datetime.datetime.now(timezone.utc)
@@ -545,7 +542,6 @@ def tracking_status(request, pk):
     """
     Submits the ActionForm and Updates an Action Tracking Status
     """
-    actionform = ActionForm()
     action = Action.objects.get(id=pk)
     action.tracking_status = not action.tracking_status
     action.save()
