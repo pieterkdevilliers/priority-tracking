@@ -37,15 +37,23 @@ else {
 // Sets and holds the action-date query for filtered-actions
 // in order to reloac the page with the same query
 
+console.log(window.location);
+relistQuery = window.location.search;
+const urlParams = new URLSearchParams(relistQuery);
+const relistParam = urlParams.get('action_date');
+document.cookie = 'action_date=' + relistParam;
+console.log(relistParam);
+console.log(document.cookie);
+
+// console.log(window.location);
 // relistQuery = window.location.search;
-// document.cookie = 
-// console.log(relistQuery)
+// const urlParams = new URLSearchParams(relistQuery);
+// const relistParam = urlParams.get('action_date');
+// document.cookie = "action_date=; expires=Thu, 02 Jan 1970 00:00:01 GMT;"
+// console.log(relistParam);
+// console.log(document.cookie);
 
-// // // Set a cookie
-// // Cookies.set('name', 'value');
 
-// // // Read the cookie
-// // Cookies.get('name') => // => 'value'
 
 
 
