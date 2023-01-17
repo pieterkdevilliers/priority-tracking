@@ -3,6 +3,14 @@
 {% block content %}
 
 <body>
+    {% for message in messages %}
+    <div class="container d-flex justify-content-end">
+        <div id="message" class="alert alert-success d-flex justify-content-center show fade" role="alert">
+            <p>{{message}}</p>
+        </div>
+    </div>
+    {% endfor %}
+
     <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>Things I need to do:</h1>
         <a class="fa-solid fa-2xl p-2 fa-square-plus" role="button" href="/add-action/"></a>

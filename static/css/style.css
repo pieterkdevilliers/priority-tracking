@@ -59,3 +59,9 @@
 a {
     text-decoration: none;
   }
+
+/* Limit alert box size */
+
+#message {
+    max-width: 250px;
+}

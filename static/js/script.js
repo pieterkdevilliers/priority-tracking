@@ -74,3 +74,9 @@ function retrieveLastQuery() {
     const parts = value.split(`; ${"action_date"}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 };
+
+setTimeout(function(){
+if ($('#message').length > 0) {
+    $('#message').remove();
+}
+}, 2000)

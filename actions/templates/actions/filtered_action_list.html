@@ -3,6 +3,13 @@
 {% block content %}
 
 <body>
+    {% for message in messages %}
+    <div id="message" class="alert alert-success alert-dismissible show fade" role="alert">
+        <p>{{message}}</p>
+    </div>
+        
+    {% endfor %}
+    
     <div class="d-flex justify-content-start mb-3 form-group p-2">
         <form class="mb-3" action="" method="GET">
             <input class="p-2 form-control mb-3" type="date" name="action_date">

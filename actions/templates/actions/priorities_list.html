@@ -3,6 +3,13 @@
 {% block content %}
 
 <body>
+    {% for message in messages %}
+    <div id="message" class="alert alert-success alert-dismissible show fade" role="alert">
+        <p>{{message}}</p>
+    </div>
+        
+    {% endfor %}
+    
     <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>Active Priorities:</h1>
         <a class="fa-solid fa-2xl p-2 fa-square-plus" role="button" href="/add-priority/"></a>

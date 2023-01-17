@@ -290,6 +290,7 @@ def add_action(request):
             instance = actionform.save(commit=False)
             instance.user = request.user
             instance.save()
+            messages.success(request, "Action added successfully")
             return redirect('/actions/')
 
     context = {'actionform': actionform}
@@ -304,6 +305,7 @@ def complete_action(request, pk):
     action = Action.objects.get(id=pk)
     action.done_status = not action.done_status
     action.save()
+    messages.success(request, "Action status updated")
     return redirect('/actions/')
 
 
@@ -315,6 +317,7 @@ def relist_action(request, pk):
     action = Action.objects.get(id=pk)
     action.action_date = date.today()
     action.save()
+    messages.success(request, "Action relisted for today")
     return redirect('/filtered-actions/')
 
 
@@ -330,6 +333,7 @@ def update_action(request, pk):
         actionform = ActionForm(request.POST, instance=action)
         if actionform.is_valid():
             actionform.save()
+            messages.success(request, "Action updated successfully")
             return redirect('/actions/')
 
     context = {'actionform': actionform}
@@ -344,6 +348,7 @@ def delete_action(request, pk):
     action = Action.objects.get(id=pk)
     if request.method == "POST":
         action.delete()
+        messages.success(request, "Action deleted")
         return redirect('/actions/')
 
     context = {'item': action}
@@ -362,6 +367,7 @@ def add_category(request):
             instance = categoryform.save(commit=False)
             instance.user = request.user
             instance.save()
+            messages.success(request, "Category added successfully")
             return redirect('/categories/')
 
     context = {'categoryform': categoryform}
@@ -380,6 +386,7 @@ def update_category(request, pk):
         categoryform = CategoryForm(request.POST, instance=category)
         if categoryform.is_valid():
             categoryform.save()
+            messages.success(request, "Category updated successfully")
             return redirect('/categories/')
 
     context = {'categoryform': categoryform}
@@ -394,6 +401,7 @@ def delete_category(request, pk):
     category = Category.objects.get(id=pk)
     if request.method == "POST":
         category.delete()
+        messages.success(request, "Category deleted")
         return redirect('/categories/')
 
     context = {'item': category}
@@ -412,6 +420,7 @@ def add_priority(request):
             instance = priorityform.save(commit=False)
             instance.user = request.user
             instance.save()
+            messages.success(request, "Priority added successfully")
             return redirect('/priorities/')
 
     context = {'priorityform': priorityform}
@@ -430,6 +439,7 @@ def update_priority(request, pk):
         priorityform = PriorityForm(request.POST, instance=priority)
         if priorityform.is_valid():
             priorityform.save()
+            messages.success(request, "Priority updated successfully")
             return redirect('/priorities/')
 
     context = {'priorityform': priorityform}
@@ -444,6 +454,7 @@ def priority_active_status(request, pk):
     priority = Priority.objects.get(id=pk)
     priority.activeStatus = not priority.activeStatus
     priority.save()
+    messages.success(request, "Priority active status updated")
     return redirect('/priorities/')
 
 
@@ -455,6 +466,7 @@ def delete_priority(request, pk):
     priority = Priority.objects.get(id=pk)
     if request.method == "POST":
         priority.delete()
+        messages.success(request, "Priority deleted")
         return redirect('/priorities/')
 
     context = {'item': priority}
@@ -515,6 +527,7 @@ def start_timer(request, pk):
     action.tracked_start = datetime.datetime.now(timezone.utc)
     action.tracking_status = True
     action.save()
+    messages.success(request, "Timer started")
     return redirect('/actions/')
 
 
@@ -533,6 +546,7 @@ def stop_timer(request, pk):
         action.active_tracked_time = action.tracked_stop - action.tracked_start
         action.tracked_time = action.tracked_time + action.active_tracked_time
     action.save()
+    messages.success(request, "Timer stopped")
     return redirect('/actions/')
 
 
