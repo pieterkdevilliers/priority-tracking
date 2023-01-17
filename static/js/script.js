@@ -39,13 +39,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 var filtered_actions_page = document.getElementById("relist-icon");
 if (filtered_actions_page != null) {
 
-    console.log(window.location);
     relistQuery = window.location.search;
     const urlParams = new URLSearchParams(relistQuery);
     const relistParam = urlParams.get('action_date');
     document.cookie = 'action_date=' + relistParam;
-    console.log(relistParam);
-    console.log(document.cookie);
 }});  
 
 // Resets the action_date query when a new query is started
@@ -53,14 +50,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 document.getElementById("get-filtered-actions").addEventListener("click", resetQuery);
 
 function resetQuery() {
-    console.log("resetQuery Function Called");
-    console.log(window.location);
     relistQuery = window.location.search;
     const urlParams = new URLSearchParams(relistQuery);
     const relistParam = urlParams.get('action_date');
     document.cookie = "action_date=; expires=Thu, 02 Jan 1970 00:00:01 GMT;"
-    console.log(relistParam);
-    console.log(document.cookie);
 }});
 
 
@@ -69,8 +62,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 var filtered_actions_page = document.getElementById("relist-icon");
 if (filtered_actions_page == null) {
     
-    console.log("reloadFilteredActions Function Called");
-    console.log(window.location);
     existingQueryValue = retrieveLastQuery();
     if (existingQueryValue != undefined) {
         window.location.href = "?action_date=" + existingQueryValue;
@@ -79,12 +70,7 @@ if (filtered_actions_page == null) {
     
 // Retrieves the lates action_date value from cookies
 function retrieveLastQuery() {
-    console.log("retrieveLastQuery called");
-    console.log(document.cookie);
     const value = `; ${document.cookie}`;
-    console.log("Value set as: ");
-    console.log(value);
     const parts = value.split(`; ${"action_date"}=`);
-    console.log(parts);
     if (parts.length === 2) return parts.pop().split(';').shift();
 };
