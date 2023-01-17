@@ -44,5 +44,5 @@ urlpatterns = [
     path('start-timer/<str:pk>/', views.start_timer, name='start_timer'),
     path('stop-timer/<str:pk>/', views.stop_timer, name='stop_timer'),
     path('tracking-status/<str:pk>/', views.tracking_status, name='tracking_status'),
-    path('priority_active_status/<str:pk>/', views.priority_active_status, name='priority_active_status')
+    path('priority_active_status/<str:pk>/', views.priority_active_status, name='priority_active_status'),
 ]
