@@ -289,6 +289,7 @@ def add_action(request):
         if actionform.is_valid():
             instance = actionform.save(commit=False)
             instance.user = request.user
+            Action.category = instance.priority.category
             instance.save()
             messages.success(request, "Action added successfully")
             return redirect('/actions/')
