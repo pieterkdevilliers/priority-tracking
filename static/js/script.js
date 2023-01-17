@@ -1,7 +1,6 @@
 // Determine if the loaded page is the Actions page.
 // If true, then determine if the Today and Average On-Priority Percentage
 // is above or below 70% and set border colour accordingly.
-
 window.addEventListener('DOMContentLoaded', (event) => {
 var actions_page = document.getElementById("on-priority-perc");
 if (actions_page != null) {
@@ -36,7 +35,6 @@ else {
 
 // Sets and holds the action-date query for filtered-actions
 // in order to reload the page with the same query
-
 window.addEventListener('DOMContentLoaded', (event) => {
 var filtered_actions_page = document.getElementById("relist-icon");
 if (filtered_actions_page != null) {
@@ -51,10 +49,10 @@ if (filtered_actions_page != null) {
 }});  
 
 // Resets the action_date query when a new query is started
-
+window.addEventListener('DOMContentLoaded', (event) => {
 document.getElementById("get-filtered-actions").addEventListener("click", resetQuery);
 
-function resetQuery(){
+function resetQuery() {
     console.log("resetQuery Function Called");
     console.log(window.location);
     relistQuery = window.location.search;
@@ -63,5 +61,30 @@ function resetQuery(){
     document.cookie = "action_date=; expires=Thu, 02 Jan 1970 00:00:01 GMT;"
     console.log(relistParam);
     console.log(document.cookie);
-};
+}});
+
+
+// Reloads the Filtered Actions with the saved query, if the query exists
+window.addEventListener('DOMContentLoaded', (event) => {
+var filtered_actions_page = document.getElementById("relist-icon");
+if (filtered_actions_page == null) {
     
+    console.log("reloadFilteredActions Function Called");
+    console.log(window.location);
+    existingQueryValue = retrieveLastQuery();
+    if (existingQueryValue != undefined) {
+        window.location.href = "?action_date=" + existingQueryValue;
+    } 
+}});
+    
+// Retrieves the lates action_date value from cookies
+function retrieveLastQuery() {
+    console.log("retrieveLastQuery called");
+    console.log(document.cookie);
+    const value = `; ${document.cookie}`;
+    console.log("Value set as: ");
+    console.log(value);
+    const parts = value.split(`; ${"action_date"}=`);
+    console.log(parts);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+};
