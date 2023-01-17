@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
+from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
 User = get_user_model()
 
 # Create your tests here.
@@ -21,7 +21,7 @@ class TestActionForm(TestCase):
 
     def test_priority_and_category_fields_are_not_required(self):
         """
-        Tests for Priority and Category Fields NOT Required
+        Tests for Priority Field NOT Required
         """
         form = ActionForm({'title': 'Test Action'})
         self.assertTrue(form.is_valid())
@@ -31,6 +31,34 @@ class TestActionForm(TestCase):
         Tests for Action Fields Explicit
         """
         form = ActionForm()
+        self.assertEqual(form.Meta.fields, ['title', 'priority'])
+
+
+class TestUpdateActionForm(TestCase):
+    """
+    Tests for Update Action Forms
+    """
+    def test_action_title_is_required(self):
+        """
+        Tests for Action Title is Required
+        """
+        form = UpdateActionForm({'title': ''})
+        self.assertFalse(form.is_valid())
+        self.assertIn('title', form.errors.keys())
+        self.assertEqual(form.errors['title'][0], 'This field is required.')
+
+    def test_priority_and_category_fields_are_not_required(self):
+        """
+        Tests for Priority and Category Fields NOT Required
+        """
+        form = UpdateActionForm({'title': 'Test Action'})
+        self.assertTrue(form.is_valid())
+
+    def test_actionform_fields_are_explicit_in_form_metaclass(self):
+        """
+        Tests for Action Fields Explicit
+        """
+        form = UpdateActionForm()
         self.assertEqual(form.Meta.fields, ['title', 'priority', 'category'])
 
 

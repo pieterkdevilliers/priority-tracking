@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm
+from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
 from .models import Action, Category, Priority
 # Create your views here.
 
@@ -324,13 +324,13 @@ def relist_action(request, pk):
 @login_required(login_url='login')
 def update_action(request, pk):
     """
-    Submits the ActionForm and Updates an Action
+    Submits the UpdateActionForm and Updates an Action
     """
     action = Action.objects.get(id=pk)
-    actionform = ActionForm(instance=action)
+    actionform = UpdateActionForm(instance=action)
 
     if request.method == "POST":
-        actionform = ActionForm(request.POST, instance=action)
+        actionform = UpdateActionForm(request.POST, instance=action)
         if actionform.is_valid():
             actionform.save()
             messages.success(request, "Action updated successfully")

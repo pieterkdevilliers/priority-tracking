@@ -4,8 +4,9 @@ ModelForms for Actions App
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from .models import Action, Priority, Category
 from django import forms
+from .models import Action, Priority, Category
+
 
 User = get_user_model()
 
@@ -19,6 +20,23 @@ class ActionForm(ModelForm):
         Meta class for ActionForm
         """
         model = Action
+        fields = ['title', 'priority']
+
+        widgets = {
+                'title': forms.TextInput(attrs={'class': 'form-control'}),
+                'priority': forms.Select(attrs={'class': 'form-control'}),
+            }
+
+
+class UpdateActionForm(ModelForm):
+    """
+    ModelForm for Updating Actions
+    """
+    class Meta:
+        """
+        Meta class for UpdateActionForm
+        """
+        model = Action
         fields = ['title', 'priority', 'category']
 
         widgets = {
@@ -26,8 +44,7 @@ class ActionForm(ModelForm):
                 'priority': forms.Select(attrs={'class': 'form-control'}),
                 'category': forms.Select(attrs={'class': 'form-control'}),
             }
-    
-    
+
 
 
 
