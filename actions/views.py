@@ -308,11 +308,10 @@ def complete_action(request, pk):
 
 
 @login_required(login_url='login')
-def relist_action(request, pk, query):
+def relist_action(request, pk):
     """
     Submits the ActionForm and Relists an Action
     """
-    print(query)
     action = Action.objects.get(id=pk)
     action.action_date = date.today()
     action.save()

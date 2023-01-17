@@ -35,29 +35,33 @@ else {
 }});
 
 // Sets and holds the action-date query for filtered-actions
-// in order to reloac the page with the same query
+// in order to reload the page with the same query
 
-console.log(window.location);
-relistQuery = window.location.search;
-const urlParams = new URLSearchParams(relistQuery);
-const relistParam = urlParams.get('action_date');
-document.cookie = 'action_date=' + relistParam;
-console.log(relistParam);
-console.log(document.cookie);
+window.addEventListener('DOMContentLoaded', (event) => {
+var filtered_actions_page = document.getElementById("relist-icon");
+if (filtered_actions_page != null) {
 
-// console.log(window.location);
-// relistQuery = window.location.search;
-// const urlParams = new URLSearchParams(relistQuery);
-// const relistParam = urlParams.get('action_date');
-// document.cookie = "action_date=; expires=Thu, 02 Jan 1970 00:00:01 GMT;"
-// console.log(relistParam);
-// console.log(document.cookie);
+    console.log(window.location);
+    relistQuery = window.location.search;
+    const urlParams = new URLSearchParams(relistQuery);
+    const relistParam = urlParams.get('action_date');
+    document.cookie = 'action_date=' + relistParam;
+    console.log(relistParam);
+    console.log(document.cookie);
+}});  
 
+// Resets the action_date query when a new query is started
 
+document.getElementById("get-filtered-actions").addEventListener("click", resetQuery);
 
-
-
+function resetQuery(){
+    console.log("resetQuery Function Called");
+    console.log(window.location);
+    relistQuery = window.location.search;
+    const urlParams = new URLSearchParams(relistQuery);
+    const relistParam = urlParams.get('action_date');
+    document.cookie = "action_date=; expires=Thu, 02 Jan 1970 00:00:01 GMT;"
+    console.log(relistParam);
+    console.log(document.cookie);
+};
     
-
-
-
