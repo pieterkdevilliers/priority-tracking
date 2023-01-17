@@ -58,6 +58,7 @@ function resetQuery() {
 
 
 // Reloads the Filtered Actions with the saved query, if the query exists
+// after a relist action
 window.addEventListener('DOMContentLoaded', (event) => {
 var filtered_actions_page = document.getElementById("relist-icon");
 if (filtered_actions_page == null) {
@@ -67,7 +68,24 @@ if (filtered_actions_page == null) {
         window.location.href = "?action_date=" + existingQueryValue;
     } 
 }});
-    
+//********************************* */
+// Reloads the Filtered Actions with the saved query, if the query exists
+// after an undo action on a filtered-actions page
+window.addEventListener('DOMContentLoaded', (event) => {
+filtered_actions_done = document.getElementById("filtered-actions-undo");
+    if (filtered_actions_done != null) {
+        filtered_actions_done.addEventListener("click", undoFilteredAction)
+    }
+
+ function undoFilteredAction() {
+    console.log("undoFilteredAction called");
+    existingQueryValue = retrieveLastQuery();
+    if (existingQueryValue != undefined) {
+        window.location.href = "?action_date=" + existingQueryValue;
+    }
+}});
+//************************************ */
+
 // Retrieves the lates action_date value from cookies
 function retrieveLastQuery() {
     const value = `; ${document.cookie}`;
@@ -75,6 +93,7 @@ function retrieveLastQuery() {
     if (parts.length === 2) return parts.pop().split(';').shift();
 };
 
+// 2 second timer to remove alerts after display
 setTimeout(function(){
 if ($('#message').length > 0) {
     $('#message').remove();
