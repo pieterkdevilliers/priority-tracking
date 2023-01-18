@@ -54,8 +54,8 @@ function resetQuery() {
     const urlParams = new URLSearchParams(relistQuery);
     const relistParam = urlParams.get('action_date');
     document.cookie = "action_date=; expires=Thu, 02 Jan 1970 00:00:01 GMT;"
-}});
-
+}
+});
 
 // Reloads the Filtered Actions with the saved query, if the query exists
 // after a relist action
@@ -66,7 +66,9 @@ if (filtered_actions_page == null) {
     existingQueryValue = retrieveLastQuery();
     if (existingQueryValue != undefined) {
         window.location.href = "?action_date=" + existingQueryValue;
-    } 
+    }  else {
+        window.location.href = "";
+    }
 }});
 
 
@@ -79,9 +81,7 @@ filtered_actions_done = document.getElementById("filtered-actions-undo");
     }
 
  function undoFilteredAction() {
-    console.log("undoFilteredAction called");
     existingQueryValue = retrieveLastQuery();
-    console.log("existingQueryValue is " + existingQueryValue);
     if (existingQueryValue != undefined) {
         window.location.href = "?action_date=" + existingQueryValue;
     }
