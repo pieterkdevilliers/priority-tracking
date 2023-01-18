@@ -45,4 +45,5 @@ urlpatterns = [
     path('stop-timer/<str:pk>/', views.stop_timer, name='stop_timer'),
     path('tracking-status/<str:pk>/', views.tracking_status, name='tracking_status'),
     path('priority_active_status/<str:pk>/', views.priority_active_status, name='priority_active_status'),
+    path('complete-filtered-action/<str:pk>/', views.complete_filtered_action, name='complete_filtered_action'),
 ]

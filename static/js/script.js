@@ -68,7 +68,8 @@ if (filtered_actions_page == null) {
         window.location.href = "?action_date=" + existingQueryValue;
     } 
 }});
-//********************************* */
+
+
 // Reloads the Filtered Actions with the saved query, if the query exists
 // after an undo action on a filtered-actions page
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -80,11 +81,11 @@ filtered_actions_done = document.getElementById("filtered-actions-undo");
  function undoFilteredAction() {
     console.log("undoFilteredAction called");
     existingQueryValue = retrieveLastQuery();
+    console.log("existingQueryValue is " + existingQueryValue);
     if (existingQueryValue != undefined) {
         window.location.href = "?action_date=" + existingQueryValue;
     }
 }});
-//************************************ */
 
 // Retrieves the lates action_date value from cookies
 function retrieveLastQuery() {

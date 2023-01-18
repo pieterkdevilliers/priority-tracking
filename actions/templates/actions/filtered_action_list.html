@@ -37,7 +37,7 @@
                 <div class="icon-container d-flex justify-content-end">
                     <div class="d-flex justify-content-end col-12">
                         <a class="fa-solid fa-lg fa-check p-2 bd-highlight" role="button"
-                            href="{% url 'complete_action' action.id %}"></a>
+                            href="{% url 'complete_filtered_action' action.id %}"></a>
                         <a class="fa-solid fa-lg fa-pen-to-square p-2 bd-highlight" role="button"
                             href="{% url 'update_action' action.id %}"></a>
                         <a class="fa-solid fa-lg fa-trash p-2 bd-highlight" role="button"
@@ -76,7 +76,7 @@
                 <div class="icon-container d-flex justify-content-end">
                     <div class="d-flex justify-content-end col-12 col-md-1">
                         <a id="filtered-actions-undo" class="fa-solid fa-lg p-2 fa-rotate-left" role="button"
-                            href="{% url 'complete_action' action.id %}"></a>
+                            href="{% url 'complete_filtered_action' action.id %}"></a>
                     </div>
                 </div>
             </div>

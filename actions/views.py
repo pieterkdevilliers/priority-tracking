@@ -311,6 +311,18 @@ def complete_action(request, pk):
 
 
 @login_required(login_url='login')
+def complete_filtered_action(request, pk):
+    """
+    Submits the ActionForm and Updates an Action
+    """
+    action = Action.objects.get(id=pk)
+    action.done_status = not action.done_status
+    action.save()
+    messages.success(request, "Action status updated")
+    return redirect('/filtered-actions/')
+
+
+@login_required(login_url='login')
 def relist_action(request, pk):
     """
     Submits the ActionForm and Relists an Action
