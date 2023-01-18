@@ -53,11 +53,11 @@ function resetQuery() {
     relistQuery = window.location.search;
     const urlParams = new URLSearchParams(relistQuery);
     const relistParam = urlParams.get('action_date');
-    document.cookie = "action_date=; expires=Thu, 02 Jan 1970 00:00:01 GMT;"
-}
-});
+    document.cookie = "action_date=; expires=Thu, 02 Jan 1970 00:00:01 GMT;";
+}});
 
-// Reloads the Filtered Actions with the saved query, if the query exists
+
+ // Reloads the Filtered Actions with the saved query, if the query exists
 // after a relist action
 window.addEventListener('DOMContentLoaded', (event) => {
 var filtered_actions_page = document.getElementById("relist-icon");
@@ -66,9 +66,7 @@ if (filtered_actions_page == null) {
     existingQueryValue = retrieveLastQuery();
     if (existingQueryValue != undefined) {
         window.location.href = "?action_date=" + existingQueryValue;
-    }  else {
-        window.location.href = "";
-    }
+    } 
 }});
 
 
@@ -80,8 +78,10 @@ filtered_actions_done = document.getElementById("filtered-actions-undo");
         filtered_actions_done.addEventListener("click", undoFilteredAction)
     }
 
- function undoFilteredAction() {
+    function undoFilteredAction() {
+    console.log("undoFilteredAction called");
     existingQueryValue = retrieveLastQuery();
+    console.log("existingQueryValue is " + existingQueryValue);
     if (existingQueryValue != undefined) {
         window.location.href = "?action_date=" + existingQueryValue;
     }
