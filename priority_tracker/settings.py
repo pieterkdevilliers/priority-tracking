@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-pieterkdevi-prioritytra-x9x9n2ts09q.ws-eu82.gitpod.io',
+    'https://8000-pieterkdevi-prioritytra-dhafefqg7h6.ws-eu83.gitpod.io',
     'https://ci-priority-tracker.herokuapp.com'
     ]
 
@@ -165,4 +165,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redefining the Auth User Model
 AUTH_USER_MODEL = 'actions.User'
+
+
+# Email Settings
+
+EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
+MAILJET_API_KEY = 'MAILJET_API_KEY'
+MAILJET_API_SECRET = 'MAIL_JET_API_SECRET'
 
