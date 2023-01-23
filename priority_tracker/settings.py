@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-pieterkdevi-prioritytra-dhafefqg7h6.ws-eu83.gitpod.io',
+    'https://8000-pieterkdevi-prioritytra-sj8kwifp1vu.ws-eu83.gitpod.io',
     'https://ci-priority-tracker.herokuapp.com'
     ]
 
@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'actions',
-    'fontawesomefree',
     'whitenoise',
 ]
 
