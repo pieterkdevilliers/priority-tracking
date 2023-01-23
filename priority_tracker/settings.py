@@ -168,7 +168,9 @@ AUTH_USER_MODEL = 'actions.User'
 
 # Email Settings
 
-EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
-MAILJET_API_KEY = 'MAILJET_API_KEY'
-MAILJET_API_SECRET = 'MAIL_JET_API_SECRET'
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'pieter@hey.com'
+EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
+EMAIL_USE_TLS = True

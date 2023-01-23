@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Sum
 from django.core.mail import send_mail
+from django.conf import settings
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
 from .models import Action, Category, Priority
 # Create your views here.
@@ -569,6 +570,13 @@ def register_page(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            username = request.POST['username']
+            email = request.POST['email']
+            subject = 'Welcome to Priority Tracker'
+            message = f'Hi {username} thanks for checking out Priority Tracker.'
+            from_email = settings.EMAIL_HOST_USER
+            recipient_list = [email]
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
             form.save()
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account created for ' + user)
