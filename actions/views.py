@@ -69,10 +69,15 @@ def get_action_list(request):
     off_priority_perc_all_time = off_priority_calc(
             all_time_seconds, all_time_off_priority_seconds)
 
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
     actions = Action.objects.all()
-    filtered_actions = Action.objects.filter(action_date=query)
+    filtered_actions = Action.objects.filter(action_date=query, user=current_user)
     priorities = Priority.objects.all()
     context = {
+        "username": username,
+        "user_id": user_id,
         "actions": actions,
         "filtered_actions": filtered_actions,
         "priorities": priorities,
@@ -245,9 +250,14 @@ def get_filtered_action_list(request):
     """
     query_dict = request.GET
     query = query_dict.get("action_date")
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
     actions = Action.objects.all()
-    filtered_actions = Action.objects.filter(action_date=query)
+    filtered_actions = Action.objects.filter(action_date=query, user=current_user)
     context = {
+        "username": username,
+        "user_id": user_id,
         "actions": actions,
         "query": query,
         "filtered_actions": filtered_actions
@@ -260,8 +270,13 @@ def get_priorities_list(request):
     """
     Retrieves the priorities_list template.
     """
-    priorities = Priority.objects.all()
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
+    priorities = Priority.objects.filter(user=current_user)
     context = {
+        "username": username,
+        "user_id": user_id,
         "priorities": priorities
     }
     return render(request, 'actions/priorities_list.html', context)
@@ -272,8 +287,13 @@ def get_categories_list(request):
     """
     Retrieves the categories_list template.
     """
-    categories = Category.objects.all()
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
+    categories = Category.objects.filter(user=current_user)
     context = {
+        "username": username,
+        "user_id": user_id,
         "categories": categories
     }
     return render(request, 'actions/categories_list.html', context)
@@ -285,6 +305,9 @@ def add_action(request):
     Submits the ActionForm and Creates an Action
     """
     actionform = ActionForm()
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
     if request.method == "POST":
         actionform = ActionForm(request.POST)
         if actionform.is_valid():
@@ -295,7 +318,11 @@ def add_action(request):
             messages.success(request, "Action added successfully")
             return redirect('/actions/')
 
-    context = {'actionform': actionform}
+    context = {
+        'actionform': actionform,
+        "username": username,
+        "user_id": user_id
+        }
     return render(request, 'actions/add_action.html', context)
 
 
@@ -342,6 +369,9 @@ def update_action(request, pk):
     """
     action = Action.objects.get(id=pk)
     actionform = UpdateActionForm(instance=action)
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
 
     if request.method == "POST":
         actionform = UpdateActionForm(request.POST, instance=action)
@@ -350,7 +380,11 @@ def update_action(request, pk):
             messages.success(request, "Action updated successfully")
             return redirect('/actions/')
 
-    context = {'actionform': actionform}
+    context = {
+        'actionform': actionform,
+        "username": username,
+        "user_id": user_id
+        }
     return render(request, 'actions/update_action.html', context)
 
 
@@ -375,6 +409,9 @@ def add_category(request):
     Submits the CategoryForm and Creates a Category
     """
     categoryform = CategoryForm()
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
     if request.method == "POST":
         categoryform = CategoryForm(request.POST)
         if categoryform.is_valid():
@@ -384,7 +421,11 @@ def add_category(request):
             messages.success(request, "Category added successfully")
             return redirect('/categories/')
 
-    context = {'categoryform': categoryform}
+    context = {
+        'categoryform': categoryform,
+        "username": username,
+        "user_id": user_id,
+        }
     return render(request, 'actions/add_category.html', context)
 
 
@@ -395,6 +436,9 @@ def update_category(request, pk):
     """
     category = Category.objects.get(id=pk)
     categoryform = CategoryForm(instance=category)
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
 
     if request.method == "POST":
         categoryform = CategoryForm(request.POST, instance=category)
@@ -403,7 +447,11 @@ def update_category(request, pk):
             messages.success(request, "Category updated successfully")
             return redirect('/categories/')
 
-    context = {'categoryform': categoryform}
+    context = {
+        'categoryform': categoryform,
+        "username": username,
+        "user_id": user_id,
+        }
     return render(request, 'actions/update_category.html', context)
 
 
@@ -412,13 +460,20 @@ def delete_category(request, pk):
     """
     Deletes the selected Category
     """
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
     category = Category.objects.get(id=pk)
     if request.method == "POST":
         category.delete()
         messages.success(request, "Category deleted")
         return redirect('/categories/')
 
-    context = {'item': category}
+    context = {
+        'item': category,
+        "username": username,
+        "user_id": user_id,
+        }
     return render(request, 'actions/delete_category.html', context)
 
 
@@ -428,6 +483,9 @@ def add_priority(request):
     Submits the PriorityForm and Creates a Priority
     """
     priorityform = PriorityForm()
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
     if request.method == "POST":
         priorityform = PriorityForm(request.POST)
         if priorityform.is_valid():
@@ -437,7 +495,11 @@ def add_priority(request):
             messages.success(request, "Priority added successfully")
             return redirect('/priorities/')
 
-    context = {'priorityform': priorityform}
+    context = {
+        'priorityform': priorityform,
+        "username": username,
+        "user_id": user_id,
+        }
     return render(request, 'actions/add_priority.html', context)
 
 
@@ -448,6 +510,9 @@ def update_priority(request, pk):
     """
     priority = Priority.objects.get(id=pk)
     priorityform = PriorityForm(instance=priority)
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
 
     if request.method == "POST":
         priorityform = PriorityForm(request.POST, instance=priority)
@@ -456,7 +521,11 @@ def update_priority(request, pk):
             messages.success(request, "Priority updated successfully")
             return redirect('/priorities/')
 
-    context = {'priorityform': priorityform}
+    context = {
+        'priorityform': priorityform,
+        "username": username,
+        "user_id": user_id,
+        }
     return render(request, 'actions/update_priority.html', context)
 
 
@@ -477,13 +546,20 @@ def delete_priority(request, pk):
     """
     Deletes the selected Priority
     """
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
     priority = Priority.objects.get(id=pk)
     if request.method == "POST":
         priority.delete()
         messages.success(request, "Priority deleted")
         return redirect('/priorities/')
 
-    context = {'item': priority}
+    context = {
+        'item': priority,
+        "username": username,
+        "user_id": user_id,
+        }
     return render(request, 'actions/delete_priority.html', context)
 
 

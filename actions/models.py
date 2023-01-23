@@ -32,6 +32,7 @@ class Priority(models.Model):
         Category, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="priorities", null=True)
+    
 
     def __str__(self):
         return str(self.title)

@@ -46,8 +46,6 @@ class UpdateActionForm(ModelForm):
             }
 
 
-
-
 class CategoryForm(ModelForm):
     """
     ModelForm for adding Categories
@@ -79,7 +77,7 @@ class PriorityForm(ModelForm):
         widgets = {
                 'title': forms.TextInput(attrs={'class': 'form-control'}),
                 'description': forms.TextInput(attrs={'class': 'form-control'}),
-                'category': forms.Select(attrs={'class': 'form-control'}),
+                'category': forms.Select(attrs={'class': 'form-control', 'user': 'user'}),
                 'activeStatus': forms.CheckboxInput(attrs={'class': 'form-control form-check-input'}),
             }
 
