@@ -78,7 +78,6 @@ def get_action_list(request):
     context = {
         "username": username,
         "user_id": user_id,
-        "actions": actions,
         "filtered_actions": filtered_actions,
         "priorities": priorities,
         "completed_actions_count": completed_actions_count,
@@ -258,7 +257,6 @@ def get_filtered_action_list(request):
     context = {
         "username": username,
         "user_id": user_id,
-        "actions": actions,
         "query": query,
         "filtered_actions": filtered_actions
     }
