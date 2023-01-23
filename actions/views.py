@@ -570,6 +570,8 @@ def register_page(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
+
+            # send welcome email
             username = request.POST['username']
             email = request.POST['email']
             subject = 'Welcome to Priority Tracker'
@@ -577,6 +579,8 @@ def register_page(request):
             from_email = settings.EMAIL_HOST_USER
             recipient_list = [email]
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+            # save new user
             form.save()
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account created for ' + user)
