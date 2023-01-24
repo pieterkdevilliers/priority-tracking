@@ -46,18 +46,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
         "relist-filtered-action");
     var filtered_actions_page = document.getElementById(
         "filtered-action-page");
-    if (filtered_actions_page !== null) {
-        if(undo_filtered_action !== null || complete_filtered_action !== null
-            || relist_filtered_action !== null) {
+    if (filtered_actions_page != null) {
+        if(undo_filtered_action != null || complete_filtered_action != null
+            || relist_filtered_action != null) {
             relistQuery = window.location.search;
             const urlParams = new URLSearchParams(relistQuery);
             const relistParam = urlParams.get('action_date');
             document.cookie = 'action_date=' + relistParam;
         } else if
-            (undo_filtered_action === null && complete_filtered_action === null
-                && relist_filtered_action === null) {
+            (undo_filtered_action == null && complete_filtered_action == null
+                && relist_filtered_action == null) {
                 lastQuery = retrieveLastQuery()
-                if (lastQuery !== null) {
+                if (lastQuery != null) {
                     window.location.href = "?action_date=" + lastQuery;
                 }
             }
@@ -77,7 +77,7 @@ document.getElementById(
 function retrieveLastQuery() {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${"action_date"}=`);
-    if (parts.length === 2){
+    if (parts.length == 2){
         return parts.pop().split(';').shift();
     }
 }
