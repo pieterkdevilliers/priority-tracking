@@ -573,9 +573,6 @@ def register_page(request):
         if form.is_valid():
             email = request.POST['email']
             username = request.POST['username']
-            is_superuser = request.POST['is_superuser']
-            is_staff = request.POST['is_staff']
-            print(request.POST)
 
             # send welcome email via sendgrid
             message = Mail(

@@ -91,4 +91,4 @@ class CreateUserForm(UserCreationForm):
         Meta class for CreateUserForm
         """
         model = User
-        fields = ['username', 'email', 'password1', 'password2', 'is_superuser', 'is_staff']
+        fields = ['username', 'email', 'password1', 'password2']
