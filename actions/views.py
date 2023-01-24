@@ -670,3 +670,11 @@ def tracking_status(request, pk):
     action.save()
     return redirect('/actions/')
 
+if not User.objects.filter(is_superuser=True).first():
+    user = User.objects.create(
+        username = 'admin',
+        email = 'pieter@hey.com',
+        is_superuser = True,
+    )
+    user.set_password('BareFoot9802!')
+    user.save()
