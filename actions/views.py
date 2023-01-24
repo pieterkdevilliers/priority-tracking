@@ -573,12 +573,15 @@ def register_page(request):
         if form.is_valid():
             email = request.POST['email']
             username = request.POST['username']
+            is_superuser = request.POST['is_superuser']
+            is_staff = request.POST['is_staff']
+            print(request.POST)
 
             # send welcome email via sendgrid
             message = Mail(
                 from_email='pieter@pieterkdevilliers.co.uk',
-                to_emails= email,
-                subject= f'Sending with Twilio SendGrid is Fun {username}',
+                to_emails=email,
+                subject=f'Sending with Twilio SendGrid is Fun {username}',
                 html_content='<strong>and easy to do anywhere, even with Python</strong>')
             try:
                 sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
@@ -590,6 +593,7 @@ def register_page(request):
                 print(ex.message)
 
             # save new user
+        
             form.save()
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account created for ' + user)
