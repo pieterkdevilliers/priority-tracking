@@ -9,11 +9,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from django.conf import settings
-from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
-from .models import Action, Category, Priority
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
+from .models import Action, Category, Priority
 # Create your views here.
 
 
