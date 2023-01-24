@@ -36,55 +36,31 @@ else {
 // Sets and holds the action-date query for filtered-actions
 // in order to reload the page with the same query
 window.addEventListener('DOMContentLoaded', (event) => {
-var filtered_actions_page = document.getElementById("relist-icon");
-if (filtered_actions_page != null) {
-
-    relistQuery = window.location.search;
-    const urlParams = new URLSearchParams(relistQuery);
-    const relistParam = urlParams.get('action_date');
-    document.cookie = 'action_date=' + relistParam;
-}});  
+    var undo_filtered_action = document.getElementById("undo-filtered-action");
+    var complete_filtered_action = document.getElementById("complete-filtered-action");
+    var relist_filtered_action = document.getElementById("relist-filtered-action");
+    var filtered_actions_page = document.getElementById("filtered-action-page");
+    if (filtered_actions_page != null) {
+        if(undo_filtered_action != null || complete_filtered_action != null || relist_filtered_action != null) {
+            relistQuery = window.location.search;
+            const urlParams = new URLSearchParams(relistQuery);
+            const relistParam = urlParams.get('action_date');
+            document.cookie = 'action_date=' + relistParam;
+        } else if 
+            (undo_filtered_action == null && complete_filtered_action == null && relist_filtered_action == null) {
+                lastQuery = retrieveLastQuery()
+                if (lastQuery != null) {
+                    window.location.href = "?action_date=" + lastQuery;
+                }
+            }
+    }});  
 
 // Resets the action_date query when a new query is started
 window.addEventListener('DOMContentLoaded', (event) => {
 document.getElementById("get-filtered-actions").addEventListener("click", resetQuery);
 
 function resetQuery() {
-    relistQuery = window.location.search;
-    const urlParams = new URLSearchParams(relistQuery);
-    const relistParam = urlParams.get('action_date');
     document.cookie = "action_date=; expires=Thu, 02 Jan 1970 00:00:01 GMT;";
-}});
-
-
- // Reloads the Filtered Actions with the saved query, if the query exists
-// after a relist action
-window.addEventListener('DOMContentLoaded', (event) => {
-var filtered_actions_page = document.getElementById("relist-icon");
-if (filtered_actions_page == null) {
-    
-    existingQueryValue = retrieveLastQuery();
-    if (existingQueryValue != undefined) {
-        window.location.href = "?action_date=" + existingQueryValue;
-    } 
-}});
-
-
-// Reloads the Filtered Actions with the saved query, if the query exists
-// after an undo action on a filtered-actions page
-window.addEventListener('DOMContentLoaded', (event) => {
-filtered_actions_done = document.getElementById("filtered-actions-undo");
-    if (filtered_actions_done != null) {
-        filtered_actions_done.addEventListener("click", undoFilteredAction)
-    }
-
-    function undoFilteredAction() {
-    console.log("undoFilteredAction called");
-    existingQueryValue = retrieveLastQuery();
-    console.log("existingQueryValue is " + existingQueryValue);
-    if (existingQueryValue != undefined) {
-        window.location.href = "?action_date=" + existingQueryValue;
-    }
 }});
 
 // Retrieves the lates action_date value from cookies

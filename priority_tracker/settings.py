@@ -165,10 +165,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Redefining the Auth User Model
 AUTH_USER_MODEL = 'actions.User'
 
-
-# Email Settings
-
-EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
-MAILJET_API_KEY = 'MAILJET_API_KEY'
-MAILJET_API_SECRET = 'MAIL_JET_API_SECRET'
-
