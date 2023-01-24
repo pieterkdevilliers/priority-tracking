@@ -10,12 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
-import environ
 import os
 import dj_database_url
-
-env = environ.Env()
-environ.Env.read_env()
 
 development = os.environ.get('DEVELOPMENT', False)
 
@@ -169,15 +165,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Redefining the Auth User Model
 AUTH_USER_MODEL = 'actions.User'
 
-
-# Email Settings
-#Twilio SendGrid
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
-EMAIL_USE_TLS = True
-
-# Sender Email Details
-DEFAULT_FROM_EMAIL = env('FROM_EMAIL', default='pieter@pieterkdevilliers.co.uk')
-LOGIN_REDIRECT_URL = 'success'

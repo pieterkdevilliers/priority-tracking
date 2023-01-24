@@ -4,5 +4,9 @@ dj-database-url==1.2.0
 Django==4.1.5
 gunicorn==20.1.0
 psycopg2-binary==2.9.5
+django-environ==0.9.0
+python-http-client==3.3.7
+sendgrid==6.9.7
 sqlparse==0.4.3
+starkbank-ecdsa==2.2.0
 whitenoise==6.3.0

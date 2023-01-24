@@ -1,6 +1,7 @@
 """
 Views for the Actions App.
 """
+import os
 import datetime
 from datetime import timezone, date
 from django.contrib import messages
@@ -8,10 +9,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
 from .models import Action, Category, Priority
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 # Create your views here.
 
 
@@ -570,15 +572,23 @@ def register_page(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
-
-            # send welcome email
-            username = request.POST['username']
             email = request.POST['email']
-            subject = 'Welcome to Priority Tracker'
-            message = f'Hi {username} thanks for checking out Priority Tracker.'
-            from_email = settings.EMAIL_HOST_USER
-            recipient_list = [email]
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            username = request.POST['username']
+
+            # send welcome email via sendgrid
+            message = Mail(
+                from_email='pieter@pieterkdevilliers.co.uk',
+                to_emails= email,
+                subject= f'Sending with Twilio SendGrid is Fun {username}',
+                html_content='<strong>and easy to do anywhere, even with Python</strong>')
+            try:
+                sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+                response = sg.send(message)
+                print(response.status_code)
+                print(response.body)
+                print(response.headers)
+            except Exception as ex:
+                print(ex.message)
 
             # save new user
             form.save()
