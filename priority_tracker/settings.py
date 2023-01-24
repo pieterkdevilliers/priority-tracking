@@ -165,3 +165,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Redefining the Auth User Model
 AUTH_USER_MODEL = 'actions.User'
 
+
+if not User.objects.filter(is_superuser=True).first():
+    user = User.objects.create(
+        username = 'admin',
+        email = 'pieter@hey.com',
+        is_superuser = True,
+        ...
+    )
+    user.set_password('BareFoot9802!')
+    user.save()
