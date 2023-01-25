@@ -47,20 +47,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var filtered_actions_page = document.getElementById(
         "filtered-action-page");
     if (filtered_actions_page != null) {
-        if(undo_filtered_action != null || complete_filtered_action != null
-            || relist_filtered_action != null) {
+        if(undo_filtered_action != null || relist_filtered_action != null) {
             relistQuery = window.location.search;
             const urlParams = new URLSearchParams(relistQuery);
             const relistParam = urlParams.get('action_date');
             document.cookie = 'action_date=' + relistParam;
         } else if
-            (undo_filtered_action == null && complete_filtered_action == null
-                && relist_filtered_action == null) {
+            (undo_filtered_action == null && relist_filtered_action == null) {
                 lastQuery = retrieveLastQuery()
                 if (lastQuery != null) {
                     window.location.href = "?action_date=" + lastQuery;
                 }
-            }
+            } else 
+            relistQuery = window.location.search;
+            const urlParams = new URLSearchParams(relistQuery);
+            const relistParam = urlParams.get('action_date');
+            document.cookie = 'action_date=' + relistParam;
     }});
 
 // Resets the action_date query when a new query is started
