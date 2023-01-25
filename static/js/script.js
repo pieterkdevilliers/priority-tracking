@@ -58,11 +58,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (lastQuery != null) {
                     window.location.href = "?action_date=" + lastQuery;
                 }
-            } else 
-            relistQuery = window.location.search;
-            const urlParams = new URLSearchParams(relistQuery);
-            const relistParam = urlParams.get('action_date');
-            document.cookie = 'action_date=' + relistParam;
+            }
     }});
 
 // Resets the action_date query when a new query is started
