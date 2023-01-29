@@ -9,10 +9,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+# from sendgrid import SendGridAPIClient
+# from sendgrid.helpers.mail import Mail
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
 from .models import Action, Category, Priority
+from .SendDynamic import send_welcome
 # Create your views here.
 
 
@@ -573,24 +574,12 @@ def register_page(request):
         if form.is_valid():
             email = request.POST['email']
             username = request.POST['username']
-
+            template_id = 'd-2a6824e5ca614beaa08cd60b2784a0f2'
+            
             # send welcome email via sendgrid
-            message = Mail(
-                from_email='pieter@pieterkdevilliers.co.uk',
-                to_emails=email,
-                subject=f'Sending with Twilio SendGrid is Fun {username}',
-                html_content='<strong>and easy to do anywhere, even with Python</strong>')
-            try:
-                sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-                response = sg.send(message)
-                print(response.status_code)
-                print(response.body)
-                print(response.headers)
-            except Exception as ex:
-                print(ex.message)
+            send_welcome(email, username, template_id)
 
             # save new user
-        
             form.save()
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account created for ' + user)
