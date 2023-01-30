@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from sendgrid.helpers.mail import Mail
+from sendgrid import SendGridAPIClient
 
 development = os.environ.get('DEVELOPMENT', False)
 
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'actions',
     'whitenoise',
+    'sendgrid'
 ]
 
 MIDDLEWARE = [
@@ -165,3 +168,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Redefining the Auth User Model
 AUTH_USER_MODEL = 'actions.User'
 
+
+# SendGrid Email Settings
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'sgbackend.SendGridBackend'
+DEFAULT_FROM_EMAIL = 'pieter@pieterkdevilliers.co.uk'
