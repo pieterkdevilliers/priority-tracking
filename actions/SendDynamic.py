@@ -3,14 +3,9 @@ import os
 from sendgrid.helpers.mail import Mail
 from sendgrid import SendGridAPIClient
 
-# from address we pass to our Mail object, edit with your name
+
+# from address we pass to our Mail object
 FROM_EMAIL = 'pieter@pieterkdevilliers.co.uk'
-
-# # update to your dynamic template id from the UI
-# TEMPLATE_ID = 'd-2a6824e5ca614beaa08cd60b2784a0f2'
-
-# list of emails and preheader names, update with yours
-# TO_EMAILS = [('pieter@macanta.org', '')]
 
 
 def send_welcome(email, username, template_id):

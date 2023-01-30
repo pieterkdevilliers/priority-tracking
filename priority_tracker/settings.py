@@ -30,7 +30,7 @@ DEBUG = development
 
 ALLOWED_HOSTS = [
     'ci-priority-tracker.herokuapp.com',
-    'localhost'
+    'localhost',
 ]
 
 CSRF_TRUSTED_ORIGINS = [

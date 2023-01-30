@@ -658,3 +658,4 @@ def tracking_status(request, pk):
     action.tracking_status = not action.tracking_status
     action.save()
     return redirect('/actions/')
+
