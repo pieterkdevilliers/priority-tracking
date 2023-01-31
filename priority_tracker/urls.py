@@ -18,6 +18,13 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 from actions import views
 
+# custom error handlers
+
+handler400 = 'priority_tracker.views.handler400'
+handler403 = 'priority_tracker.views.handler403'
+handler404 = 'priority_tracker.views.handler404'
+handler500 = 'priority_tracker.views.handler500'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login_page, name='login'),
