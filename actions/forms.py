@@ -20,11 +20,12 @@ class ActionForm(ModelForm):
         Meta class for ActionForm
         """
         model = Action
-        fields = ['title', 'priority']
+        fields = ['title', 'priority', 'category']
 
         widgets = {
                 'title': forms.TextInput(attrs={'class': 'form-control'}),
                 'priority': forms.Select(attrs={'class': 'form-control'}),
+                'category': forms.Select(attrs={'class': 'form-control'}),
             }
 
 

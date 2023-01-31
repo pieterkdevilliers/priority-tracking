@@ -31,7 +31,7 @@ class TestActionForm(TestCase):
         Tests for Action Fields Explicit
         """
         form = ActionForm()
-        self.assertEqual(form.Meta.fields, ['title', 'priority'])
+        self.assertEqual(form.Meta.fields, ['title', 'priority', 'category'])
 
 
 class TestUpdateActionForm(TestCase):
