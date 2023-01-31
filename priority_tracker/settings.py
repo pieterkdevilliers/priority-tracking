@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-from sendgrid.helpers.mail import Mail
-from sendgrid import SendGridAPIClient
 
 development = os.environ.get('DEVELOPMENT', False)
 
@@ -28,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  # development
+DEBUG = development
 
 ALLOWED_HOSTS = [
     'ci-priority-tracker.herokuapp.com',
