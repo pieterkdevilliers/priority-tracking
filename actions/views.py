@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.db.models import Sum
+from django.db.models import Sum, Subquery
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
 from .models import Action, Category, Priority
 from .SendDynamic import send_welcome
@@ -314,13 +314,11 @@ def add_action(request):
         if actionform.is_valid():
             instance = actionform.save(commit=False)
             instance.user = request.user
-            Action.category = instance.priority.category
+            Action.category = Priority.objects.get(title=instance.priority).category
+            instance.category = Action.category
             instance.save()
             messages.success(request, "Action added successfully")
             return redirect('/actions/')
-
-
-
     context = {
         'actionform': actionform,
         "username": username,
