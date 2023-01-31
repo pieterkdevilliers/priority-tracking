@@ -4,13 +4,13 @@ Views for the Actions App.
 import os
 import datetime
 from datetime import timezone, date
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-# from sendgrid import SendGridAPIClient
-# from sendgrid.helpers.mail import Mail
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
 from .models import Action, Category, Priority
 from .SendDynamic import send_welcome
@@ -319,6 +319,8 @@ def add_action(request):
             messages.success(request, "Action added successfully")
             return redirect('/actions/')
 
+
+
     context = {
         'actionform': actionform,
         "username": username,
@@ -601,7 +603,7 @@ def login_page(request):
 
         if user is not None:
             login(request, user)
-            return redirect('/actions/')
+            return HttpResponseRedirect(reverse('get_action_list'))
         else:
             messages.info(request, 'Username OR Password is incorrect')
 
@@ -614,7 +616,7 @@ def logout_user(request):
     Logs out the user
     """
     logout(request)
-    return redirect('/login/')
+    return HttpResponseRedirect(reverse('login'))
 
 
 @login_required(login_url='login')
