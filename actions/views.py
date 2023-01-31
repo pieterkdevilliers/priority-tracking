@@ -314,7 +314,8 @@ def add_action(request):
         if actionform.is_valid():
             instance = actionform.save(commit=False)
             instance.user = request.user
-            instance.category = Priority.objects.get(title=instance.priority).category
+            if instance.priority != None:
+                instance.category = Priority.objects.get(title=instance.priority).category
             instance.save()
             messages.success(request, "Action added successfully")
             return redirect('/actions/')
