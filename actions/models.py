@@ -53,7 +53,7 @@ class Action(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True, blank=True)
     priority = models.ForeignKey(
-        Priority, on_delete=models.CASCADE, null=True, blank=True, limit_choices_to={'activeStatus': True})
+        Priority, on_delete=models.CASCADE, null=True, blank=True, limit_choices_to={'activetatus': True})
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="action", null=True)
 
