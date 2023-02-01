@@ -9,8 +9,8 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.db.models import Sum, Subquery
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Sum
 from .forms import ActionForm, CategoryForm, PriorityForm, CreateUserForm, UpdateActionForm
 from .models import Action, Category, Priority
 from .SendDynamic import send_welcome
@@ -332,7 +332,7 @@ def complete_action(request, pk):
     """
     Submits the ActionForm and Updates an Action
     """
-    action = Action.objects.get(id=pk)
+    action = get_object_or_404(Action, id=pk)
     action.done_status = not action.done_status
     action.save()
     messages.success(request, "Action status updated")
@@ -344,7 +344,7 @@ def complete_filtered_action(request, pk):
     """
     Submits the ActionForm and Updates an Action
     """
-    action = Action.objects.get(id=pk)
+    action = get_object_or_404(Action, id=pk)
     action.done_status = not action.done_status
     action.save()
     messages.success(request, "Action status updated")
@@ -356,7 +356,7 @@ def relist_action(request, pk):
     """
     Submits the ActionForm and Relists an Action
     """
-    action = Action.objects.get(id=pk)
+    action = get_object_or_404(Action, id=pk)
     action.action_date = date.today()
     action.save()
     messages.success(request, "Action relisted for today")
@@ -368,7 +368,7 @@ def update_action(request, pk):
     """
     Submits the UpdateActionForm and Updates an Action
     """
-    action = Action.objects.get(id=pk)
+    action = get_object_or_404(Action, id=pk)
     actionform = UpdateActionForm(instance=action)
     current_user = request.user
     user_id = current_user.id
@@ -394,7 +394,7 @@ def delete_action(request, pk):
     """
     Deletes the selected Action
     """
-    action = Action.objects.get(id=pk)
+    action = get_object_or_404(Action, id=pk)
     if request.method == "POST":
         action.delete()
         messages.success(request, "Action deleted")
@@ -435,7 +435,7 @@ def update_category(request, pk):
     """
     Submits the CategoryForm and Updates a Category
     """
-    category = Category.objects.get(id=pk)
+    category = get_object_or_404(Category, id=pk)
     categoryform = CategoryForm(instance=category)
     current_user = request.user
     user_id = current_user.id
@@ -464,7 +464,7 @@ def delete_category(request, pk):
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
-    category = Category.objects.get(id=pk)
+    category = get_object_or_404(Category, id=pk)
     if request.method == "POST":
         category.delete()
         messages.success(request, "Category deleted")
@@ -509,7 +509,7 @@ def update_priority(request, pk):
     """
     Submits the PriorityForm and Updates a Priority
     """
-    priority = Priority.objects.get(id=pk)
+    priority = get_object_or_404(Priority, id=pk)
     priorityform = PriorityForm(instance=priority)
     current_user = request.user
     user_id = current_user.id
@@ -535,7 +535,7 @@ def priority_active_status(request, pk):
     """
     Submits the PriorityForm and Updates an Active Status
     """
-    priority = Priority.objects.get(id=pk)
+    priority = get_object_or_404(Priority, id=pk)
     priority.activeStatus = not priority.activeStatus
     priority.save()
     messages.success(request, "Priority active status updated")
@@ -550,7 +550,7 @@ def delete_priority(request, pk):
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
-    priority = Priority.objects.get(id=pk)
+    priority = get_object_or_404(Priority, id=pk)
     if request.method == "POST":
         priority.delete()
         messages.success(request, "Priority deleted")
@@ -622,7 +622,7 @@ def start_timer(request, pk):
     """
     Submits the ActionForm and sets the start time for an Action
     """
-    action = Action.objects.get(id=pk)
+    action = get_object_or_404(Action, id=pk)
     action.tracked_start = datetime.datetime.now(timezone.utc)
     action.tracking_status = True
     action.save()
@@ -635,7 +635,7 @@ def stop_timer(request, pk):
     """
     Submits the ActionForm and sets the start time for an Action
     """
-    action = Action.objects.get(id=pk)
+    action = get_object_or_404(Action, id=pk)
     action.tracking_status = False
     action.tracked_stop = datetime.datetime.now(timezone.utc)
     if action.active_tracked_time is None:
@@ -654,7 +654,7 @@ def tracking_status(request, pk):
     """
     Submits the ActionForm and Updates an Action Tracking Status
     """
-    action = Action.objects.get(id=pk)
+    action = get_object_or_404(Action, id=pk)
     action.tracking_status = not action.tracking_status
     action.save()
     return redirect('/actions/')
