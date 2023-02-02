@@ -73,6 +73,7 @@ def get_action_list(request):
     actions = Action.objects.all()
     filtered_actions = Action.objects.filter(action_date=query, user=current_user)
     priorities = Priority.objects.all()
+    page_title = 'Actions'
     context = {
         "username": username,
         "user_id": user_id,
@@ -88,6 +89,7 @@ def get_action_list(request):
         "converted_off_priority_time": converted_off_priority_time,
         "on_priority_perc_all_time": on_priority_perc_all_time,
         "off_priority_perc_all_time": off_priority_perc_all_time,
+        'page_title': page_title
     }
     return render(request, 'actions/action_list.html', context)
 
@@ -252,11 +254,13 @@ def get_filtered_action_list(request):
     username = current_user.username
     actions = Action.objects.all()
     filtered_actions = Action.objects.filter(action_date=query, user=current_user)
+    page_title = 'Past Actions'
     context = {
         "username": username,
         "user_id": user_id,
         "query": query,
-        "filtered_actions": filtered_actions
+        "filtered_actions": filtered_actions,
+        'page_title': page_title
     }
     return render(request, 'actions/filtered_action_list.html', context)
 
@@ -270,10 +274,12 @@ def get_priorities_list(request):
     user_id = current_user.id
     username = current_user.username
     priorities = Priority.objects.filter(user=current_user)
+    page_title = 'Priorities'
     context = {
         "username": username,
         "user_id": user_id,
-        "priorities": priorities
+        "priorities": priorities,
+        'page_title': page_title
     }
     return render(request, 'actions/priorities_list.html', context)
 
@@ -287,10 +293,12 @@ def get_categories_list(request):
     user_id = current_user.id
     username = current_user.username
     categories = Category.objects.filter(user=current_user)
+    page_title = 'Categories'
     context = {
         "username": username,
         "user_id": user_id,
-        "categories": categories
+        "categories": categories,
+        'page_title': page_title
     }
     return render(request, 'actions/categories_list.html', context)
 
@@ -304,6 +312,7 @@ def add_action(request):
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
+    page_title = 'Add Action'
     if request.method == "POST":
         actionform = ActionForm(request.POST)
         if actionform.is_valid():
@@ -317,7 +326,8 @@ def add_action(request):
     context = {
         'actionform': actionform,
         "username": username,
-        "user_id": user_id
+        "user_id": user_id,
+        'page_title': page_title
         }
     return render(request, 'actions/add_action.html', context)
 
@@ -368,7 +378,7 @@ def update_action(request, pk):
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
-
+    page_title = 'Update Action'
     if request.method == "POST":
         actionform = UpdateActionForm(request.POST, instance=action)
         if actionform.is_valid():
@@ -379,7 +389,8 @@ def update_action(request, pk):
     context = {
         'actionform': actionform,
         "username": username,
-        "user_id": user_id
+        "user_id": user_id,
+        'page_title': page_title
         }
     return render(request, 'actions/update_action.html', context)
 
@@ -394,16 +405,17 @@ def delete_action(request, pk):
     user_id = current_user.id
     username = current_user.username
     action_user = action.user
+    page_title = 'Delete Action'
     if request.method == "POST":
         action.delete()
         messages.success(request, "Action deleted")
         return redirect('/actions/')
-
     context = {
         'item': action,
         'username': username,
         'user_id': user_id,
-        'action_user': action_user
+        'action_user': action_user,
+        'page_title': page_title
         }
     return render(request, 'actions/delete_action.html', context)
 
@@ -417,6 +429,7 @@ def add_category(request):
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
+    page_title = 'Add Category'
     if request.method == "POST":
         categoryform = CategoryForm(request.POST)
         if categoryform.is_valid():
@@ -425,11 +438,11 @@ def add_category(request):
             instance.save()
             messages.success(request, "Category added successfully")
             return redirect('/categories/')
-
     context = {
         'categoryform': categoryform,
         "username": username,
         "user_id": user_id,
+        'page_title': page_title
         }
     return render(request, 'actions/add_category.html', context)
 
@@ -444,7 +457,7 @@ def update_category(request, pk):
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
-
+    page_title = 'Update Category'
     if request.method == "POST":
         categoryform = CategoryForm(request.POST, instance=category)
         if categoryform.is_valid():
@@ -456,6 +469,7 @@ def update_category(request, pk):
         'categoryform': categoryform,
         "username": username,
         "user_id": user_id,
+        'page_title': page_title
         }
     return render(request, 'actions/update_category.html', context)
 
@@ -470,6 +484,7 @@ def delete_category(request, pk):
     user_id = current_user.id
     username = current_user.username
     category_user = category.user
+    page_title = 'Delete Category'
     if request.method == "POST":
         category.delete()
         messages.success(request, "Category deleted")
@@ -479,7 +494,8 @@ def delete_category(request, pk):
         'item': category,
         'username': username,
         'user_id': user_id,
-        'category_user': category_user
+        'category_user': category_user,
+        'page_title': page_title
         }
     return render(request, 'actions/delete_category.html', context)
 
@@ -493,6 +509,7 @@ def add_priority(request):
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
+    page_title = 'Add Priority'
     if request.method == "POST":
         priorityform = PriorityForm(request.POST)
         if priorityform.is_valid():
@@ -501,11 +518,11 @@ def add_priority(request):
             instance.save()
             messages.success(request, "Priority added successfully")
             return redirect('/priorities/')
-
     context = {
         'priorityform': priorityform,
         "username": username,
         "user_id": user_id,
+        'page_title': page_title
         }
     return render(request, 'actions/add_priority.html', context)
 
@@ -520,7 +537,7 @@ def update_priority(request, pk):
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
-
+    page_title = 'Update Priority'
     if request.method == "POST":
         priorityform = PriorityForm(request.POST, instance=priority)
         if priorityform.is_valid():
@@ -532,6 +549,7 @@ def update_priority(request, pk):
         'priorityform': priorityform,
         "username": username,
         "user_id": user_id,
+        'page_title': page_title
         }
     return render(request, 'actions/update_priority.html', context)
 
@@ -558,16 +576,17 @@ def delete_priority(request, pk):
     user_id = current_user.id
     username = current_user.username
     priority_user = priority.user
+    page_title = 'Delete Priority'
     if request.method == "POST":
         priority.delete()
         messages.success(request, "Priority deleted")
         return redirect('/priorities/')
-
     context = {
         'item': priority,
         'username': username,
         'user_id': user_id,
-        'priority_user': priority_user
+        'priority_user': priority_user,
+        'page_title': page_title
         }
     return render(request, 'actions/delete_priority.html', context)
 
@@ -577,6 +596,7 @@ def register_page(request):
     Allows new user registrations
     """
     form = CreateUserForm()
+    page_title = 'Registration Page'
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -592,8 +612,10 @@ def register_page(request):
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account created for ' + user)
             return redirect('/login/')
-
-    context = {'form': form}
+    context = {
+        'form': form,
+        'page_title': page_title
+        }
     return render(request, 'actions/register.html', context)
 
 
@@ -601,19 +623,19 @@ def login_page(request):
     """
     Allows user login
     """
+    page_title = 'Login'
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(request, username=username, password=password)
-
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse('get_action_list'))
         else:
             messages.info(request, 'Username OR Password is incorrect')
-
-    context = {}
+    context = {
+        'page_title': page_title
+    }
     return render(request, 'actions/login.html', context)
 
 
