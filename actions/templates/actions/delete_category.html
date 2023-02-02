@@ -3,19 +3,31 @@
 {% block content %}
 
 <body>
-    <div class="d-flex p-2 justify-content-center">
-        <h1>Delete Category Confirmation Request</h1>
+    {% if user_id == category_user.id %}
+    <div>
+        <div class="d-flex p-2 justify-content-center">
+            <h1>Delete Category Confirmation Request</h1>
+        </div>
+        <div class="d-flex p-2 justify-content-center">
+            <p>Are you sure you want to delete "{{item}}"?</p>
+        </div>
+        <div class="d-flex justify-content-center mb-3 form-group p-2">
+            <form action="{% url 'delete_category' item.id %}" method="POST">
+                {% csrf_token %}
+                <a class="btn btn-success" href="{% url 'get_categories_list' %}">Cancel</a>
+                <button class="btn btn-danger" type="submit">Yes, Delete!</button>
+            </form>
+        </div>
+        {% endif %}
     </div>
-    <div class="d-flex p-2 justify-content-center">
-        <p>Are you sure you want to delete "{{item}}"?</p>
+    {% if user_id != category_user.id %}
+    <div>
+        <div class="d-flex p-2 justify-content-center">
+            <h1>You don't have permission to delete "{{item}}"</h1>
+        </div>
+        {% endif %}
     </div>
-    <div class="d-flex justify-content-center mb-3 form-group p-2">
-        <form action="{% url 'delete_category' item.id %}" method="POST">
-            {% csrf_token %}
-            <a class="btn btn-success" href="{% url 'get_categories_list' %}">Cancel</a>
-            <button class="btn btn-danger" type="submit">Yes, Delete!</button>
-        </form>
-    </div>
+    
 </body>
 
 {% endblock %}

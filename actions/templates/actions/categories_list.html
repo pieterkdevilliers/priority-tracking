@@ -23,6 +23,7 @@
                 <p class="bd-highlight">{{ category.title }}</p>
                 <p class="bd-highlight">{{ category.description }}</p>
             </div>
+            {% if user.id == category.user.id %}
             <div class="icon-outer-container">
                 <div class="icon-container d-flex justify-content-end">
                     <div class="d-flex justify-content-end col-12">
@@ -31,6 +32,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
         {% endfor %}

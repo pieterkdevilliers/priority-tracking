@@ -1,7 +1,6 @@
 """
 Views for the Actions App.
 """
-import os
 import datetime
 from datetime import timezone, date
 from django.http import HttpResponseRedirect
@@ -32,8 +31,6 @@ def get_action_list(request):
         total_action_time = tracked_time(query)
         total_seconds = int(tracked_seconds(total_action_time))
         converted_tracked_time = tracked_today(total_seconds)
-        on_priority_count = on_priority_actions(query)
-        off_priority_count = off_priority_actions(query)
         on_priority_time = on_priority_tracked_time(query)
         off_priority_time = off_priority_tracked_time(query)
         on_priority_seconds = int(tracked_seconds(on_priority_time))
@@ -48,8 +45,6 @@ def get_action_list(request):
         total_action_time = 0
         total_seconds = 0
         converted_tracked_time = 0
-        on_priority_count = 0
-        off_priority_count = 0
         on_priority_time = 0
         off_priority_time = 0
         on_priority_seconds = 0
@@ -395,12 +390,21 @@ def delete_action(request, pk):
     Deletes the selected Action
     """
     action = get_object_or_404(Action, id=pk)
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
+    action_user = action.user
     if request.method == "POST":
         action.delete()
         messages.success(request, "Action deleted")
         return redirect('/actions/')
 
-    context = {'item': action}
+    context = {
+        'item': action,
+        'username': username,
+        'user_id': user_id,
+        'action_user': action_user
+        }
     return render(request, 'actions/delete_action.html', context)
 
 
@@ -461,10 +465,11 @@ def delete_category(request, pk):
     """
     Deletes the selected Category
     """
+    category = get_object_or_404(Category, id=pk)
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
-    category = get_object_or_404(Category, id=pk)
+    category_user = category.user
     if request.method == "POST":
         category.delete()
         messages.success(request, "Category deleted")
@@ -472,8 +477,9 @@ def delete_category(request, pk):
 
     context = {
         'item': category,
-        "username": username,
-        "user_id": user_id,
+        'username': username,
+        'user_id': user_id,
+        'category_user': category_user
         }
     return render(request, 'actions/delete_category.html', context)
 
@@ -547,10 +553,11 @@ def delete_priority(request, pk):
     """
     Deletes the selected Priority
     """
+    priority = get_object_or_404(Priority, id=pk)
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
-    priority = get_object_or_404(Priority, id=pk)
+    priority_user = priority.user
     if request.method == "POST":
         priority.delete()
         messages.success(request, "Priority deleted")
@@ -558,8 +565,9 @@ def delete_priority(request, pk):
 
     context = {
         'item': priority,
-        "username": username,
-        "user_id": user_id,
+        'username': username,
+        'user_id': user_id,
+        'priority_user': priority_user
         }
     return render(request, 'actions/delete_priority.html', context)
 

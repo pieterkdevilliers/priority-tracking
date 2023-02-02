@@ -29,6 +29,7 @@
                 <h6 class="text-muted">{{ action.category }}</h6>
                 <h6 class="text-muted">{{ action.action_date|date:"Y-m-d" }}</h6>
             </div>
+            {% if user.id == action.user.id %}
             <div class="icon-outer-container">
                 <div class="icon-container d-flex justify-content-end">
                     <div class="d-flex justify-content-end col-12">
@@ -51,6 +52,7 @@
 
                 </div>
             </div>
+            {% endif %}
         </div>
     <br>
 
@@ -77,6 +79,7 @@
                     <h6 class="text-muted">{{ action.category }}</h6>
                     <h6 class="text-muted">{{ action.action_date|date:"Y-m-d" }}</h6>
                 </div>
+                {% if user.id == action.user.id %}
                 <div class="icon-outer-container">
                     <div class="icon-container d-flex justify-content-end">
                         <div class="d-flex justify-content-end col-12 col-md-1">
@@ -85,6 +88,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
 <br>
     {% endif %}
