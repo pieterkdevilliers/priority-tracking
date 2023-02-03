@@ -35,6 +35,7 @@ urlpatterns = [
     path('filtered-actions/', views.get_filtered_action_list, name='get_filtered_action_list'),
     path('priorities/', views.get_priorities_list, name='get_priorities_list'),
     path('categories/', views.get_categories_list, name='get_categories_list'),
+    path('help/', views.help, name='help'),
     path('add-action/', views.add_action, name='add_action'),
     path('add-category/', views.add_category, name='add_category'),
     path('add-priority/', views.add_priority, name='add_priority'),

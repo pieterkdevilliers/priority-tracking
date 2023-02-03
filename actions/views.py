@@ -689,3 +689,18 @@ def tracking_status(request, pk):
     action.save()
     return redirect('/actions/')
 
+@login_required(login_url='login')
+def help(request):
+    """
+    Retrieves the help template.
+    """
+    current_user = request.user
+    user_id = current_user.id
+    username = current_user.username
+    page_title = 'Help'
+    context = {
+        "username": username,
+        "user_id": user_id,
+        'page_title': page_title
+    }
+    return render(request, 'actions/help.html', context)
