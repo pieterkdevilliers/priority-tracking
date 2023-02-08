@@ -40,8 +40,6 @@ else {
 window.addEventListener('DOMContentLoaded', (event) => {
     var undo_filtered_action = document.getElementById(
         "undo-filtered-action");
-    var complete_filtered_action = document.getElementById(
-        "complete-filtered-action");
     var relist_filtered_action = document.getElementById(
         "relist-filtered-action");
     var filtered_actions_page = document.getElementById(
