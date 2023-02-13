@@ -129,45 +129,45 @@ Averages: Displays the on-priority and off-priority percentages for all time. Th
 ---
 ## Technologies Used
 - [**HTML**](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
-    - The project uses **HTML** to create the basic elements and content of my app.
+    - The project uses **HTML** to create the pages and content of the app.
 
 - [**CSS**](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3)
-    - The project uses **CSS** to apply the custom styles to my app.
+    - The project uses **CSS** to apply the custom styles to the app.
 
 - [**Bootstrap**](https://getbootstrap.com/)
-    - The project uses the **Bootstrap** framework to add a responsive grid system, prebuilt components, plugins built on jQuery, and Bootstrap styles, before adding my custom styles.
+    - The project uses the **Bootstrap** framework for the majority of the layour and styling.
 
 - [**Python**](https://www.python.org/)
-    - The project uses **Python** as the back-end programming language for my app.
+    - The project uses **Python** as the back-end programming language applied using the Django Framework.
 
-- [**Django**](https://jinja.palletsprojects.com/en/2.10.x/)
-    - The project uses **Jinja** for templating with Flask in the HTML code. I used **Jinja** to simplify my HTML code, avoid repetition, and allow simpler linking of the back-end to the front-end.
+- [**Django**](https://www.djangoproject.com/)
+    - **Django** was used for all aspects of creating the app. 
 
 - [**Font Awesome**](https://fontawesome.com/)
-    - The project uses **Font Awesome** for the visual icons used in my app.
+    - **Font Awesome** is used for the icons for the Actions, Priorities and Categories.
 
 - [**SQLite**](https://www.sqlite.org/index.html)
-    - The project uses **SQLite** as the relational database to hold the backend information for the varions models used, when running locally.
+    - The project uses **SQLite** is used as the Database when running the project locally.
 
 - [**PostgreSQL**](https://www.postgresql.org/)
-    - The project uses Heroku's **PostgreSQL** relational database to hold the backend information for the various models used, when deployed remotely.
+    - The project uses Heroku's **PostgreSQL** relational database for the deployed version of the app.
 
 - [**SendGrid API**](https://stripe.com/gb)
-    - The project uses **Stripe** to make secure payments for my app.
+    - **SendGrid** is used to send the new user Welcome email as well as the emails related to the Password Reset process.
 
-- [**GitPod**](https://code.visualstudio.com/)
-    - I've used **Visual Studio Code** as the development environment to write the code for my app.
+- [**GitPod**](https://gitpod.io/)
+    - I've used **GitPod** as the development environment when writing the code for the app.
 
 ### Version Control
 - [**Git**](https://git-scm.com/)
-    - I've used **Git** as a version control system to regularly add and commit changes made to my project in Visual Studio Code, before pushing to GitHub.
+    - **Git** is used as a version control system throughout the building of this app.
 
 - [**GitHub**](https://github.com/)
-    - I've used **GitHub** as a remote repository to push and store the committed changes to my project from Git.
+    - I use **GitHub** as a remote repository linked to Heroku when committing and pushing updates and changes.
 
 ### Hosting
 - [**Heroku**](https://www.heroku.com/)
-    - I've used **Heroku** as the hosting platform to deploy my app.
+    - The deployed vertion of the app is hosted on **Heroku**.
 
 ##### [back to top](#table-of-contents)
 ---
@@ -175,9 +175,9 @@ Averages: Displays the on-priority and off-priority percentages for all time. Th
 ## Testing
 
 ### Code Validation
-- [W3C HTML Validator tool](https://validator.w3.org/#validate_by_input) was used to validate my HTML code.
-    - The W3C Validator tool doesn't recognise the Jinja templating, which has resulted in it showing a lot of errors in relation to the Jinja code. However, all other code is validating fine.
-- [W3C CSS Validator tool](https://jigsaw.w3.org/css-validator/#validate_by_input) was used to validate my CSS code.
+- [W3C HTML Validator tool](https://validator.w3.org/#validate_by_input) was used to validate all HTML code.
+    - As W3C doesn't validate the Django Template HTML correctly, the validator remains showing some errors, but these are specific to the W3C compatibility with Django Templates. All standard HTML validates successfully.
+- [W3C CSS Validator tool](https://jigsaw.w3.org/css-validator/#validate_by_input) was used to validate all CSS code, excluding Bootstrap.
 - [Pep8 Online tool](http://pep8online.com/) was used to validate my Python syntax.
 
 ### Automated Testing
@@ -192,13 +192,11 @@ To generate your own coverage report install the package using `pip install cove
 ### Manual User Testing
 [Manual testing document](TESTING.md)
 
-### Travis Continuous Integration
-In addition to the automated testing files, I used Travis CI for Continuous Integration testing of my code.
 
 ### Interesting Bugs Or Problems
-- **Stripe Payment** - Has a customized logo at the top of the modal payment form. After deploying the app to Heroku and during testing I realised that image was not displaying correctly due to an error. All image files were uploaded to the AWS bucket, but the image link was broken. The image link was amended in order to fix this bug.
-- **Reset Password & Email Confirmation** - Despite allowing less secure apps within my Google Account settings, as instructed by Code Institute's LMS videos, I was still getting an SMTPAuthenticationError when entering the password on the 'Password Reset' screen. This meant that the site was failing to send the password reset email to the user. I resolved this issue by activating the 2-Step Authentication in my Google Account, creating an app password and storing it within my environment variables instead of my standard Gmail password, as instructed by the Django SMTPAuthenticationError article.
-- **Order History Tab Page Reload** - The order history is displayed within a multitab view and is paginiated to display a list of 4 items per page. Clicking the pagination to move to the next page makes the page reload. The default tab view is set to the Profile tab so when the page reloads the user is taken back the default Profile view. This meant that the user had to click back onto the History tab in order to view the second page. I resolved this by adding a Javascript to handle the URL request to the selected page, as advised by a [How to get URL parameter using Javascript](https://stackoverflow.com/questions/19491336/how-to-get-url-parameter-using-jquery-or-plain-javascript#:~:text=inArray%20%3A%20http%3A%2F%2Fapi.jquery,.com%2FjQuery.inArray%2F&text=url%20%3D%20%27http%3A%2F%2Fexample.,) artical on StackOverflow.
+- **Repeating Past Action Query** - Has a customized logo at the top of the modal payment form. After deploying the app to Heroku and during testing I realised that image was not displaying correctly due to an error. All image files were uploaded to the AWS bucket, but the image link was broken. The image link was amended in order to fix this bug.
+- **Past Action Query LReload Loop** - Despite allowing less secure apps within my Google Account settings, as instructed by Code Institute's LMS videos, I was still getting an SMTPAuthenticationError when entering the password on the 'Password Reset' screen. This meant that the site was failing to send the password reset email to the user. I resolved this issue by activating the 2-Step Authentication in my Google Account, creating an app password and storing it within my environment variables instead of my standard Gmail password, as instructed by the Django SMTPAuthenticationError article.
+
 ##### [back to top](#table-of-contents)
 ---
 
