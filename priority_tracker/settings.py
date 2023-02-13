@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-pieterkdevi-prioritytra-sj8kwifp1vu.ws-eu85.gitpod.io',
+    'https://8000-pieterkdevi-prioritytra-sj8kwifp1vu.ws-eu86.gitpod.io',
     'https://ci-priority-tracker.herokuapp.com'
     ]
 
