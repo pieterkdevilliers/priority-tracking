@@ -1,18 +1,16 @@
-<p align="center">
-  <img src="https://pram-bookstore.s3.eu-west-2.amazonaws.com/static/img/logo.png">
-</p>
 
-[Link to deployed site](https://pram-bookstore.herokuapp.com/)
+
+[Link to deployed site](https://ci-priority-tracker.herokuapp.com/)
 
 **Project Overview - What are we aiming for?**
 
 A priority tracking app, allowing the user to specify their top 3 priorities, and then track their time on tasks. This will allow the user to see how much of their time is spent on priority and how much is spent off priority.
 
-[![Wireframe Overview](/assets/images/WireFrameScreenshot.png)](https://www.loom.com/share/14b672c3510a4650bfed82f3297aa880)
+[![Wireframe Overview](/assets/images/wire_frame_screenshot.png)](https://www.loom.com/share/14b672c3510a4650bfed82f3297aa880)
 
-**Love Reading Books?**
+**Where does your time go?**
 
-The Bookstore holds a vast collection of reading material from some of the greatest authors such as William Shakespeare, Stephen King, J.K. Rowling and many more, you'll be sure to find the book you are looking for.
+It is easy to be busy, and still feel as if you don't get anything done. This often happens when you don't know where your time goes. What are you really busy with? With this Priority Tracking App you'll see clearly how much of your time is spent on what is really important, and what is wasted away.
 
 ---
 ## Table of Contents
@@ -41,34 +39,44 @@ The Bookstore holds a vast collection of reading material from some of the great
     - [**Acknowledgements**](#acknowledgements)
 ---
 ### Why This Project?
-I created this app as part of the Full Stack Frameworks project of [**_Code Institute's_**](https://codeinstitute.net/) Full Stack Software Development course. The project scope was to create a online bookstore, which allows users to search and view books. Users can register to create an account which would then allow the user to make a purchase. Authenticated users can create book reviews for all users to see and view their order history.
+This project was initially inspired by a paper version used by a friend [Emma Mills](https://www.linkedin.com/in/emmamipa/), for her clients. It is used in her company [Mi-PA](https://www.mi-pa.co.uk/), to help clients identify the work which can be handed off to the mi-PA.
 
-The front-end display and functionality uses HTML, CSS and JavaScript. The back-end functionality uses Python, Django, SQLite3 and PostgreSQL.
+For the front-end I used HTML, CSS and JavaScript. For the back-end I used Python, Django, SQLite3 and PostgreSQL.
 
 ## UX
-Bookstore the online store for book lovers across the world. Users can register, login, browse or search for the book they want to read. Order your book, pay online, see your order history via the profile page. Loved reading that book why don't you leave a book review?
+This is a simple Priority Tracker, focussed on tracking the work you are actually doing, and not as a task-list manager for work you intend to do.
 
-Bookstore is designed to give the user a clean modern experience with quick access to user needs with the browse or search functionality. The navigation bar provides one click links to the homepage, registration, login and browse all books. Only registered and logged in users can see the profile link.
+Users can register/login and create their own Work Categories, Active Priorities and Actions, in a simple uncluttered interface.
 
 ### User Stories
 "**_As a user, I would like to_** _____"
-- see links to the registration, login pages.
-- search the site by book title, author or category.
-- create my own account as a registered user.
-- see my profile page and order history.
-- see the price of each book and be able to read more information about the book.
-- be able to see user reviews to help me decide if I want to purchase the book.
-- be able to leave my own book review.
-- receive and email as order confirmation for my purchase.
-- be able to track my order.
+- reister for a new account
+- log into my existing account
+- create my own work categories
+- list my own key priorities
+- list my actions within priorities and categories
+- track time for each action
+- see the total time tracked
+- see what percentage of time is spent on-priority and off-priority
+- relist an incomplete action for today
+- mark actions as complete
+- undo a completed action
+- delete actions not required
+- have the ability to reset my password if I forget it
+
+"**_As a product owner, I would like to_** _____"
+- send new registered users an automated welcome email
+- assist users with resetting their passwords, in an automated fashion
+- have full test coverage for Models, Views and Forms
+
 
 ### Wireframes
-I drew my wireframes using Powerpoint. I have different wireframes to show how to make my website/app responsive. The links to the files are below:
-- [Home](https://github.com/pramcistudent/bookstore-milestone-four/blob/master/design/Home%20Page.pdf)
-- [Browse all books](https://github.com/pramcistudent/bookstore-milestone-four/blob/master/design/Browse%20Page.pdf)
-- [Book detail](https://github.com/pramcistudent/bookstore-milestone-four/blob/master/design/Book%20Page.pdf)
-- [View cart](https://github.com/pramcistudent/bookstore-milestone-four/blob/master/design/Cart%20Page.pdf)
-- [Profile](https://github.com/pramcistudent/bookstore-milestone-four/blob/master/design/Profile%20Page.pdf)
+I used Balsamiq to create the wireframes and mock-up of the app. The links to the files are below:
+- [Registration](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/registration_page.png)
+- [Login](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/login_page.png)
+- [Basic Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/basic_actions_page.png)
+- [Multi-Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/multi_actions_apge.png)
+- [Full App Screen](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/full_app_page.png)
 
 ### Database Schema
 Before building my project, I created an Entity Relationship Diagram (ERD) to outline the database schema for the various tables that I would use.
