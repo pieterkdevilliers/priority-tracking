@@ -89,38 +89,41 @@ At the start of the project I created a Database Schema using [dbdiagram.io](htt
 ### Existing Features
 
 #### Actions - serves as the main page for using the app
-- **Navigation** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
-- **Things I need to do** - This section displays 3 of the newest featured books the site has to offer to the user. Images are clickable to allow the user to view more information about the book.
-- **Things I've done** - Visible to users not logged in, allows the user to click the button and redirects them to the selected book detail page.
-- **Active Priorities** - Visible to users logged in, clicking this button will add the selected book to shopping cart and redirects the user to cart summary view.
-- **Time Tracking** - Visible to users logged in, clicking this button will add the selected book to shopping cart and redirects the user to cart summary view.
+- **Navigation** - Simple navigation to access the Actions, Categories, Priorities, Past Actions and Help sections. This is visible on all pages in the app.
+- **Things I need to do** - This lists the existing actions being worked on and the ability to add new actions. For each actions there is also controls to start/stop the timer. mark an actions as done, edit an action or delete an action.
+For each actions there is information on the Title, Related Priority, Related Category the time tracked and the action date.
+- **Things I've done** - This simply list the Completed Actions with the ability to undo an Action, which moves it back into the "Things I need to do" section.
+- **Active Priorities** - This section shows the Active Priorities, with their Title, Description and related Category.
+- **Time Tracking** - Here a user can see their tracking details.
+Time - Today: Displays the number of Actions, Completed Actions, Open Actions and Total Time Tracked for the day.
+Focus - Today: Displays the percentage and time split between on-priority and off-priority tracking, for today. This area has a red border when the On-Priority Percentage is below 70%.
+Averages: Displays the on-priority and off-priority percentages for all time. This area has a red border when the On-Priority Percentage is below 70%.
 
-#### Categories - serves as the main page for using the app
-- **Add a Category** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
-- **Edit a Category** - This section displays 3 of the newest featured books the site has to offer to the user. Images are clickable to allow the user to view more information about the book.
-- **Delete a Category** - Visible to users not logged in, allows the user to click the button and redirects them to the selected book detail page.
+#### Categories - management of all Categories
+- **Add a Category** - Allows the user to add a work Category, which is then used to categorise Priorities and Actions.
+- **Edit a Category** - Allows the user to amend an existing Category.
+- **Delete a Category** - Allows the user to delete an existing Category.
 
-#### Priorities - serves as the main page for using the app
-- **Add a Priority** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
-- **Edit a Priority** - This section displays 3 of the newest featured books the site has to offer to the user. Images are clickable to allow the user to view more information about the book.
-- **Priority Active Status** - Visible to users not logged in, allows the user to click the button and redirects them to the selected book detail page.
-- **Delete a Priority** - Visible to users logged in, clicking this button will add the selected book to shopping cart and redirects the user to cart summary view.
+#### Priorities - management of all Priorities
+- **Add a Priority** - Allows the user to add Priorities, which can be nested under Categories, and uset to link Actions to their related Priorities.
+- **Edit a Priority** - Allows the user to edit an existing Priority.
+- **Priority Active Status** - Only Active Priorities are shown on the Actions Overview. Actions can only be assigned under Active Priorities. User control the Active/Inactvie status of Priorities with a tiggle.
+- **Delete a Priority** - Allows users to delete existing Priorities. Only Inactive Priorities can be deleted.
 
-#### Past Actions - serves as the main page for using the app
-- **Search** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
-- **Relist Actions** - This section displays 3 of the newest featured books the site has to offer to the user. Images are clickable to allow the user to view more information about the book.
+#### Past Actions - ability to access past Actions and their details
+- **Search** - Users have the ability to select a date to filter past Actions by. The result shows Actions with an Action Date matching the search query.
+- **Relist Actions** - In addition to the standard Action Controls as listed in the Things I need to do section, users here have the option to "relist" and action, which moves it from the Past Actions results into today's active Actions list.
 
-#### Help & Logout - serves as the main page for using the app
-- **Help** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
+#### Help & Logout - simple help and logout
+- **Help** - A simple overview to help new users get to know the Priority Tracker and the available functions.
 
-- **Logout** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
+- **Logout** - Users can log out of their account and they will be redirected to the login page.
 
 #### 404 and 500 Error Pages
--  I've included custom 404 and 500 error messages and error handlers to catch these errors. My custom messages allow the user to redirect back to the home page.
+-  Included are custom error handlers for 400, 403, 404 and 500 errors, with the option to navigate back to the desired section of the app. 
 
 ### Features Left to Implement
-Due to a change in my personal circumstances and with more time and knowledge, I would have liked to implement some additional features to the app:
-- **Auto-Relist Actions** - This feature is currently out of the scope of this project. I have added a link to the project to show potential of how it could be used. I feel this is an important feature to have, a user making any purchase online would generally want to be able to track there order.
+- **Auto-Relist Actions** - At some stage I would like to add an automated sevice which will automatically relist yesterdays uncompleted Actions to today, to save the user time in having to review the previous day's uncompleted Actions.
 
 ##### [back to top](#table-of-contents)
 ---
