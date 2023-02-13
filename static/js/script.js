@@ -46,7 +46,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var filtered_actions_page = document.getElementById(
         "filtered-action-page");
     var reload_required_status = retrieveReloadRequiredStatus();
-        console.log(reload_required_status);
     if (filtered_actions_page != null) {
         if(undo_filtered_action != null || relist_filtered_action != null) {
             relistQuery = window.location.search;
