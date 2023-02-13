@@ -72,16 +72,15 @@ Users can register/login and create their own Work Categories, Active Priorities
 
 ### Wireframes
 I used Balsamiq to create the wireframes and mock-up of the app. The links to the files are below:
-- [Registration](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/registration_page.png)
-- [Login](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/login_page.png)
-- [Basic Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/basic_actions_page.png)
-- [Multi-Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/multi_actions_apge.png)
-- [Full App Screen](https://github.com/pieterkdevilliers/priority-tracking/blob/12ac4371b89d6bfce2bc7aaef91a711a2cc374d9/assets/images/full_app_page.png)
+- [Registration](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/registration_page.png)
+- [Login](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/login_page.png)
+- [Basic Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/basic_actions_page.png)
+- [Multi-Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/multi_actions_apge.png)
+- [Full App Screen](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/full_app_page.png)
 
 ### Database Schema
-Before building my project, I created an Entity Relationship Diagram (ERD) to outline the database schema for the various tables that I would use.
-Link to the file is below:
-- [Bookstore Database Schema](https://github.com/pramcistudent/bookstore-milestone-four/blob/master/design/DB%20Schema.pdf)
+At the start of the project I created a Database Schema using [dbdiagram.io](https://dbdiagram.io) The link to the file is below:
+- [Database Schema](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/priority_tracker_schema.png)
 
 ##### [back to top](#table-of-contents)
 ---
@@ -89,60 +88,39 @@ Link to the file is below:
 ## Features
 ### Existing Features
 
-#### Home Page - serves as the initial landing page for all users
-- **Navigation bar** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
-- **Featured Books** - This section displays 3 of the newest featured books the site has to offer to the user. Images are clickable to allow the user to view more information about the book.
-- **More Info** - Visible to users not logged in, allows the user to click the button and redirects them to the selected book detail page.
-- **Add to cart** - Visible to users logged in, clicking this button will add the selected book to shopping cart and redirects the user to cart summary view.
+#### Actions - serves as the main page for using the app
+- **Navigation** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
+- **Things I need to do** - This section displays 3 of the newest featured books the site has to offer to the user. Images are clickable to allow the user to view more information about the book.
+- **Things I've done** - Visible to users not logged in, allows the user to click the button and redirects them to the selected book detail page.
+- **Active Priorities** - Visible to users logged in, clicking this button will add the selected book to shopping cart and redirects the user to cart summary view.
+- **Time Tracking** - Visible to users logged in, clicking this button will add the selected book to shopping cart and redirects the user to cart summary view.
 
-#### Browse all books - this page displays a wide collection of books
-- **Search** - The search function allows the user to search by book title, or filtered by author or category.
-- **Books** - Displays a selection of books, images are clickable to allow the user to view more information about the book.
-- **More Info** - Visible to users not logged in, allows the user to click the button and redirects them to the selected book detail page.
-- **Add to cart** - Visible to users logged in, clicking this button will add the selected book to shopping cart and redirects the user to cart summary view.
-- **Pagination** - Has been added to allow the user to view 6 books per page.
+#### Categories - serves as the main page for using the app
+- **Add a Category** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
+- **Edit a Category** - This section displays 3 of the newest featured books the site has to offer to the user. Images are clickable to allow the user to view more information about the book.
+- **Delete a Category** - Visible to users not logged in, allows the user to click the button and redirects them to the selected book detail page.
 
-#### Single book view - all users are able to view this page, display more information about the selected book
-- **Book image** - Displays an image of the book cover.
-- **Book details** - displays the book title, book description, price, category, book author and description about the author.
-- **Register** - Visible to users not logged in, informs the user that they can register to buy this book. Clicking the link redirects the user to the register page.
-- **Add to cart** - Visible to users logged in, clicking this button will add the selected book to shopping cart and redirects the user to cart summary view.
-- **Add review** - Only users logged in are able to write and submit a review comment. Users not logged in will see a link asking them to 'Register' which redirects the user to the register page.
-- **Reviews** - All user are able to see review comments.
+#### Priorities - serves as the main page for using the app
+- **Add a Priority** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
+- **Edit a Priority** - This section displays 3 of the newest featured books the site has to offer to the user. Images are clickable to allow the user to view more information about the book.
+- **Priority Active Status** - Visible to users not logged in, allows the user to click the button and redirects them to the selected book detail page.
+- **Delete a Priority** - Visible to users logged in, clicking this button will add the selected book to shopping cart and redirects the user to cart summary view.
 
-#### Cart - shows the user a summary of the books that were added to the cart
-- **Your items** - Display a summary of the books in cart with each book showing the book image, book title, and price.
-- **Amend quantity** - User can amend the quantity of the book by clicking the '-' or '+' to increasing or decreasing the quantity in cart.
-- **Remove from cart** - Allows the user to remove the book from cart using a two-step process.
-- **Continue shopping** - Redirects the user back to the browse all books page to continue shopping.
-- **Pay with card** - Allows the user to make a card payment.
+#### Past Actions - serves as the main page for using the app
+- **Search** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
+- **Relist Actions** - This section displays 3 of the newest featured books the site has to offer to the user. Images are clickable to allow the user to view more information about the book.
 
-#### Stripe - allows the user to pay securely using Stripe payment
-- **Purchase Form** - This form connects to the Stripe API to process a user's card details. No card details are stored locally or on the server, they are only sent to Stripe and then discarded.
+#### Help & Logout - serves as the main page for using the app
+- **Help** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
 
-#### Thank You - after completing payment redirect the user to the Thank You page
-- **Thank You page** - User receives confirmation that the order has been placed and is given a order reference number.
-- **Email** - User receives email confirmation there order has been placed and receives a order summary.
-
-#### Registration - allow new user to register for an account
-- **Register** - User must provide a unique username and email address, which are checked against existing entries in the database. A password is required, which must be entered twice to check it has been input correctly.
-- **Message** - On successfully registering the user will be redirected to the home page. An alert message will notify the user that the account has been created and they are now logged in.
-
-#### Login - allow existing user to login to their account
-- The login page only requires the user to input there username and password. There is a link to the register page so a user can create an account, and a password reset link if a user has forgotten or lost their password.
-
-#### Profile - only available to logged in user
-- **Password** - Users can change their password by inputting the old password and then the new password which must be entered twice to check it has been input correctly.
-- **Order History**- Users are able to view a summary of their previous orders placed. Users can click on icon link 'View order' which provides a detail view of the selected order which can be printed. Users can click icon 'Track order' this feature is currently unavailable and is out of the scope of this project. Clicking the link opens a model to informs the user this feature is under development.
-- **Pagination** - Has been added to allow the user to see a list of 4 previous orders per page.
+- **Logout** - The navbar links vary depending on whether the user is logged in or not. If the user isn't logged in, the 'Home', 'Browse', 'Register' and 'Login' links are shown. When the user is logged in, the 'Home', 'Browse', 'Profile' and 'Logout' links are shown.
 
 #### 404 and 500 Error Pages
 -  I've included custom 404 and 500 error messages and error handlers to catch these errors. My custom messages allow the user to redirect back to the home page.
 
 ### Features Left to Implement
 Due to a change in my personal circumstances and with more time and knowledge, I would have liked to implement some additional features to the app:
-- **Track my order** - This feature is currently out of the scope of this project. I have added a link to the project to show potential of how it could be used. I feel this is an important feature to have, a user making any purchase online would generally want to be able to track there order.
-- **Star Rating** - Currently the user review rating is implemented using a dropdown menu and I would like to change this on a future update to a clickable star rating.
+- **Auto-Relist Actions** - This feature is currently out of the scope of this project. I have added a link to the project to show potential of how it could be used. I feel this is an important feature to have, a user making any purchase online would generally want to be able to track there order.
 
 ##### [back to top](#table-of-contents)
 ---
@@ -156,13 +134,10 @@ Due to a change in my personal circumstances and with more time and knowledge, I
 - [**Bootstrap**](https://getbootstrap.com/)
     - The project uses the **Bootstrap** framework to add a responsive grid system, prebuilt components, plugins built on jQuery, and Bootstrap styles, before adding my custom styles.
 
-- [**jQuery**](https://jquery.com)
-    - The project uses **jQuery** as the primary JavaScript functionality. This is both the standard jQuery that is built with Bootstrap components.
-
 - [**Python**](https://www.python.org/)
     - The project uses **Python** as the back-end programming language for my app.
 
-- [**Jinja**](https://jinja.palletsprojects.com/en/2.10.x/)
+- [**Django**](https://jinja.palletsprojects.com/en/2.10.x/)
     - The project uses **Jinja** for templating with Flask in the HTML code. I used **Jinja** to simplify my HTML code, avoid repetition, and allow simpler linking of the back-end to the front-end.
 
 - [**Font Awesome**](https://fontawesome.com/)
@@ -174,13 +149,10 @@ Due to a change in my personal circumstances and with more time and knowledge, I
 - [**PostgreSQL**](https://www.postgresql.org/)
     - The project uses Heroku's **PostgreSQL** relational database to hold the backend information for the various models used, when deployed remotely.
 
-- [**Google Fonts**](https://fonts.google.com/)
-    - The project uses **Google Fonts** for the typography. The font styles used in the app were *_Roboto_* font and the rest of the site uses the *_Noto Serif_* font.
-
-- [**Stripe API**](https://stripe.com/gb)
+- [**SendGrid API**](https://stripe.com/gb)
     - The project uses **Stripe** to make secure payments for my app.
 
-- [**Visual Studio Code**](https://code.visualstudio.com/)
+- [**GitPod**](https://code.visualstudio.com/)
     - I've used **Visual Studio Code** as the development environment to write the code for my app.
 
 ### Version Control
