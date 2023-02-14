@@ -39,7 +39,7 @@ It is easy to be busy, and still feel as if you don't get anything done. This of
     - [**Acknowledgements**](#acknowledgements)
 ---
 ### Why This Project?
-This project was initially inspired by a paper version used by a friend [Emma Mills](https://www.linkedin.com/in/emmamipa/), for her clients. It is used in her company [Mi-PA](https://www.mi-pa.co.uk/), to help clients identify the work which can be handed off to the mi-PA.
+This project was initially inspired by a paper version used by a friend, [Emma Mills](https://www.linkedin.com/in/emmamipa/), for her clients. It is used in her company [Mi-PA](https://www.mi-pa.co.uk/), to help clients identify the work which can be handed off to the Mi-PA team.
 
 For the front-end I used HTML, CSS and JavaScript. For the back-end I used Python, Django, SQLite3 and PostgreSQL.
 
@@ -90,9 +90,9 @@ At the start of the project I created a Database Schema using [dbdiagram.io](htt
 
 #### Actions - serves as the main page for using the app
 - **Navigation** - Simple navigation to access the Actions, Categories, Priorities, Past Actions and Help sections. This is visible on all pages in the app.
-- **Things I need to do** - This lists the existing actions being worked on and the ability to add new actions. For each actions there is also controls to start/stop the timer. mark an actions as done, edit an action or delete an action.
-For each actions there is information on the Title, Related Priority, Related Category the time tracked and the action date.
-- **Things I've done** - This simply list the Completed Actions with the ability to undo an Action, which moves it back into the "Things I need to do" section.
+- **Things I need to do** - This lists the existing actions being worked on and the ability to add new actions. For each action there is also controls to start/stop the timer, mark an actions as done, edit an action or delete an action.
+Each action displays information on the Title, Related Priority, Related Category the time tracked and the action date.
+- **Things I've done** - This simply lists the Completed Actions, with the ability to undo an Action, which moves it back into the "Things I need to do" section.
 - **Active Priorities** - This section shows the Active Priorities, with their Title, Description and related Category.
 - **Time Tracking** - Here a user can see their tracking details.
 Time - Today: Displays the number of Actions, Completed Actions, Open Actions and Total Time Tracked for the day.
@@ -105,21 +105,21 @@ Averages: Displays the on-priority and off-priority percentages for all time. Th
 - **Delete a Category** - Allows the user to delete an existing Category.
 
 #### Priorities - management of all Priorities
-- **Add a Priority** - Allows the user to add Priorities, which can be nested under Categories, and uset to link Actions to their related Priorities.
+- **Add a Priority** - Allows the user to add Priorities, which can be nested under Categories, and used to link Actions to their related Priorities.
 - **Edit a Priority** - Allows the user to edit an existing Priority.
-- **Priority Active Status** - Only Active Priorities are shown on the Actions Overview. Actions can only be assigned under Active Priorities. User control the Active/Inactvie status of Priorities with a tiggle.
+- **Priority Active Status** - Only Active Priorities are shown on the Actions Overview. Actions can only be assigned under Active Priorities. Users control the Active/Inactvie status of Priorities with a tiggle.
 - **Delete a Priority** - Allows users to delete existing Priorities. Only Inactive Priorities can be deleted.
 
 #### Past Actions - ability to access past Actions and their details
 - **Search** - Users have the ability to select a date to filter past Actions by. The result shows Actions with an Action Date matching the search query.
-- **Relist Actions** - In addition to the standard Action Controls as listed in the Things I need to do section, users here have the option to "relist" and action, which moves it from the Past Actions results into today's active Actions list.
+- **Relist Actions** - In addition to the standard Action Controls as listed in the Things I need to do section, users here have the option to "relist" an action, which moves it from the Past Actions results into today's active Actions list.
 
 #### Help & Logout - simple help and logout
 - **Help** - A simple overview to help new users get to know the Priority Tracker and the available functions.
 
 - **Logout** - Users can log out of their account and they will be redirected to the login page.
 
-#### 404 and 500 Error Pages
+#### Error Pages
 -  Included are custom error handlers for 400, 403, 404 and 500 errors, with the option to navigate back to the desired section of the app. 
 
 ### Features Left to Implement
@@ -135,7 +135,7 @@ Averages: Displays the on-priority and off-priority percentages for all time. Th
     - The project uses **CSS** to apply the custom styles to the app.
 
 - [**Bootstrap**](https://getbootstrap.com/)
-    - The project uses the **Bootstrap** framework for the majority of the layour and styling.
+    - The project uses the **Bootstrap** framework for the majority of the layout and styling.
 
 - [**Python**](https://www.python.org/)
     - The project uses **Python** as the back-end programming language applied using the Django Framework.
@@ -147,7 +147,7 @@ Averages: Displays the on-priority and off-priority percentages for all time. Th
     - **Font Awesome** is used for the icons for the Actions, Priorities and Categories.
 
 - [**SQLite**](https://www.sqlite.org/index.html)
-    - The project uses **SQLite** is used as the Database when running the project locally.
+    - The project uses **SQLite** as the Database when running the project locally.
 
 - [**PostgreSQL**](https://www.postgresql.org/)
     - The project uses Heroku's **PostgreSQL** relational database for the deployed version of the app.
