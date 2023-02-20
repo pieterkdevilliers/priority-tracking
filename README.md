@@ -198,14 +198,13 @@ You can generate a coverage report by installing the package using `pip3 install
 ---
 
 ## Deployment
-I used GitHub for my version control and Heroku to host the live version of my project. To deploy my website to Heroku, 
-I used the following steps:
+Using GitHub for version control and Heroku as the host for the deployed version of the site, I deployed to Heroku following these steps:
 
-1. Created the app using a unique name in Heroku.
+1. Create an app in Heroku using a unique name.
 
-2. Went to the **Resources** tab in Heroku and searched for **Heroku Postgres** in the 'Add-Ons' section.
+2. Under the **Resources** tab in Heroku, search for **Heroku Postgres** in the 'Add-Ons' section.
 
-3. Selected the free **Hobby** level.
+3. Selected the **Heroku Mini** level.
 
 4. Updated the `env.py` file within my local workspace with the `DATABASE_URL` details, and the `settings.py` to connect to the database using the `dj_database_url` package.
 
@@ -213,162 +212,109 @@ I used the following steps:
 
 6. Went to the **Settings** tab in Heroku and clicked on the **Reveal Config Vars** button.
 
-7. Copied and pasted all of the `env.py` default variables into Heroku's Config Vars settings.
+7. Add the required SendGrid and Database URL values as required.
 
 KEY | VALUE
 --- | -----
 DATABASE_URL | link to db |
-AWS_ACCESS_KEY_ID | aws access key |
-AWS_SECRET_ACCESS_KEY | aws secret key |
-AWS_STORAGE_BUCKET_NAME | aws bucket name |
-SECRET_KEY | site secret key |
-STRIPE_PUBLISHABLE_KEY | stripe key |
-STRIPE_SECRET_KEY | stripe secret key |
+SENDGRID_API_KEY | sendgrid API Key |
 
-8. Went to the **Deploy** tab in Heroku, connected my app to my GitHub repository and selected **Enable Automatic Deployment** as the deployment method.
+8. On the **Deploy** tab in Heroku, connect the Heroku App to the GitHub repository and select **Enable Automatic Deployment** as the deployment method.
 
-9. Went to the **Developers** section in Stripe and clicked on **API Keys**.
+11. Ensure `settings.py` references the correct Environment Variables for the Database Connections.
 
-10. Copied and pasted the **Publishable Key** and **Secret Key** and set them as the `STRIPE_PUBLISHABLE_KEY` and `STRIPE_SECRET_KEY` environment variables in the `env.py` file within my local workspace. These were also added to the Heroku's Config Vars settings.
 
-11. Updated the `settings.py` with the new Stripe environment variables.
+12. Update the `settings.py` file with the relevant configuration for static and media file storage.
 
-12. Went to the **S3** section of AWS and created a new S3 bucket.
+13. Update the `settings.py` file with the required SendGrid email settings.
 
-13. Within the relevant bucket's permissions, changed the **CORS Configuration** to the following:
-    ```
-    <?xml version="1.0" encoding="UTF-8"?>
-    <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-    <CORSRule>
-        <AllowedOrigin>*</AllowedOrigin>
-        <AllowedMethod>GET</AllowedMethod>
-        <AllowedMethod>HEAD</AllowedMethod>
-        <MaxAgeSeconds>3000</MaxAgeSeconds>
-        <AllowedHeader>Authorization</AllowedHeader>
-    </CORSRule>
-    </CORSConfiguration>
-    ```
+14. Confirm the correct API values in the `sendgrid.env` file.
 
-14. Still in the **S3** section, changed the **Bucket Policy** to the following:
-    ```
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "PublicReadGetObject",
-                "Effect": "Allow",
-                "Principal": "*",
-                "Action": "s3:GetObject",
-                "Resource": "arn:aws:s3:::<my-bucket-name>/*"
-            }
-        ]
-    }
-    ```
-15. Replaced the `<my-bucket-name>` in the `Resource` line with my S3 bucket's name instead.
+15. Confirm that `sendgrid.env` is included in `.gitignore`
 
-16. Went to the **IAM** section of AWS, created a 'New Group' and attached my S3 bucket to it.
+13. Run the `python manage.py collectstatic` command to push the static files to Heroku.
 
-17. Still in the **IAM** section, created a 'New Policy' and a 'New User' and attached these to the newly created group.
-
-18. Updated the `settings.py` file in my local workspace with the relevant S3 bucket details:
-    ```
-    AWS_S3_OBJECT_PARAMETERS = {
-        "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
-        "CacheControl": "max-age=94608000",
-    }
-    AWS_STORAGE_BUCKET_NAME = "<s3-bucket-name>"
-    AWS_S3_REGION_NAME = "<region-name>"
-    AWS_ACCESS_KEY_ID = <access-key-id>
-    AWS_SECRET_ACCESS_KEY = <secret-access-key>
-    AWS_DEFAULT_ACL = None
-    AWS_S3_CUSTOM_DOMAIN = "%s.s3.amazonaws.com" % AWS_STORAGE_BUCKET_NAME
-    ```
-
-19. Created a `custom_storages.py` file with classes to route to the relevant location settings for static and media files.
-
-20. Updated the `settings.py` file with the relevant configuration for static and media file storage.
-
-21. Ran the `python manage.py collectstatic` command to push the static files to my S3 bucket.
-
-22. Created a requirements.txt file using the following command in the terminal window:
+14. Created a requirements.txt file using the following command in the terminal window:
     ```pip3 freeze --local > requirements.txt```
 
-23. Created a Procfile using the following command in the terminal window:
-    ```echo web: gunicorn bookstore.wsgi:application > Procfile```
+15. Create a Procfile using the following command in the terminal window:
+    ```echo web: gunicorn priority_tracker.wsgi:application > Procfile```
 
-24. Ran the `git add .`, `git commit -m "<commit-message>"` and `git push` commands to push all changes to my GitHub repository.
+16. Ensure that the Heroku App has an associated Dyno for running the App
 
-The app was successfully deployed to Heroku at this stage.
+16. Run the `git add .`, `git commit -m "<commit-message>"` and `git push` commands to push all changes to my GitHub repository.
+
+The app should be successfully deployed to Heroku.
 
 ### Repository Link
 
-Click the link below to visit my project's GitHub repository:
+Visit the project's GitHub repository:
 
-[Bookstore Repository](https://github.com/pramcistudent/bookstore-milestone-four)
+[GitHub Repository](https://github.com/pieterkdevilliers/priority-tracking)
 
 ### Running Code Locally
 
-To run my code locally, users can download a copy of my code to their desktop by completing the following steps:
+To run the code locally, you can follow these steps:
 
-1. Go to my [GitHub repository](https://github.com/pramcistudent/bookstore-milestone-four)
+1. Go to my [GitHub repository](https://github.com/pieterkdevilliers/priority-tracking)
 
-2. Click on 'Clone or download' under the repository name.
+2. Select Clone from the 'Code' dropdown.
 
-3. Copy the clone URL for the repository in the 'Clone with HTTPs section'.
+3. Copy the clone URL for the repository under the HTTPs tab.
 
 4. Open 'Git Bash' in your local IDE.
 
-5. Change the current working directory to the location where you want the cloned directory to be made.
+5. Select the directory you want to use for the clone.
 
-6. Type `git clone`, then paste the URL you copied in Step 
+6. Use `git clone`, and paste the URL from step 3 above. 
     
     ```git clone https://github.com/USERNAME/REPOSITORY```
 
-7. Press `Enter` to complete the process and clone the repository.
+7. Press `Enter` to complete the clone process.
 
-8. Complete one of the two below steps in your local workspace to set your own credentials for the environment variables:
-    - Create a `env.py` file with your own credentials and import this into the `settings.py` file
-
-9. Install the `requirements.txt` file by running the below command in your CLI Terminal:
+9. Install `requirements.txt` using the following command in your Terminal:
 
     ```pip3 install -r requirements.txt```
 
-10. Run one of the following commands in your Terminal to launch the Django project:
+10. Run the following command in your Terminal:
 
     ```python manage.py runserver```
 
-11. Click the `http://` link that loads, and the project should load. If it doesn't load when you click the link, copy and paste it into a new browser tab instead.
+11. Click the `http://` link  or the `Open In Browser` button from the pop-up,to load the project.
 
-12. Run the following commands to migrate the database models and create a super user:
-    ```
-    python manage.py makemigrations
-    python manage.py migrate
-    python manage.py createsuperuser
-    ```
+12. Migrate the database models and create a super user:
 
-Once the migrations are completed and the super user has been created successfully, the site should be running locally. To deploy the site remotely, follow the instructions in the [Deployment](#Deployment) section.
+    `python manage.py makemigrations`
+    `python manage.py migrate`
+    `python manage.py createsuperuser`
+
+
+This will migrate the models and create your SuperUser account. You should now be able to run the site locally.
+
+ To deploy the site remotely, follow the instructions in the [Deployment](#Deployment) section.
 
 ##### [back to top](#table-of-contents)
 ---
 
 ## Credits
-#### Content
-- The Author content was sourced using [Google](https://www.google.com) search and by researching each individual Author.
-- Information about each book was sourced using the online [Waterstones](https://www.waterstones.com/) E-commerce site.
+#### Helpful Resources
+These creators and teachers were all helpful through there content at different steps in this project.
+- [Tech With Tim - YouTube ](https://www.youtube.com/@TechWithTim) 
+- [Dennis Ivy - YouTube ](https://www.youtube.com/@DennisIvy)
+- [Codemy.com - YouTube ](https://www.youtube.com/@Codemycom)
+- [TylerPottsDev - GitHub ](https://github.com/TylerPottsDev/yt-js-stopwatch)
+- [WhiteNoise - Django Library ](https://whitenoise.evans.io/en/latest/)
+- [StudyGyaan - YouTube ](https://www.youtube.com/watch?v=VIx3HD2gRWQ)
+- [Did Coding - YouTube ](https://www.youtube.com/@DidCoding)
+- [Master Code Online - YouTube ](https://www.youtube.com/@LearnpythontutorialFree)
 
-#### Media
-- The site Logo was created using [Free Logo Design](https://www.freelogodesign.org/) site.
-- I found the Favicon image on Google, and I used the [Favicon.io](https://favicon.io/) converter to convert the image to a Favicon.
-- Carousel images were sourced from the [Google](https://www.google.com/search?q=book+images&tbm=isch&ved=2ahUKEwinuaq1zqnqAhUF0oUKHU2XAVYQ2-cCegQIABAA&oq=book+images&gs_lcp=CgNpbWcQAzIECCMQJzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIAFCsJ1jGM2C1NWgBcAB4AIABiAGIAcAFkgEDNi4ymAEAoAEBqgELZ3dzLXdpei1pbWc&sclient=img&ei=zDn7XqejBoWklwTNroawBQ&bih=625&biw=1024&safe=active&hl=en) images pages.
-- Images for each book were sourced by using the online [Waterstones](https://www.waterstones.com/) E-commerce site.
-- Images were converted from PNG files to JPG files by using [PNG2JPG](https://png2jpg.com/) site and re-seized by using [Pixlr](https://pixlr.com/x/) site.
+I also found a lot of examples and suggested solution to questions on Stack Overflow for specific issues I got stuck on.
+- [Stack Overflow ](https://stackoverflow.com/)
+
 
 #### Acknowledgements
-- I would like to thank my mentor [Guido Cecilio](https://github.com/guidocecilio) for his feedback on my project's scope, design and functionality.
-- Thanks to the Slack community for their feedback and help on how to debug my Python code.
-
-### Disclaimer
-This project is for educational purposes only.
+- I would like to thank both my mentors [Guido Cecilio](https://github.com/guidocecilio) for their feedback and suggestions.
+- Thanks to the CI Slack community for help with the odd question.
 
 ##### [back to top](#table-of-contents)
 ---
