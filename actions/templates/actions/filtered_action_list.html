@@ -12,13 +12,13 @@
     
     <div class="d-flex justify-content-start mb-3 form-group p-2">
         <form class="mb-3" action="" method="GET">
-            <input class="p-2 form-control mb-3" type="date" name="action_date">
-            <button class="p-2 btn btn-primary" type="submit">Search</button>
+            <input class="p-2 form-control mb-3" type="date" name="action_date" aria-label="Set Search Date">
+            <button class="p-2 btn btn-primary" type="submit" aria-label="Submit Search">Search</button>
         </form>
     </div>
     <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>Things I need to do:</h1>
-        <a title="Add Action" class="fa-solid p-2 fa-2xl fa-square-plus" role="button" href="/add-action/"></a>
+        <a title="Add Action" aria-label="Add Action" class="fa-solid p-2 fa-2xl fa-square-plus" role="button" href="/add-action/"></a>
     </div>
     <div class="container d-flex p-2 flex-column bd-highlight">
         {% for action in filtered_actions %}
@@ -38,13 +38,13 @@
                 <div class="icon-container d-flex justify-content-end">
                     <div class="d-flex justify-content-end col-12">
                         <a title="Complete Action" id="complete-filtered-action" class="fa-solid fa-lg fa-check p-2 bd-highlight" role="button"
-                            href="{% url 'complete_filtered_action' action.id %}"></a>
+                            aria-label="Complete Action" href="{% url 'complete_filtered_action' action.id %}"></a>
                         <a title="Update Action" class="fa-solid fa-lg fa-pen-to-square p-2 bd-highlight" role="button"
-                            href="{% url 'update_action' action.id %}"></a>
+                            aria-label="Update Action" href="{% url 'update_action' action.id %}"></a>
                         <a title="Delete Action" id="delete-filtered-action" class="fa-solid fa-lg fa-trash p-2 bd-highlight" role="button"
-                            href="{% url 'delete_action' action.id %}"></a>
+                            aria-label="Delete Action" href="{% url 'delete_action' action.id %}"></a>
                         <a title="Relist Action for Today" id="relist-filtered-action" class="fa-solid fa-lg fa-arrow-up-right-from-square p-2" role="button"
-                            href="{% url 'relist_action' action.id %}"></a>
+                            aria-label="Relist Action" href="{% url 'relist_action' action.id %}"></a>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                 <div class="icon-container d-flex justify-content-end">
                     <div class="d-flex justify-content-end col-12 col-md-1">
                         <a title="Undo Action" id="undo-filtered-action" class="fa-solid fa-lg p-2 fa-rotate-left" role="button"
-                            href="{% url 'complete_filtered_action' action.id %}"></a>
+                            aria-label="Undo Action" href="{% url 'complete_filtered_action' action.id %}"></a>
                     </div>
                 </div>
             </div>

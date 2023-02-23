@@ -17,13 +17,13 @@
             {% csrf_token %}
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" placeholder="Username..." id="username">
+                <input type="text" aria-label="Enter Username" class="form-control" name="username" placeholder="Username..." id="username">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Password..." id="password">
+                <input type="password" aria-label="Enter Password" class="form-control" name="password" placeholder="Password..." id="password">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" aria-label="Login" class="btn btn-primary">Login</button>
         </form>
 
     </div>
@@ -37,13 +37,13 @@
         <p>Don't have an account yet? </p>
     </div>
     <div class="d-flex p-2 justify-content-center">
-        <p><a href="{% url 'register' %}">Register Here.</a></p>
+        <p><a aria-label="Register" href="{% url 'register' %}">Register Here.</a></p>
     </div>
     <div class="d-flex p-2 justify-content-center">
         <p>Forgotten your password? </p>
     </div>
     <div class="d-flex p-2 justify-content-center">
-        <p><a href="{% url 'reset_password' %}">Reset Password.</a></p>
+        <p><a aria-label="Reset Password" href="{% url 'reset_password' %}">Reset Password.</a></p>
     </div>
     <div class="d-flex justify-content-center">
         <h5>Copyright - Pieter K de Villiers 2023</h5>

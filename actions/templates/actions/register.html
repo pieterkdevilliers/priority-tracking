@@ -17,21 +17,21 @@
             {% csrf_token %}
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" placeholder="Username..." id="username">
+                <input type="text" aria-label="Enter Username" class="form-control" name="username" placeholder="Username..." id="username">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email Address</label>
-                <input type="text" class="form-control" name="email" placeholder="Email Address..." id="email">
+                <input type="text" aria-label="Enter Email" class="form-control" name="email" placeholder="Email Address..." id="email">
             </div>
             <div class="mb-3">
                 <label for="password1" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password1" placeholder="Password..." id="password1">
+                <input type="password" aria-label="Enter Password" class="form-control" name="password1" placeholder="Password..." id="password1">
             </div>
             <div class="mb-3">
                 <label for="password2" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" name="password2" placeholder="Password Confirmation..." id="password2">
+                <input type="password" aria-label="Confirm Password" class="form-control" name="password2" placeholder="Password Confirmation..." id="password2">
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" aria-label="Register" class="btn btn-primary">Register</button>
         </form>
     </div>
     {{form.errors}}
@@ -42,7 +42,7 @@
         <p>Already have an account?</p>
     </div>
     <div class="d-flex p-2 justify-content-center">
-        <p><a href="{% url 'login' %}">Login Here.</a></p>
+        <p><a aria-label="Login" href="{% url 'login' %}">Login Here.</a></p>
     </div>
     <div class="d-flex justify-content-center">
         <h5>Copyright - Pieter K de Villiers 2023</h5>
