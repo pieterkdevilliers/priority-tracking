@@ -4,6 +4,7 @@ from sendgrid.helpers.mail import Mail
 from sendgrid import SendGridAPIClient
 
 
+
 # from address we pass to our Mail object
 FROM_EMAIL = 'pieter@pieterkdevilliers.co.uk'
 
@@ -12,12 +13,14 @@ def send_welcome(email, username, template_id):
     """ Send a dynamic email to a list of email addresses
     :returns API response code
     :raises Exception e: raises an exception """
-    # list of emails and preheader names, update with yours
-    TO_EMAILS = [(email, '')]
 
     # update to your dynamic template id from the UI
     TEMPLATE_ID = template_id
 
+    # list of emails and preheader names, update with yours
+    TO_EMAILS = [(email, username)]
+        
+        
     # create Mail object and populate
     message = Mail(
         from_email=FROM_EMAIL,
@@ -26,7 +29,9 @@ def send_welcome(email, username, template_id):
     message.dynamic_template_data = {
         'username': username
     }
+
     message.template_id = TEMPLATE_ID
+
     # create our sendgrid client object, pass it our key, then send and return our response objects
     try:
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
@@ -39,7 +44,3 @@ def send_welcome(email, username, template_id):
     except Exception as e:
         print("Error: {0}".format(e))
     return str(response.status_code)
-
-
-if __name__ == "__main__":
-    send_dynamic()
