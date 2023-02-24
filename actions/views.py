@@ -610,7 +610,7 @@ def register_page(request):
             form.save()
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account created for ' + user)
-            return redirect('/login/')
+            return redirect('/login')
     context = {
         'form': form,
         'page_title': page_title
