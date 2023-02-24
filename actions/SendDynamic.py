@@ -4,14 +4,13 @@ from sendgrid.helpers.mail import Mail
 from sendgrid import SendGridAPIClient
 
 
-
-# from address we pass to our Mail object
-FROM_EMAIL = 'pieter@pieterkdevilliers.co.uk'
-
 def send_welcome(email, username, template_id):
     """ Send a dynamic email to a list of email addresses
     :returns API response code
     :raises Exception e: raises an exception """
+
+    # from address we pass to our Mail object
+    FROM_EMAIL = 'pieter@pieterkdevilliers.co.uk'
 
     # update to your dynamic template id from the UI
     TEMPLATE_ID = template_id
