@@ -602,9 +602,9 @@ def register_page(request):
         if form.is_valid():
             email = request.POST['email']
             username = request.POST['username']
-            # template_id = 'd-2a6824e5ca614beaa08cd60b2784a0f2'
-            # # send welcome email via sendgrid
-            # send_welcome(email, username, template_id)
+            template_id = 'd-2a6824e5ca614beaa08cd60b2784a0f2'
+            # send welcome email via sendgrid
+            send_welcome(email, username, template_id)
             
             # save new user
             form.save()
