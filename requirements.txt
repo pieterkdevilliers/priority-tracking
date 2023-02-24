@@ -6,7 +6,7 @@ gunicorn==20.1.0
 psycopg2-binary==2.9.5
 django-environ==0.9.0
 python-http-client==3.3.7
-sendgrid==6.9.7
+sendgrid==3.6.5
 sendgrid-django==4.2.0
 sqlparse==0.4.3
 starkbank-ecdsa==2.2.0
