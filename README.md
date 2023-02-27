@@ -72,15 +72,15 @@ Users can register/login and create their own Work Categories, Active Priorities
 
 ### Wireframes
 I used Balsamiq to create the wireframes and mock-up of the app. The links to the files are below:
-- [Registration](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/registration_page.png)
-- [Login](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/login_page.png)
-- [Basic Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/basic_actions_page.png)
-- [Multi-Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/multi_actions_apge.png)
-- [Full App Screen](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/full_app_page.png)
+- [Registration](https://github.com/pieterkdevilliers/priority-tracking/blob/main/assets/images/registration_page.png)
+- [Login](https://github.com/pieterkdevilliers/priority-tracking/blob/main/assets/images/login_page.png)
+- [Basic Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/main/assets/images/basic_actions_page.png)
+- [Multi-Actions](https://github.com/pieterkdevilliers/priority-tracking/blob/main/assets/images/multi_actions_apge.png)
+- [Full App Screen](https://github.com/pieterkdevilliers/priority-tracking/blob/main/assets/images/full_app_page.png)
 
 ### Database Schema
 At the start of the project I created a Database Schema using [dbdiagram.io](https://dbdiagram.io) The link to the file is below:
-- [Database Schema](https://github.com/pieterkdevilliers/priority-tracking/blob/assets/images/priority_tracker_schema.png)
+- [Database Schema](https://github.com/pieterkdevilliers/priority-tracking/blob/main/assets/images/priority_tracker_schema.png)
 
 ##### [back to top](#table-of-contents)
 ---
