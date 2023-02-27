@@ -50,7 +50,7 @@ Users can register/login and create their own Work Categories, Active Priorities
 
 ### User Stories
 "**_As a user, I would like to_** _____"
-- reister for a new account
+- register for a new account
 - log into my existing account
 - create my own work categories
 - list my own key priorities
@@ -123,7 +123,7 @@ Averages: Displays the on-priority and off-priority percentages for all time. Th
 -  Included are custom error handlers for 400, 403, 404 and 500 errors, with the option to navigate back to the desired section of the app. 
 
 ### Features Left to Implement
-- **Auto-Relist Actions** - At some stage I would like to add an automated sevice which will automatically relist yesterdays uncompleted Actions to today, to save the user time in having to review the previous day's uncompleted Actions.
+- **Auto-Relist Actions** - At some stage I would like to add an automated service which will automatically relist yesterdays uncompleted Actions to today, to save the user time in having to review the previous day's uncompleted Actions.
 
 ##### [back to top](#table-of-contents)
 ---
@@ -167,7 +167,7 @@ Averages: Displays the on-priority and off-priority percentages for all time. Th
 
 ### Hosting
 - [**Heroku**](https://www.heroku.com/)
-    - The deployed vertion of the app is hosted on **Heroku**.
+    - The deployed version of the app is hosted on **Heroku**.
 
 ##### [back to top](#table-of-contents)
 ---
@@ -190,7 +190,7 @@ You can generate a coverage report by installing the package using `pip3 install
 
 
 ### Interesting Bugs Or Problems
-- **Repeating Past Action Query** - When a user performs a Past Actions query the app displays the Actions for the queried date. The trick here was to ensure that when the user marks a Past Action as Done, Undone or Relisting a Past Action, that the page relaods, including the most recently user Query Date. This is so that the user does not need to keep running the query manaully when updating multiple Actions from a Past Actions query. The solution here was to store the Query Date as a cookie, in order to fetch it upon page reload, combined with `click` event listeners.
+- **Repeating Past Action Query** - When a user performs a Past Actions query, the app displays the Actions for the queried date. The trick here was to ensure that when the user marks a Past Action as Done, Undone or Relisting a Past Action, that the page reloads, including the most recently used Query Date. This is so that the user does not need to keep running the query manually when updating multiple Actions from a Past Actions query. The solution here was to store the Query Date as a cookie, in order to fetch it upon page reload, combined with `click` event listeners.
 
 - **Past Action Query Reload Loop** - I ran into an issue where once the Past Actions page was cleared of either all Done Actions or Active Actions, the page would go into a looping reload. This was solved by using a cookie for the reload_required_status in order to only reload the query page when required.
 
@@ -313,7 +313,7 @@ I also found a lot of examples and suggested solution to questions on Stack Over
 
 
 #### Acknowledgements
-- I would like to thank both my mentors [Guido Cecilio](https://github.com/guidocecilio) for their feedback and suggestions.
+- I would like to thank both my mentors Guido Cecilio and Brian Macharia for their feedback and suggestions.
 - Thanks to the CI Slack community for help with the odd question.
 
 ##### [back to top](#table-of-contents)
