@@ -1,0 +1,22 @@
+{
+  "name": "priority-tracking",
+  "version": "1.0.0",
+  "description": "[Link to deployed site](https://ci-priority-tracker.herokuapp.com/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pieterkdevilliers/priority-tracking.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pieterkdevilliers/priority-tracking/issues"
+  },
+  "homepage": "https://github.com/pieterkdevilliers/priority-tracking#readme",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  }
+}
