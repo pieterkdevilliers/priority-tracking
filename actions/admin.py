@@ -10,7 +10,10 @@ admin.site.register(Action)
 admin.site.register(Category)
 admin.site.register(Priority)
 
+
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
+    """
+    Register User Admin
+    """
     pass
-

@@ -12,6 +12,7 @@ class TestViews(TestCase):
     """
     Tests for Views
     """
+
     def setUp(self):
         """
         Sets up the user for the tests
@@ -130,8 +131,8 @@ class TestViews(TestCase):
         """
         self.client.login(username='john', password='johnpassword')
         response = self.client.post(
-            '/add-category/', {'title': 'Test Add Category',\
-            'description': 'Test Cat Description'})
+            '/add-category/', {'title': 'Test Add Category',
+                               'description': 'Test Cat Description'})
         self.assertRedirects(response, '/categories/')
 
     def test_delete_category_page(self):
@@ -172,8 +173,8 @@ class TestViews(TestCase):
         """
         self.client.login(username='john', password='johnpassword')
         response = self.client.post(
-            '/add-priority/', {'title': 'Test Add priority',\
-            'description': 'Test Priority Description'})
+            '/add-priority/', {'title': 'Test Add priority',
+                               'description': 'Test Priority Description'})
         self.assertRedirects(response, '/priorities/')
 
     def test_delete_priority_page(self):
@@ -199,4 +200,3 @@ class TestViews(TestCase):
             response, '/actions/', status_code=301, target_status_code=200)
         updated_action = Action.objects.get(id=action.id)
         self.assertTrue(updated_action.done_status)
-

@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-center mb-3 form-group p-2">
         <form method="POST" action="/add-new-category/">
             {% csrf_token %}
-    
+
             {{categoryform}}
             <br>
             <button class="btn btn-primary" type="submit" name="Add Category">Add Category</button>

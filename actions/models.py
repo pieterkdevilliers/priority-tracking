@@ -15,7 +15,8 @@ class Category(models.Model):
     title = models.CharField(max_length=50, null=False, blank=False)
     description = models.CharField(max_length=150)
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="categories", null=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name="categories", null=True)
 
     def __str__(self):
         return str(self.title)
@@ -31,8 +32,8 @@ class Priority(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="priorities", null=True)
-    
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name="priorities", null=True)
 
     def __str__(self):
         return str(self.title)
@@ -49,16 +50,23 @@ class Action(models.Model):
     tracked_stop = models.DateTimeField(null=True, blank=True)
     done_status = models.BooleanField(null=False, blank=False, default=False)
     action_date = models.DateField(auto_now_add=True)
-    tracking_status = models.BooleanField(null=False, blank=False, default=False)
+    tracking_status = models.BooleanField(
+        null=False, blank=False, default=False)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True, blank=True)
     priority = models.ForeignKey(
-        Priority, on_delete=models.CASCADE, null=True, blank=True, limit_choices_to={'activeStatus': True})
+        Priority, on_delete=models.CASCADE, null=True, blank=True,
+        limit_choices_to={'activeStatus': True})
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="action", null=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name="action", null=True)
 
     def __str__(self):
         return str(self.title)
 
+
 class User(AbstractUser):
+    """
+    Extend base user model to specify email as unique
+    """
     email = models.EmailField(unique=True)

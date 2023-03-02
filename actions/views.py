@@ -60,19 +60,20 @@ def get_action_list(request):
     all_time_on_priority_tracked = on_priority_tracked_all_time(query)
     all_time_off_priority_tracked = off_priority_tracked_all_time(query)
     all_time_on_priority_seconds = int(
-            tracked_seconds(all_time_on_priority_tracked))
+        tracked_seconds(all_time_on_priority_tracked))
     all_time_off_priority_seconds = int(
-            tracked_seconds(all_time_off_priority_tracked))
+        tracked_seconds(all_time_off_priority_tracked))
     on_priority_perc_all_time = on_priority_calc(
-            all_time_seconds, all_time_on_priority_seconds)
+        all_time_seconds, all_time_on_priority_seconds)
     off_priority_perc_all_time = off_priority_calc(
-            all_time_seconds, all_time_off_priority_seconds)
+        all_time_seconds, all_time_off_priority_seconds)
 
     current_user = request.user
     user_id = current_user.id
     username = current_user.username
     actions = Action.objects.all()
-    filtered_actions = Action.objects.filter(action_date=query, user=current_user)
+    filtered_actions = Action.objects.filter(
+        action_date=query, user=current_user)
     priorities = Priority.objects.all()
     page_title = 'Actions'
     context = {
@@ -181,7 +182,7 @@ def on_priority_calc(total_seconds, on_priority_seconds):
     """
     if total_seconds == 0:
         on_priority_calc = 0
-    else:    
+    else:
         on_priority_calc = (on_priority_seconds * 100) / total_seconds
     return on_priority_calc
 
@@ -254,7 +255,8 @@ def get_filtered_action_list(request):
     user_id = current_user.id
     username = current_user.username
     actions = Action.objects.all()
-    filtered_actions = Action.objects.filter(action_date=query, user=current_user)
+    filtered_actions = Action.objects.filter(
+        action_date=query, user=current_user)
     page_title = 'Past Actions'
     context = {
         "username": username,
@@ -320,7 +322,8 @@ def add_action(request):
             instance = actionform.save(commit=False)
             instance.user = request.user
             if instance.priority != None:
-                instance.category = Priority.objects.get(title=instance.priority).category
+                instance.category = Priority.objects.get(
+                    title=instance.priority).category
             instance.save()
             messages.success(request, "Action added successfully")
             return redirect('/actions/')
@@ -329,7 +332,7 @@ def add_action(request):
         "username": username,
         "user_id": user_id,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/add_action.html', context)
 
 
@@ -392,7 +395,7 @@ def update_action(request, pk):
         "username": username,
         "user_id": user_id,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/update_action.html', context)
 
 
@@ -417,7 +420,7 @@ def delete_action(request, pk):
         'user_id': user_id,
         'action_user': action_user,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/delete_action.html', context)
 
 
@@ -444,7 +447,7 @@ def add_category(request):
         "username": username,
         "user_id": user_id,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/add_category.html', context)
 
 
@@ -471,7 +474,7 @@ def update_category(request, pk):
         "username": username,
         "user_id": user_id,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/update_category.html', context)
 
 
@@ -497,7 +500,7 @@ def delete_category(request, pk):
         'user_id': user_id,
         'category_user': category_user,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/delete_category.html', context)
 
 
@@ -524,7 +527,7 @@ def add_priority(request):
         "username": username,
         "user_id": user_id,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/add_priority.html', context)
 
 
@@ -551,7 +554,7 @@ def update_priority(request, pk):
         "username": username,
         "user_id": user_id,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/update_priority.html', context)
 
 
@@ -588,7 +591,7 @@ def delete_priority(request, pk):
         'user_id': user_id,
         'priority_user': priority_user,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/delete_priority.html', context)
 
 
@@ -606,7 +609,7 @@ def register_page(request):
             template_id = 'd-2a6824e5ca614beaa08cd60b2784a0f2'
             # send welcome email via sendgrid
             send_welcome(email, username, template_id)
-            
+
             # save new user
             form.save()
             user = form.cleaned_data.get('username')
@@ -615,7 +618,7 @@ def register_page(request):
     context = {
         'form': form,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/register.html', context)
 
 
@@ -633,16 +636,17 @@ def reset_password_page(request):
             template_id = 'd-2a6824e5ca614beaa08cd60b2784a0f2'
             # send welcome email via sendgrid
             send_welcome(email, username, template_id)
-            
+
             # save new user
             form.save()
             email = form.cleaned_data.get('email')
-            messages.success(request, 'Password Reset Instructions Sent To ' + email)
+            messages.success(
+                request, 'Password Reset Instructions Sent To ' + email)
             return redirect('/login')
     context = {
         'form': form,
         'page_title': page_title
-        }
+    }
     return render(request, 'actions/register.html', context)
 
 
@@ -715,6 +719,7 @@ def tracking_status(request, pk):
     action.tracking_status = not action.tracking_status
     action.save()
     return redirect('/actions/')
+
 
 @login_required(login_url='login')
 def help(request):

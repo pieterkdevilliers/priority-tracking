@@ -23,10 +23,10 @@ class ActionForm(ModelForm):
         fields = ['title', 'priority', 'category']
 
         widgets = {
-                'title': forms.TextInput(attrs={'class': 'form-control'}),
-                'priority': forms.Select(attrs={'class': 'form-control'}),
-                'category': forms.Select(attrs={'class': 'form-control'}),
-            }
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'priority': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+        }
 
 
 class UpdateActionForm(ModelForm):
@@ -41,10 +41,10 @@ class UpdateActionForm(ModelForm):
         fields = ['title', 'priority', 'category']
 
         widgets = {
-                'title': forms.TextInput(attrs={'class': 'form-control'}),
-                'priority': forms.Select(attrs={'class': 'form-control'}),
-                'category': forms.Select(attrs={'class': 'form-control'}),
-            }
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'priority': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+        }
 
 
 class CategoryForm(ModelForm):
@@ -59,9 +59,9 @@ class CategoryForm(ModelForm):
         fields = ['title', 'description']
 
         widgets = {
-                'title': forms.TextInput(attrs={'class': 'form-control'}),
-                'description': forms.TextInput(attrs={'class': 'form-control'}),
-            }
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 class PriorityForm(ModelForm):
@@ -76,11 +76,13 @@ class PriorityForm(ModelForm):
         fields = ['title', 'description', 'category', 'activeStatus']
 
         widgets = {
-                'title': forms.TextInput(attrs={'class': 'form-control'}),
-                'description': forms.TextInput(attrs={'class': 'form-control'}),
-                'category': forms.Select(attrs={'class': 'form-control', 'user': 'user'}),
-                'activeStatus': forms.CheckboxInput(attrs={'class': 'form-control form-check-input'}),
-            }
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={
+                'class': 'form-control', 'user': 'user'}),
+            'activeStatus': forms.CheckboxInput(attrs={
+                'class': 'form-control form-check-input'}),
+        }
 
 
 class CreateUserForm(UserCreationForm):
@@ -93,4 +95,3 @@ class CreateUserForm(UserCreationForm):
         """
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-

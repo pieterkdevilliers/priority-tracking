@@ -3,10 +3,12 @@ from .models import Action
 
 # Create your tests here.
 
+
 class TestMoodels(TestCase):
     """
     Testing Models
     """
+
     def test_new_action_not_done(self):
         """
         All Actions are created with done_status as Not Done by default

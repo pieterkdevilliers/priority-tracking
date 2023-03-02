@@ -7,34 +7,37 @@
     <div id="message" class="alert alert-success alert-dismissible show fade" role="alert">
         <p>{{message}}</p>
     </div>
-        
+
     {% endfor %}
-    
+
     <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>My Categories:</h1>
-        <a title="Add Category" aria-label="Add Category" class="fa-solid fa-2xl p-2 fa-square-plus" role="button" href="/add-category/"></a>
+        <a title="Add Category" aria-label="Add Category" class="fa-solid fa-2xl p-2 fa-square-plus" role="button"
+            href="/add-category/"></a>
     </div>
     <div class="container d-flex p-2 flex-column bd-highlight">
-    {% for category in user.categories.all %}
-    <div class="d-flex p-2 flex-column bd-highlight">
-        
-        <div class="p-2 card bd-highlight">
-            <div class="d-flex justify-content-between flex-row bd-highlight">
-                <p class="bd-highlight">{{ category.title }}</p>
-                <p class="bd-highlight">{{ category.description }}</p>
-            </div>
-            {% if user.id == category.user.id %}
-            <div class="icon-outer-container">
-                <div class="icon-container d-flex justify-content-end">
-                    <div class="d-flex justify-content-end col-12">
-                        <a title="Update Category" class="fa-solid fa-lg p-2 fa-pen-to-square" role="button" aria-label="Update Category" href="{% url 'update_category' category.id %}"></a>
-                        <a title="Delete Category" class="fa-solid fa-lg p-2 fa-trash" role="button" aria-label="Delete Category" href="{% url 'delete_category' category.id %}"></a>
+        {% for category in user.categories.all %}
+        <div class="d-flex p-2 flex-column bd-highlight">
+
+            <div class="p-2 card bd-highlight">
+                <div class="d-flex justify-content-between flex-row bd-highlight">
+                    <p class="bd-highlight">{{ category.title }}</p>
+                    <p class="bd-highlight">{{ category.description }}</p>
+                </div>
+                {% if user.id == category.user.id %}
+                <div class="icon-outer-container">
+                    <div class="icon-container d-flex justify-content-end">
+                        <div class="d-flex justify-content-end col-12">
+                            <a title="Update Category" class="fa-solid fa-lg p-2 fa-pen-to-square" role="button"
+                                aria-label="Update Category" href="{% url 'update_category' category.id %}"></a>
+                            <a title="Delete Category" class="fa-solid fa-lg p-2 fa-trash" role="button"
+                                aria-label="Delete Category" href="{% url 'delete_category' category.id %}"></a>
+                        </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
-    </div>
         {% endfor %}
     </div>
 </body>

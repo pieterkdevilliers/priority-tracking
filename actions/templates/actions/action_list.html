@@ -13,7 +13,8 @@
 
     <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>Things I need to do:</h1>
-        <a title="Add Action" aria-label="Add Action" class="fa-solid fa-2xl p-2 fa-square-plus" role="button" href="/add-action/"></a>
+        <a title="Add Action" aria-label="Add Action" class="fa-solid fa-2xl p-2 fa-square-plus" role="button"
+            href="/add-action/"></a>
     </div>
 
     <div class="container d-flex p-2 flex-column bd-highlight">
@@ -54,14 +55,14 @@
             </div>
             {% endif %}
         </div>
-    <br>
+        <br>
 
         {% endif %}
         {% empty %}
         <H2 class="p-2 bd-highlight">You have nothing to do.</H2>
         {% endfor %}
     </div>
-        <hr>
+    <hr>
     <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
         <h1>Things I've Done:</h1>
     </div>
@@ -90,11 +91,11 @@
                 </div>
                 {% endif %}
             </div>
-<br>
-    {% endif %}
-    {% endfor %}
-    </div>
-    <hr>
+            <br>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <hr>
         <div class="container d-flex p-2 justify-content-between flex-row bd-highlight">
             <h1>Active Priorities:</h1>
         </div>
@@ -166,7 +167,9 @@
                                 <h6 class="card-title">% On Priority</h6>
                             </div>
                             <div class="d-flex justify-content-start">
-                                <h5 class="card-text text-muted"><span id="on-priority-perc">{{ on_priority_perc|floatformat:2 }}</span><span>%</span></h5>
+                                <h5 class="card-text text-muted"><span
+                                        id="on-priority-perc">{{ on_priority_perc|floatformat:2 }}</span><span>%</span>
+                                </h5>
                             </div>
                         </div>
                         <div>
@@ -209,7 +212,9 @@
                                 <h6 class="card-title">% On Priority</h6>
                             </div>
                             <div class="d-flex justify-content-start">
-                                <h5 class="card-text text-muted"><span id="on_priority_perc_all_time">{{ on_priority_perc_all_time|floatformat:2 }}</span><span>%</span></h5>
+                                <h5 class="card-text text-muted"><span
+                                        id="on_priority_perc_all_time">{{ on_priority_perc_all_time|floatformat:2 }}</span><span>%</span>
+                                </h5>
                             </div>
                         </div>
                         <div>

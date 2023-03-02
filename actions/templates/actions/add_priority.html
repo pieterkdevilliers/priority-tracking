@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-center mb-3 form-group p-2">
         <form method="POST" action="/add-new-priority/">
             {% csrf_token %}
-    
+
             {{priorityform}}
             <br>
             <button class="btn btn-primary" type="submit" name="Add Priority">Add Priority</button>
