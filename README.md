@@ -29,7 +29,6 @@ It is easy to be busy, and still feel as if you don't get anything done. This of
     - [**Code Validation**](#code-validation)
     - [**Automated Testing**](#automated-testing)
     - [**Manual User Testing**](#manual-user-testing)
-    - [**Travis Continuous Integration**](#travis-continuous-integration)
     - [**Interesting Bugs Or Problems**](#interesting-bugs-or-problems)
 6. [**Deployment**](#deployment)
     - [**Local Deployment**](#local-deployment)
@@ -187,6 +186,60 @@ You can generate a coverage report by installing the package using `pip3 install
 - Run `coverage run manage.py test`
 - Then `coverage html` to generate the report
 - The report can be viewed in a browser by opening the `index.html` file from inside the `htmlcov` folder.
+
+- **Automated Tests Included**
+**Form Tests:**
+
+- ActionForm & UpdateActionForm
+- Action Title IS required.
+- Category and Priority fields are NOT required.
+- Form Fields are explicit in the form meta class.
+
+
+**CategoryForm**
+- Category Title and Category Description fields ARE required.
+- Form Fields are explicit in the form meta class.
+
+
+**PriorityForm**
+- Priority Title and Priority Description fields ARE required.
+- Form Fields are explicit in the form meta class.
+
+
+**CreateUserForm**
+- Username, Email Password1 and Password2 fields ARE required.
+- Form Fields are explicit in the form meta class.
+
+
+**Views Tests:**
+- User Login successful - response 200
+- Loading Action List after Login
+
+**Loading the following pages:**
+- Filtered Action List
+- Priorities List
+- Categories List
+- Add Action
+- Add Action Redirect
+- Update Action
+- Delete Action
+- Add Category
+- Update Category
+- Add Category Redirect
+- Delete Category
+- Add Priority
+- Add Priority Redirect
+- Update Priority
+- Delete Priority
+- Complete Action
+
+**Model Tests:**
+
+- Confirm new Actions are created in the “Not Done” status by default.
+
+### Manual User Testing
+
+The bulk of the manual user testing was done as an "eat your own dog food" process. I started using the Priority Tracker myself, to track the work done on the project, as soon as I could, and this helped to identify edge-cases which were not seen in the planning stage.
 
 
 ### Interesting Bugs Or Problems

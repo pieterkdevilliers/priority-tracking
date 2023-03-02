@@ -7,7 +7,7 @@ class TestMoodels(TestCase):
     """
     Testing Models
     """
-    def test_this_thing_works(self):
+    def test_new_action_not_done(self):
         """
         All Actions are created with done_status as Not Done by default
         """
